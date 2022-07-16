@@ -88,7 +88,7 @@
 
             QUnit.module('Saturation', () => {
 
-                QUnit.test('when popup is opened ---> saturation element exists', (assert) => {
+                QUnit.test('when popup is opened ---> saturation element should exist', (assert) => {
                     const $colorPicker = document.querySelector('#red');
                     $colorPicker.opened = true;
 
@@ -141,6 +141,85 @@
                     const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
                     const style = $saturationColor.getAttribute('style');
                     assert.equal(style, 'background: hsl(233, 100%, 50%)');
+                });
+
+                QUnit.test('for red color pointer left position should be 100%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    const left = $pointer.style.left;
+
+                    assert.equal(left, '100%');
+                });
+
+                QUnit.test('for red color pointer top position should be 0%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '0%');
+                });
+
+                QUnit.test('for #7EC6A8 color pointer left position should be 36.36%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    const left = $pointer.style.left;
+
+                    assert.equal(left, '36.36%');
+                });
+
+                QUnit.test('for #7EC6A8 color pointer top position should be 22.35%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '22.35%');
+                });
+
+                QUnit.test('for #0a010f color pointer left position should be 93.33%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#0a010f';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    const left = $pointer.style.left;
+
+                    assert.equal(left, '93.33%');
+                });
+
+                QUnit.test('for #0a010f color pointer top position should be 94.12%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#0a010f';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '94.12%');
                 });
 
             });
