@@ -16,7 +16,19 @@
 
         <script src="qunit-2.19.1.js"></script>
         <script>
-            QUnit.module('Color Picker', () => {
+            QUnit.module('Color', () => {
+                QUnit.test('initial color should be red', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.value, 'rgba(255, 0, 0, 1)');
+                });
+
+                QUnit.test('if initial color is not provided ---> it should be black', (assert) => {
+                    const $colorPicker = document.querySelector('#black');
+                    assert.equal($colorPicker.value, 'rgba(0, 0, 0, 1)');
+                });
+            });
+
+            QUnit.module('Popup', () => {
                 QUnit.test('initial color should be red', (assert) => {
                     const $colorPicker = document.querySelector('#red');
                     assert.equal($colorPicker.value, 'rgba(255, 0, 0, 1)');
@@ -49,6 +61,21 @@
                     $colorPicker.opened = true;
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     assert.notEqual($popup, null);
+                });
+
+                QUnit.test('when clicked outside popup should close', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+                    document.body.click();
+                    assert.equal($colorPicker.opened, false);
+                });
+
+                QUnit.test('when clicked outside popup element should not appear', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+                    document.body.click();
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    assert.equal($popup, null);
                 });
             });
         </script>
