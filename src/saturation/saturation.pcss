@@ -1,0 +1,44 @@
+.color-picker__saturation{
+    touch-action: none;
+    overflow: hidden;
+    width: 100%;
+    height: 9rem;
+    position: relative;
+}
+
+.color-picker__saturation-box{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.color-picker__saturation-white{
+    background: linear-gradient(90deg, #fff, hsla(0, 0%, 100%, 0));
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.color-picker__saturation-black{
+    background: linear-gradient(0deg, #000, transparent);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.color-picker__saturation-pointer{
+    top: 34.902%;
+    left: 18.6747%;
+    cursor: pointer;
+    position: absolute;
+    outline: none;
+}
+
+.color-picker__saturation-pointer-handler{
+    box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgb(0, 0, 0, 0.3), 0 0 1px 2px rgb(0, 0, 0, 0.4);
+    transform: translate(-2px,-2px);
+    border-radius: 100%;
+    width: 0.25rem;
+    height: 0.25rem;
+    outline: none;
+}

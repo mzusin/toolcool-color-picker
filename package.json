@@ -1,0 +1,26 @@
+{
+  "name": "color-picker",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "js": "node ./run/build-js.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "esbuild": "^0.14.49",
+    "postcss": "^8.4.14",
+    "uglifycss": "^0.0.29"
+  },
+  "dependencies": {
+    "@types/tinycolor2": "^1.4.3",
+    "tinycolor2": "^1.4.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
+}

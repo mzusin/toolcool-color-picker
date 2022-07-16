@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "isolatedModules": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "useDefineForClassFields": true,
+  }
+}
