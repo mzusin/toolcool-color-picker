@@ -1,6 +1,6 @@
 // @ts-ignore: esbuild custom loader
 import styles from './hue.pcss';
-import { CUSTOM_EVENT_COLOR_HSV_CHANGED, sendHueCustomEvent } from '../../domain/helpers';
+import { CUSTOM_EVENT_COLOR_HSV_CHANGED, sendHueCustomEvent } from '../../domain/events-provider';
 import tinycolor from 'tinycolor2';
 
 /*
@@ -60,7 +60,7 @@ class ColorPickerHue extends HTMLElement {
 
         if(changed){
             const percent = (this.hue * 100) / 360;
-            this.performUpdate(Math.max(0, percent - 1));
+            this.performUpdate(Math.max(0, percent));
         }
     }
 

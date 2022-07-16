@@ -5,7 +5,7 @@ import {
     CUSTOM_EVENT_COLOR_HSV_CHANGED,
     CUSTOM_EVENT_COLOR_HUE_CHANGED,
     sendAlphaCustomEvent
-} from '../../domain/helpers';
+} from '../../domain/events-provider';
 import tinycolor from 'tinycolor2';
 
 /*

@@ -3,10 +3,12 @@ import styles from './fields.pcss';
 import {
     CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
     CUSTOM_EVENT_COLOR_HSV_CHANGED,
-    CUSTOM_EVENT_COLOR_HUE_CHANGED, fixPercent, fixRGB,
-    getUniqueId, sendAlphaCustomEvent, sendHsvCustomEvent
-} from '../../domain/helpers';
+    CUSTOM_EVENT_COLOR_HUE_CHANGED,
+    sendAlphaCustomEvent, sendHsvCustomEvent
+} from '../../domain/events-provider';
 import tinycolor from 'tinycolor2';
+import { fixPercent, fixRGB } from '../../domain/color-provider';
+import { getUniqueId } from '../../domain/common-provider';
 
 /*
  Usage:

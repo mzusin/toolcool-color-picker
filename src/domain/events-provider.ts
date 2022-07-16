@@ -42,28 +42,3 @@ export const sendHueCustomEvent = (cid: string, h: number) => {
     }));
 };
 
-export const getUniqueId = () => {
-    return Math.random().toString(16).slice(2);
-};
-
-/**
- * returns a number in the range [0, 255]
- */
-export const fixRGB = (updatedValue: any) => {
-    let value = Number(updatedValue) || 0;
-    value = Math.round(value);
-    value = Math.max(0, value);
-    value = Math.min(255, value);
-    return value;
-};
-
-/**
- * returns a number in the range [0, 100]
- */
-export const fixPercent = (updatedValue: any) => {
-    let value = Number(updatedValue) || 100;
-    value = Math.round(value);
-    value = Math.max(0, value);
-    value = Math.min(100, value);
-    return value;
-};

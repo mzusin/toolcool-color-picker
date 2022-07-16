@@ -6,8 +6,8 @@ import {
     CUSTOM_EVENT_COLOR_HSV_CHANGED,
     CUSTOM_EVENT_COLOR_HUE_CHANGED,
     CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
-    getUniqueId
-} from '../domain/helpers';
+} from '../domain/events-provider';
+import { getUniqueId } from '../domain/common-provider';
 
 /*
  Usage:
@@ -43,7 +43,7 @@ class ColorPicker extends HTMLElement {
     // -----------------------------------------
 
     // this id attribute is used for custom events
-    private readonly cid: string;
+    public readonly cid: string;
 
     private $button: HTMLElement;
     private $buttonColor: HTMLElement;

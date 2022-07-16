@@ -274,27 +274,36 @@
                     assert.equal(top, '0%');
                 });
 
-                /*
-                QUnit.test('aaa', (assert) => {
+                QUnit.test('when hsv has changed from outside ---> saturation bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#E76FF1';
+                    $colorPicker.value = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
 
-                    $saturation.dispatchEvent(new MouseEvent('mousedown', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: true,
-                        clientX: 230,
-                        clientY: 162,
-                        button: 0
+                    document.dispatchEvent(new CustomEvent('toolcool-color-hsv-changed', {
+                        detail: {
+                            h: 79,
+                            s: 0.93,
+                            v: 0.06,
+                            cid: $colorPicker.cid,
+                        }
                     }));
 
-                    assert.equal($colorPicker.value, '#E76FF1');
-                });*/
+                    const style = $saturationColor.getAttribute('style');
+                    assert.equal(style, 'background: hsl(79, 100%, 50%)');
+                });
 
+                // TODO: add API to get hsv, hex, etc. using tinycolor2
+
+                // TODO Saturation ---------------
+                // TODO: arrow right, top, down, including border cases
+                // TODO: when arrow applied --> check other components has the correct color and state
+                // TODO: when arrow applied --> check the outer value is correct
+                // TODO: when hue control changes ---> check that bg and pointer are correct
+                // TODO: when hsv changes from outside ---> check that bg and pointer are correct
             });
         </script>
 

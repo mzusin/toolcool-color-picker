@@ -1,7 +1,7 @@
 // @ts-ignore: esbuild custom loader
 import styles from './saturation.pcss';
 import tinycolor from 'tinycolor2';
-import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, sendHsvCustomEvent } from '../../domain/helpers';
+import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, sendHsvCustomEvent } from '../../domain/events-provider';
 import { getHueBackground, getLeftBySaturation, getTopByValue, SATURATION_STEP } from '../../domain/color-provider';
 
 /*
@@ -33,21 +33,24 @@ class ColorPickerSaturation extends HTMLElement {
         this.onMouseUp = this.onMouseUp.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onPointerKeyDown = this.onPointerKeyDown.bind(this);
+        this.updateColorBackground = this.updateColorBackground.bind(this);
 
         this.colorHsvChangedCustomEvent = this.colorHsvChangedCustomEvent.bind(this);
         this.colorHueChangedCustomEvent = this.colorHueChangedCustomEvent.bind(this);
     }
 
-    performUpdate() {
+    performUpdate(sendEvent: boolean = true) {
 
         // re-render
         this.$pointer.style.left = getLeftBySaturation(this.saturation);
         this.$pointer.style.top = getTopByValue(this.value);
-        this.$color.style.background = getHueBackground(this.hue);
+        this.updateColorBackground();
 
-        // update outer color to change the button, and
-        // send the updated color to the user
-        sendHsvCustomEvent(this.cid, this.hue, this.saturation, this.value);
+        if(sendEvent) {
+            // update outer color to change the button, and
+            // send the updated color to the user
+            sendHsvCustomEvent(this.cid, this.hue, this.saturation, this.value);
+        }
     }
 
     onChange(evt: any) {
@@ -143,8 +146,12 @@ class ColorPickerSaturation extends HTMLElement {
         }
 
         if(changed){
-            this.performUpdate();
+            this.performUpdate(false);
         }
+    }
+
+    updateColorBackground() {
+        this.$color.setAttribute('style', `background: ${ getHueBackground(this.hue) }`);
     }
 
     colorHueChangedCustomEvent(evt: CustomEvent) {
@@ -155,7 +162,8 @@ class ColorPickerSaturation extends HTMLElement {
         if(evt.detail.cid !== this.cid) return;
 
         this.hue = evt.detail.h;
-        this.$color.style.background = getHueBackground(this.hue);
+
+        this.updateColorBackground();
     }
 
     /**
