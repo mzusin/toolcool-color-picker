@@ -9,16 +9,46 @@
         <div id="qunit"></div>
 
         <div id="qunit-fixture">
-            <toolcool-color-picker color="#ff0000"></toolcool-color-picker>
-            <script src="../public/lib/index.min.js"></script>
+            <toolcool-color-picker id="red" color="#ff0000"></toolcool-color-picker>
+            <toolcool-color-picker id="black"></toolcool-color-picker>
+            <script src="../public/lib/toolcool-color-picker.min.js"></script>
         </div>
 
         <script src="qunit-2.19.1.js"></script>
         <script>
             QUnit.module('Color Picker', () => {
                 QUnit.test('initial color should be red', (assert) => {
-                    const $colorPicker = document.querySelector('toolcool-color-picker');
+                    const $colorPicker = document.querySelector('#red');
                     assert.equal($colorPicker.value, 'rgba(255, 0, 0, 1)');
+                });
+
+                QUnit.test('if initial color is not provided ---> it should be black', (assert) => {
+                    const $colorPicker = document.querySelector('#black');
+                    assert.equal($colorPicker.value, 'rgba(0, 0, 0, 1)');
+                });
+
+                QUnit.test('color picker popup should be closed by default', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.opened, false);
+                });
+
+                QUnit.test('color picker popup element should not appear', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    assert.equal($popup, null);
+                });
+
+                QUnit.test('after "opened = true ---> color picker popup should be opened', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+                    assert.equal($colorPicker.opened, true);
+                });
+
+                QUnit.test('color picker popup element should appear', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    assert.notEqual($popup, null);
                 });
             });
         </script>

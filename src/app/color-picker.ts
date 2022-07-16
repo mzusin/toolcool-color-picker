@@ -22,6 +22,7 @@ interface IColorPickerState {
 
 class ColorPicker extends HTMLElement {
 
+    // ----------- APIs ------------------------
     public get value() {
         const rgba = this.state.color.toRgb();
         return `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
@@ -30,6 +31,16 @@ class ColorPicker extends HTMLElement {
     public set value(updateColor: string) {
         this.state.color = tinycolor(updateColor);
     }
+
+    public get opened() {
+        return this.state.isPopupVisible;
+    }
+
+    public set opened(isOpened: boolean) {
+        this.state.isPopupVisible = isOpened;
+    }
+
+    // -----------------------------------------
 
     // this id attribute is used for custom events
     private readonly cid: string;
