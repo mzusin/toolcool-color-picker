@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Test Suite</title>
+        <link rel="stylesheet" href="qunit-2.19.1.css" />
+    </head>
+    <body>
+        <div id="qunit"></div>
+
+        <div id="qunit-fixture">
+            <toolcool-color-picker color="#ff0000"></toolcool-color-picker>
+            <script src="../public/lib/index.min.js"></script>
+        </div>
+
+        <script src="qunit-2.19.1.js"></script>
+        <script>
+            QUnit.module('Color Picker', () => {
+                QUnit.test('initial color should be red', (assert) => {
+                    const $colorPicker = document.querySelector('toolcool-color-picker');
+                    assert.equal($colorPicker.value, 'rgba(255, 0, 0, 1)');
+                });
+            });
+        </script>
+
+    </body>
+</html>
