@@ -274,7 +274,7 @@
                     assert.equal(top, '0%');
                 });
 
-                QUnit.test('when hsv has changed from outside ---> saturation bg color should change too', (assert) => {
+                QUnit.test('when hsv has changed from outside to 79 ---> saturation bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
                     $colorPicker.value = '#7EC6A8';
                     $colorPicker.opened = true;
@@ -296,14 +296,101 @@
                     assert.equal(style, 'background: hsl(79, 100%, 50%)');
                 });
 
+                QUnit.test('when hsv has changed from outside to 320 ---> saturation bg color should change too', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+
+                    document.dispatchEvent(new CustomEvent('toolcool-color-hsv-changed', {
+                        detail: {
+                            h: 320,
+                            s: 0.93,
+                            v: 0.06,
+                            cid: $colorPicker.cid,
+                        }
+                    }));
+
+                    const style = $saturationColor.getAttribute('style');
+                    assert.equal(style, 'background: hsl(320, 100%, 50%)');
+                });
+
+                QUnit.test('when hsv has changed from outside to 360 ---> saturation bg color should change too', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+
+                    document.dispatchEvent(new CustomEvent('toolcool-color-hsv-changed', {
+                        detail: {
+                            h: 360,
+                            s: 0.93,
+                            v: 0.06,
+                            cid: $colorPicker.cid,
+                        }
+                    }));
+
+                    const style = $saturationColor.getAttribute('style');
+                    assert.equal(style, 'background: hsl(360, 100%, 50%)');
+                });
+
+                QUnit.test('when hsv has changed from outside to 79 ---> pointer left position should be 93%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    document.dispatchEvent(new CustomEvent('toolcool-color-hsv-changed', {
+                        detail: {
+                            h: 79,
+                            s: 0.93,
+                            v: 0.06,
+                            cid: $colorPicker.cid,
+                        }
+                    }));
+
+                    const left = $pointer.style.left;
+                    assert.equal(left, '93%');
+                });
+
+                QUnit.test('when hsv has changed from outside to 79 ---> pointer top position should be 94%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    document.dispatchEvent(new CustomEvent('toolcool-color-hsv-changed', {
+                        detail: {
+                            h: 79,
+                            s: 0.93,
+                            v: 0.06,
+                            cid: $colorPicker.cid,
+                        }
+                    }));
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '94%');
+                });
+
                 // TODO: add API to get hsv, hex, etc. using tinycolor2
 
                 // TODO Saturation ---------------
                 // TODO: arrow right, top, down, including border cases
                 // TODO: when arrow applied --> check other components has the correct color and state
                 // TODO: when arrow applied --> check the outer value is correct
-                // TODO: when hue control changes ---> check that bg and pointer are correct
-                // TODO: when hsv changes from outside ---> check that bg and pointer are correct
+                // TODO: when hsv changes from outside ---> check that pointer is correct
             });
         </script>
 
