@@ -1,14 +1,18 @@
 {
-  "name": "color-picker",
+  "name": "toolcool-color-picker",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "js": "node ./run/build-js.js"
+    "watch": "node ./run/build-js.js",
+    "test": "web-test-runner --node-resolve"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tool Cool",
   "license": "ISC",
   "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@web/dev-server-esbuild": "^0.3.1",
+    "@web/test-runner": "^0.13.31",
     "autoprefixer": "^10.4.7",
     "esbuild": "^0.14.49",
     "postcss": "^8.4.14",
