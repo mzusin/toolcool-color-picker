@@ -1,10 +1,9 @@
 const fs = require('fs');
-const path = require('path');
-const autoprefixer = require('autoprefixer');
-const postcss = require('postcss');
-const uglifycss = require('uglifycss');
+const postcss  = require('postcss');
+const autoprefixer  = require('autoprefixer');
+const uglifycss  = require('uglifycss');
 
-const pcssPlugin = {
+const esbuildPcssPlugin = {
     name: 'pcss',
     setup(build) {
 
@@ -38,35 +37,4 @@ const pcssPlugin = {
     },
 };
 
-require('esbuild')
-    .build({
-        entryPoints: ['./src/index.ts'],
-        bundle: true,
-        sourcemap: true,
-        minify: true,
-        watch: {
-            onRebuild(error, result) {
-
-                if (error){
-                    // console.error(error);
-                }
-                else {
-                    console.log('Succeeded.');
-                }
-            },
-        },
-        target: [
-            'es6',
-        ],
-        outfile: './public/lib/index.min.js',
-        loader: {
-            '.png': 'text',
-            '.svg': 'dataurl',
-            '.pcss': 'text',
-        },
-        plugins: [pcssPlugin],
-    })
-    .then(result => {
-        console.log('Watching...');
-    })
-    .catch(() => process.exit(1));
+module.exports = esbuildPcssPlugin;

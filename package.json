@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "watch": "node ./run/build-js.js",
+    "build": "node run/build.js",
+    "watch": "node run/watch.js",
     "test": "web-test-runner --node-resolve"
   },
   "keywords": [],
