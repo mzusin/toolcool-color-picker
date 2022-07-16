@@ -1,6 +1,7 @@
-const settings = require('./settings');
+import settings from './settings.js';
+import esbuild from 'esbuild';
 
-require('esbuild')
+esbuild
     .build(settings)
     .then(result => {
         console.log('Done.');

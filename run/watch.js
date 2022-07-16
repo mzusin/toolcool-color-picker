@@ -1,4 +1,5 @@
-const settings = require('./settings');
+import settings from './settings.js';
+import esbuild from 'esbuild';
 
 settings.watch = {
     onRebuild(error, result) {
@@ -12,7 +13,7 @@ settings.watch = {
     },
 };
 
-require('esbuild')
+esbuild
     .build(settings)
     .then(result => {
         console.log('Watching...');

@@ -6,5 +6,6 @@
     "esModuleInterop": true,
     "useDefineForClassFields": true,
     "moduleResolution": "node",
+    "module": "es6",
   }
 }

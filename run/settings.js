@@ -1,6 +1,6 @@
-const pcssPlugin = require('./esbuild-pcss-plugin');
+import pcssPlugin from './esbuild-pcss-plugin.js';
 
-module.exports = {
+export default {
     entryPoints: ['./src/index.ts'],
     bundle: true,
     sourcemap: true,

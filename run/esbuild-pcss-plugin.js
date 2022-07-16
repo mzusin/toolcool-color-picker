@@ -1,7 +1,7 @@
-const fs = require('fs');
-const postcss  = require('postcss');
-const autoprefixer  = require('autoprefixer');
-const uglifycss  = require('uglifycss');
+import fs from 'fs';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
+import uglifycss from 'uglifycss';
 
 const esbuildPcssPlugin = {
     name: 'pcss',
@@ -37,4 +37,4 @@ const esbuildPcssPlugin = {
     },
 };
 
-module.exports = esbuildPcssPlugin;
+export default esbuildPcssPlugin;
