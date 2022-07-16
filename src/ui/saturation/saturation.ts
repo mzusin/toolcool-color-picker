@@ -1,7 +1,8 @@
 // @ts-ignore: esbuild custom loader
 import styles from './saturation.pcss';
 import tinycolor from 'tinycolor2';
-import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, sendHsvCustomEvent } from '../helpers';
+import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, sendHsvCustomEvent } from '../../domain/helpers';
+import { getHueBackground } from '../../domain/color-provider';
 
 /*
  Usage:
@@ -17,7 +18,7 @@ class ColorPickerSaturation extends HTMLElement {
     private $color: HTMLElement;
     private $pointer: HTMLElement;
 
-    private initialColor: tinycolor.Instance = tinycolor('#000');
+    private color: tinycolor.Instance = tinycolor('#000');
     private hue: number = 0; // [0, 360]
     private saturation: number = 0; // [0, 1]
     private value: number = 0; // [0, 1]
@@ -39,11 +40,12 @@ class ColorPickerSaturation extends HTMLElement {
     }
 
     performUpdate() {
-        // change pointer position
+
+        // re-render
         this.$pointer.style.left = `${ this.saturation * 100 }%`;
         this.$pointer.style.top = `${ -(this.value * 100) + 100 }%`;
 
-        this.$color.style.background = `hsl(${ this.hue }, 100%, 50%)`;
+        this.$color.style.background = getHueBackground(this.hue);
 
         // update outer color to change the button, and
         // send the updated color to the user
@@ -154,7 +156,7 @@ class ColorPickerSaturation extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
         this.hue = evt.detail.h;
-        this.$color.style.background = `hsl(${ this.hue }, 100%, 50%)`;
+        this.$color.style.background = getHueBackground(this.hue);
     }
 
     /**
@@ -163,9 +165,9 @@ class ColorPickerSaturation extends HTMLElement {
     connectedCallback(){
 
         this.cid = this.getAttribute('cid');
-        this.initialColor = tinycolor(this.getAttribute('color') || '#000');
+        this.color = tinycolor(this.getAttribute('color') || '#000');
 
-        const hsv = this.initialColor.toHsv();
+        const hsv = this.color.toHsv();
         this.hue = hsv.h;
         this.saturation = hsv.s;
         this.value = hsv.v;
@@ -176,7 +178,7 @@ class ColorPickerSaturation extends HTMLElement {
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
            <div class="color-picker__saturation">
-                <div class="color-picker__saturation-box" style="background: hsl(${ this.hue }, 100%, 50%)">
+                <div class="color-picker__saturation-box" style="background: ${ getHueBackground(this.hue) }">
                     <div class="color-picker__saturation-white">
                         <div class="color-picker__saturation-black"></div>
                         
@@ -220,7 +222,15 @@ class ColorPickerSaturation extends HTMLElement {
      * when attributes change
      */
     attributeChangedCallback(){
-        this.initialColor = tinycolor(this.getAttribute('color') || '#000');
+        this.color = tinycolor(this.getAttribute('color') || '#000');
+        console.log(this.color)
+
+        const hsv = this.color.toHsv();
+        this.hue = hsv.h;
+        this.saturation = hsv.s;
+        this.value = hsv.v;
+
+        this.performUpdate();
     }
 }
 

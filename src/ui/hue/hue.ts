@@ -1,6 +1,6 @@
 // @ts-ignore: esbuild custom loader
 import styles from './hue.pcss';
-import { CUSTOM_EVENT_COLOR_HSV_CHANGED, sendHueCustomEvent } from '../helpers';
+import { CUSTOM_EVENT_COLOR_HSV_CHANGED, sendHueCustomEvent } from '../../domain/helpers';
 import tinycolor from 'tinycolor2';
 
 /*

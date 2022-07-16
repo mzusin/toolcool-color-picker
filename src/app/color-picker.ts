@@ -1,13 +1,13 @@
 // @ts-ignore: esbuild custom loader
 import styles from './styles.pcss';
 import tinycolor from 'tinycolor2';
-import ColorPickerPopup from '../popup/popup';
+import ColorPickerPopup from '../ui/popup/popup';
 import {
     CUSTOM_EVENT_COLOR_HSV_CHANGED,
     CUSTOM_EVENT_COLOR_HUE_CHANGED,
     CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
     getUniqueId
-} from '../helpers';
+} from '../domain/helpers';
 
 /*
  Usage:
@@ -268,6 +268,7 @@ class ColorPicker extends HTMLElement {
     attributeChangedCallback(){
         this.state.initialColor = tinycolor(this.getAttribute('color') || '#000');
         this.state.color = tinycolor(this.getAttribute('color') || '#000');
+        this.onInitialColorChange();
     }
 }
 

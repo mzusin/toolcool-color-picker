@@ -11,6 +11,7 @@
         <div id="qunit-fixture">
             <toolcool-color-picker id="red" color="#ff0000"></toolcool-color-picker>
             <toolcool-color-picker id="black"></toolcool-color-picker>
+            <toolcool-color-picker id="color-001aff" color="#001aff"></toolcool-color-picker>
             <script src="../public/lib/toolcool-color-picker.min.js"></script>
         </div>
 
@@ -25,6 +26,12 @@
                 QUnit.test('if initial color is not provided ---> it should be black', (assert) => {
                     const $colorPicker = document.querySelector('#black');
                     assert.equal($colorPicker.value, 'rgba(0, 0, 0, 1)');
+                });
+
+                QUnit.test('change color to #282e5c', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#282e5c';
+                    assert.equal($colorPicker.value, 'rgba(40, 46, 92, 1)');
                 });
             });
 
@@ -77,6 +84,65 @@
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     assert.equal($popup, null);
                 });
+            });
+
+            QUnit.module('Saturation', () => {
+
+                QUnit.test('when popup is opened ---> saturation element exists', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    assert.notEqual($saturation, null);
+                });
+
+                QUnit.test('for red color saturation background should have 0 saturation', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const style = $saturationColor.getAttribute('style');
+                    assert.equal(style, 'background: hsl(0, 100%, 50%)');
+                });
+
+                QUnit.test('for #001aff color saturation background should have 234 saturation', (assert) => {
+                    const $colorPicker = document.querySelector('#color-001aff');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const style = $saturationColor.getAttribute('style');
+                    assert.equal(style, 'background: hsl(234, 100%, 50%)');
+                });
+
+                QUnit.test('for #001aff color saturation background should have 234 saturation', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#001aff';
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const style = $saturationColor.getAttribute('style');
+                    assert.equal(style, 'background: hsl(234, 100%, 50%)');
+                });
+
+                QUnit.test('for #282e5c color saturation background should have 233 saturation', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#282e5c';
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const style = $saturationColor.getAttribute('style');
+                    assert.equal(style, 'background: hsl(233, 100%, 50%)');
+                });
+
             });
         </script>
 
