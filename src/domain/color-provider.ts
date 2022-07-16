@@ -1,3 +1,5 @@
+export const SATURATION_STEP = 0.01;
+
 /**
  * This hue background is used in saturation component.
  * The hsl color is supported in 99.5% browsers - https://caniuse.com/?search=hsl

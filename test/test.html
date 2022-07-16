@@ -222,6 +222,79 @@
                     assert.equal(top, '94.12%');
                 });
 
+                QUnit.test('pointer arrow left twice ---> left position has changed from 100% to 98%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowLeft',
+                    }));
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowLeft',
+                    }));
+
+                    const left = $pointer.style.left;
+                    assert.equal(left, '98%');
+                });
+
+                QUnit.test('pointer arrow left twice ---> top position has not changed', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowLeft',
+                    }));
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowLeft',
+                    }));
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '0%');
+                });
+
+                /*
+                QUnit.test('aaa', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#E76FF1';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+
+                    $saturation.dispatchEvent(new MouseEvent('mousedown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: 230,
+                        clientY: 162,
+                        button: 0
+                    }));
+
+                    assert.equal($colorPicker.value, '#E76FF1');
+                });*/
+
             });
         </script>
 

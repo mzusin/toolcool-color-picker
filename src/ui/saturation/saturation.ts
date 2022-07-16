@@ -2,7 +2,7 @@
 import styles from './saturation.pcss';
 import tinycolor from 'tinycolor2';
 import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, sendHsvCustomEvent } from '../../domain/helpers';
-import { getHueBackground, getLeftBySaturation, getTopByValue } from '../../domain/color-provider';
+import { getHueBackground, getLeftBySaturation, getTopByValue, SATURATION_STEP } from '../../domain/color-provider';
 
 /*
  Usage:
@@ -32,7 +32,7 @@ class ColorPickerSaturation extends HTMLElement {
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseUp = this.onMouseUp.bind(this);
         this.onChange = this.onChange.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onPointerKeyDown = this.onPointerKeyDown.bind(this);
 
         this.colorHsvChangedCustomEvent = this.colorHsvChangedCustomEvent.bind(this);
         this.colorHueChangedCustomEvent = this.colorHueChangedCustomEvent.bind(this);
@@ -43,7 +43,6 @@ class ColorPickerSaturation extends HTMLElement {
         // re-render
         this.$pointer.style.left = getLeftBySaturation(this.saturation);
         this.$pointer.style.top = getTopByValue(this.value);
-
         this.$color.style.background = getHueBackground(this.hue);
 
         // update outer color to change the button, and
@@ -69,30 +68,30 @@ class ColorPickerSaturation extends HTMLElement {
         this.performUpdate();
     }
 
-    onKeyDown(evt: KeyboardEvent) {
+    onPointerKeyDown(evt: KeyboardEvent) {
 
         switch (evt.key){
             case 'ArrowLeft': {
-                this.saturation = Math.max(0, this.saturation - 0.01);
+                this.saturation = Math.max(0, this.saturation - SATURATION_STEP);
                 this.performUpdate();
                 break;
             }
 
             case 'ArrowRight': {
-                this.saturation = Math.min(1, this.saturation + 0.01);
+                this.saturation = Math.min(1, this.saturation + SATURATION_STEP);
                 this.performUpdate();
                 break;
             }
 
             case 'ArrowUp': {
-                this.value = Math.min(1, this.value + 0.01);
+                this.value = Math.min(1, this.value + SATURATION_STEP);
                 this.performUpdate();
                 break;
             }
 
             case 'ArrowDown': {
                 evt.preventDefault();
-                this.value = Math.max(0, this.value - 0.01);
+                this.value = Math.max(0, this.value - SATURATION_STEP);
                 this.performUpdate();
                 break;
             }
@@ -195,7 +194,7 @@ class ColorPickerSaturation extends HTMLElement {
         this.$color = this.shadowRoot.querySelector('.color-picker__saturation-box');
         this.$pointer = this.shadowRoot.querySelector('.color-picker__saturation-pointer');
 
-        this.$pointer.addEventListener('keydown', this.onKeyDown);
+        this.$pointer.addEventListener('keydown', this.onPointerKeyDown);
         this.$saturation.addEventListener('mousedown', this.onMouseDown);
         this.$saturation.addEventListener('mouseup', this.onMouseUp);
         this.$saturation.addEventListener('touchmove', this.onChange);
@@ -213,7 +212,7 @@ class ColorPickerSaturation extends HTMLElement {
         this.$saturation.removeEventListener('mouseup', this.onMouseUp);
         this.$saturation.removeEventListener('touchmove', this.onChange);
         this.$saturation.removeEventListener('touchstart', this.onChange);
-        this.$pointer.removeEventListener('keydown', this.onKeyDown);
+        this.$pointer.removeEventListener('keydown', this.onPointerKeyDown);
 
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
         document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.colorHueChangedCustomEvent);
@@ -223,6 +222,7 @@ class ColorPickerSaturation extends HTMLElement {
      * when attributes change
      */
     attributeChangedCallback(){
+
         const color = tinycolor(this.getAttribute('color') || '#000');
         const hsv = color.toHsv();
 
