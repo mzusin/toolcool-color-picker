@@ -274,6 +274,246 @@
                     assert.equal(top, '0%');
                 });
 
+                QUnit.test('pointer arrow right twice ---> left position has changed from 0% to 2%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowRight',
+                    }));
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowRight',
+                    }));
+
+                    const left = $pointer.style.left;
+                    assert.equal(left, '2%');
+                });
+
+                QUnit.test('pointer arrow right twice ---> top position should not change', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowRight',
+                    }));
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowRight',
+                    }));
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '30.59%');
+                });
+
+                QUnit.test('pointer arrow up twice ---> top position should change from 30.59% to 28.59%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowUp',
+                    }));
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowUp',
+                    }));
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '28.59%');
+                });
+
+                QUnit.test('pointer arrow up twice ---> left position should not change', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowUp',
+                    }));
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowUp',
+                    }));
+
+                    const left = $pointer.style.left;
+                    assert.equal(left, '0%');
+                });
+
+                QUnit.test('pointer arrow down twice ---> top position should change from 30.59% to 32.59%', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowDown',
+                    }));
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowDown',
+                    }));
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '32.59%');
+                });
+
+                QUnit.test('pointer arrow down twice ---> left position should not change', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowDown',
+                    }));
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowDown',
+                    }));
+
+                    const left = $pointer.style.left;
+                    assert.equal(left, '0%');
+                });
+
+                QUnit.test('pointer arrow right border case ---> left position should not change', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowRight',
+                    }));
+
+                    const left = $pointer.style.left;
+                    assert.equal(left, '100%');
+                });
+
+                QUnit.test('pointer arrow up border case ---> top position should not change', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowUp',
+                    }));
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '0%');
+                });
+
+                QUnit.test('pointer arrow left border case ---> left position should not change', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowLeft',
+                    }));
+
+                    const left = $pointer.style.left;
+                    assert.equal(left, '0%');
+                });
+
+                QUnit.test('pointer arrow down border case ---> top position should not change', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.value = '#000000';
+                    $colorPicker.opened = true;
+
+                    const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+
+                    $pointer.dispatchEvent(new KeyboardEvent('keydown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        key: 'ArrowDown',
+                    }));
+
+                    const top = $pointer.style.top;
+                    assert.equal(top, '100%');
+                });
+
                 QUnit.test('when hsv has changed from outside to 79 ---> saturation bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
                     $colorPicker.value = '#7EC6A8';
@@ -387,10 +627,8 @@
                 // TODO: add API to get hsv, hex, etc. using tinycolor2
 
                 // TODO Saturation ---------------
-                // TODO: arrow right, top, down, including border cases
                 // TODO: when arrow applied --> check other components has the correct color and state
                 // TODO: when arrow applied --> check the outer value is correct
-                // TODO: when hsv changes from outside ---> check that pointer is correct
             });
         </script>
 
