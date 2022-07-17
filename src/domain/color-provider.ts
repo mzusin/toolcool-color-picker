@@ -1,4 +1,4 @@
-import tinycolor, { Instance } from 'tinycolor2';
+import { TinyColor } from '@ctrl/tinycolor';
 
 export const SATURATION_STEP = 0.01;
 
@@ -21,12 +21,12 @@ export const getHueBackground = (hue: number) => {
  * This alpha color background is used in the alpha component.
  * The hsl color is supported in 99.5% browsers - https://caniuse.com/?search=rgba
  */
-export const getAlphaColorBackground = (color: Instance) => {
+export const getAlphaColorBackground = (color: TinyColor) => {
     const rgba = color.toRgb();
     return `linear-gradient(to right, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 0) 0%, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 1) 100%)`;
 };
 
-export const getRgbaBackground = (color: Instance) => {
+export const getRgbaBackground = (color: TinyColor) => {
     const rgba = color.toRgb();
     return `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
 };
@@ -118,7 +118,7 @@ export const fixPercent = (updatedValue: string|number) => {
 };
 
 export const parseColor = (colorString: string) => {
-    const color = tinycolor(colorString || '#000');
+    const color = new TinyColor(colorString || '#000');
     color.setAlpha(color.getAlpha());
     return color;
 };

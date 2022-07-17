@@ -1,9 +1,9 @@
 // @ts-ignore: esbuild custom loader
 import styles from './popup.pcss';
-import ColorPickerSaturation from '../saturation/saturation';
-import ColorPickerHue from '../hue/hue';
-import ColorPickerAlpha from '../alpha/alpha';
-import ColorPickerFields from '../fields/fields';
+import Saturation from '../saturation/saturation';
+import Hue from '../hue/hue';
+import Alpha from '../alpha/alpha';
+import Fields from '../fields/fields';
 
 /*
  Usage:
@@ -23,19 +23,19 @@ class ColorPickerPopup extends HTMLElement {
 
         // register web components
         if(!customElements.get('toolcool-color-picker-saturation')){
-            customElements.define('toolcool-color-picker-saturation', ColorPickerSaturation);
+            customElements.define('toolcool-color-picker-saturation', Saturation);
         }
 
         if(!customElements.get('toolcool-color-picker-hue')){
-            customElements.define('toolcool-color-picker-hue', ColorPickerHue);
+            customElements.define('toolcool-color-picker-hue', Hue);
         }
 
         if(!customElements.get('toolcool-color-picker-alpha')){
-            customElements.define('toolcool-color-picker-alpha', ColorPickerAlpha);
+            customElements.define('toolcool-color-picker-alpha', Alpha);
         }
 
         if(!customElements.get('toolcool-color-picker-fields')){
-            customElements.define('toolcool-color-picker-fields', ColorPickerFields);
+            customElements.define('toolcool-color-picker-fields', Fields);
         }
 
         this.cid = this.getAttribute('cid');

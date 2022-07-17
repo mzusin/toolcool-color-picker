@@ -14,7 +14,7 @@ import {
  ------
  <toolcool-color-picker-saturation color="#000" cid="..."></toolcool-color-picker-saturation>
  */
-class ColorPickerSaturation extends HTMLElement {
+class Saturation extends HTMLElement {
 
     // this id attribute is used for custom events
     private cid: string;
@@ -39,11 +39,11 @@ class ColorPickerSaturation extends HTMLElement {
         this.onChange = this.onChange.bind(this);
         this.onPointerKeyDown = this.onPointerKeyDown.bind(this);
 
-        this.colorHsvChangedCustomEvent = this.colorHsvChangedCustomEvent.bind(this);
-        this.colorHueChangedCustomEvent = this.colorHueChangedCustomEvent.bind(this);
+        this.hsvChanged = this.hsvChanged.bind(this);
+        this.hueChanged = this.hueChanged.bind(this);
     }
 
-    performUpdate(sendEvent = true) {
+    render(sendEvent = true) {
 
         // re-render
         this.$pointer.style.left = getLeftBySaturation(this.saturation);
@@ -74,7 +74,7 @@ class ColorPickerSaturation extends HTMLElement {
         this.saturation = lPos / boxWidth;
         this.value = 1 - (tPos / boxHeight);
 
-        this.performUpdate();
+        this.render();
     }
 
     onPointerKeyDown(evt: KeyboardEvent) {
@@ -82,26 +82,26 @@ class ColorPickerSaturation extends HTMLElement {
         switch (evt.key){
             case 'ArrowLeft': {
                 this.saturation = Math.max(0, this.saturation - SATURATION_STEP);
-                this.performUpdate();
+                this.render();
                 break;
             }
 
             case 'ArrowRight': {
                 this.saturation = Math.min(1, this.saturation + SATURATION_STEP);
-                this.performUpdate();
+                this.render();
                 break;
             }
 
             case 'ArrowUp': {
                 this.value = Math.min(1, this.value + SATURATION_STEP);
-                this.performUpdate();
+                this.render();
                 break;
             }
 
             case 'ArrowDown': {
                 evt.preventDefault();
                 this.value = Math.max(0, this.value - SATURATION_STEP);
-                this.performUpdate();
+                this.render();
                 break;
             }
         }
@@ -127,7 +127,7 @@ class ColorPickerSaturation extends HTMLElement {
         window.removeEventListener('mouseup', this.onChange);
     }
 
-    colorHsvChangedCustomEvent(evt: CustomEvent) {
+    hsvChanged(evt: CustomEvent) {
 
         if(!evt || !evt.detail || !evt.detail.cid) return;
 
@@ -152,11 +152,11 @@ class ColorPickerSaturation extends HTMLElement {
         }
 
         if(changed){
-            this.performUpdate(false);
+            this.render(false);
         }
     }
 
-    colorHueChangedCustomEvent(evt: CustomEvent) {
+    hueChanged(evt: CustomEvent) {
 
         if(!evt || !evt.detail || !evt.detail.cid) return;
 
@@ -165,7 +165,7 @@ class ColorPickerSaturation extends HTMLElement {
 
         this.hue = evt.detail.h;
 
-        this.performUpdate();
+        this.render();
     }
 
     /**
@@ -210,8 +210,8 @@ class ColorPickerSaturation extends HTMLElement {
         this.$saturation.addEventListener('touchmove', this.onChange);
         this.$saturation.addEventListener('touchstart', this.onChange);
 
-        document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
-        document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.colorHueChangedCustomEvent);
+        document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+        document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
     }
 
     /**
@@ -224,8 +224,8 @@ class ColorPickerSaturation extends HTMLElement {
         this.$saturation.removeEventListener('touchstart', this.onChange);
         this.$pointer.removeEventListener('keydown', this.onPointerKeyDown);
 
-        document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
-        document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.colorHueChangedCustomEvent);
+        document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+        document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
     }
 
     /**
@@ -240,8 +240,8 @@ class ColorPickerSaturation extends HTMLElement {
         this.saturation = hsv.s;
         this.value = hsv.v;
 
-        this.performUpdate();
+        this.render();
     }
 }
 
-export default ColorPickerSaturation;
+export default Saturation;

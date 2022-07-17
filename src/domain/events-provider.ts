@@ -1,6 +1,6 @@
-export const CUSTOM_EVENT_COLOR_HSV_CHANGED = 'toolcool-color-hsv-changed';
-export const CUSTOM_EVENT_COLOR_HUE_CHANGED = 'toolcool-color-hue-changed';
-export const CUSTOM_EVENT_COLOR_ALPHA_CHANGED = 'toolcool-color-alpha-changed';
+export const CUSTOM_EVENT_COLOR_HSV_CHANGED = 'tc-hsv-changed';
+export const CUSTOM_EVENT_COLOR_HUE_CHANGED = 'tc-hue-changed';
+export const CUSTOM_EVENT_COLOR_ALPHA_CHANGED = 'tc-alpha-changed';
 
 export const sendAlphaCustomEvent = (cid: string, a: number) => {
 

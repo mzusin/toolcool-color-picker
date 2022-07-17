@@ -1,6 +1,5 @@
 // @ts-ignore: esbuild custom loader
 import styles from './styles.pcss';
-import tinycolor from 'tinycolor2';
 import ColorPickerPopup from '../ui/popup/popup';
 import {
     CUSTOM_EVENT_COLOR_HSV_CHANGED,
@@ -9,6 +8,7 @@ import {
 } from '../domain/events-provider';
 import { getUniqueId } from '../domain/common-provider';
 import { getRgbaBackground, parseColor } from '../domain/color-provider';
+import { TinyColor } from '@ctrl/tinycolor';
 
 /*
  Usage:
@@ -17,8 +17,8 @@ import { getRgbaBackground, parseColor } from '../domain/color-provider';
  */
 interface IColorPickerState {
     isPopupVisible: boolean,
-    initialColor: tinycolor.Instance,
-    color: tinycolor.Instance,
+    initialColor: TinyColor,
+    color: TinyColor,
 }
 
 class ColorPicker extends HTMLElement {
@@ -29,7 +29,7 @@ class ColorPicker extends HTMLElement {
     }
 
     public set value(updateColor: string) {
-        this.state.color = tinycolor(updateColor);
+        this.state.color = new TinyColor(updateColor);
     }
 
     public get opened() {
@@ -51,8 +51,8 @@ class ColorPicker extends HTMLElement {
 
     private stateDefaults: IColorPickerState = {
         isPopupVisible: false,
-        initialColor: tinycolor('#000'),
-        color: tinycolor('#000'),
+        initialColor: new TinyColor('#000'),
+        color: new TinyColor('#000'),
     };
     private state: IColorPickerState;
 
@@ -74,9 +74,9 @@ class ColorPicker extends HTMLElement {
         this.onKeyDown = this.onKeyDown.bind(this);
         this.clickedOutside = this.clickedOutside.bind(this);
 
-        this.colorHsvChangedCustomEvent = this.colorHsvChangedCustomEvent.bind(this);
-        this.colorHueChangedCustomEvent = this.colorHueChangedCustomEvent.bind(this);
-        this.colorAlphaChangedCustomEvent = this.colorAlphaChangedCustomEvent.bind(this);
+        this.hsvChanged = this.hsvChanged.bind(this);
+        this.hueChanged = this.hueChanged.bind(this);
+        this.alphaChanged = this.alphaChanged.bind(this);
 
         this.initState();
     }
@@ -141,13 +141,13 @@ class ColorPicker extends HTMLElement {
         }));
     }
 
-    colorHsvChangedCustomEvent(evt: CustomEvent) {
+    hsvChanged(evt: CustomEvent) {
         if(!evt || !evt.detail || !evt.detail.cid) return;
 
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        this.state.color = tinycolor.fromRatio({
+        this.state.color = new TinyColor({
             h: evt.detail.h,
             s: evt.detail.s,
             v: evt.detail.v,
@@ -155,7 +155,7 @@ class ColorPicker extends HTMLElement {
         });
     }
 
-    colorHueChangedCustomEvent(evt: CustomEvent) {
+    hueChanged(evt: CustomEvent) {
 
         if(!evt || !evt.detail || !evt.detail.cid) return;
 
@@ -164,7 +164,7 @@ class ColorPicker extends HTMLElement {
 
         const hsv = this.state.color.toHsv();
 
-        this.state.color = tinycolor.fromRatio({
+        this.state.color = new TinyColor({
             h: evt.detail.h,
             s: hsv.s,
             v: hsv.v,
@@ -172,7 +172,7 @@ class ColorPicker extends HTMLElement {
         });
     }
 
-    colorAlphaChangedCustomEvent(evt: CustomEvent) {
+    alphaChanged(evt: CustomEvent) {
 
         if(!evt || !evt.detail || !evt.detail.cid) return;
 
@@ -182,7 +182,7 @@ class ColorPicker extends HTMLElement {
         const rgba = this.state.color.toRgb();
         rgba.a = evt.detail.a;
 
-        this.state.color = tinycolor(rgba);
+        this.state.color = new TinyColor(rgba);
     }
 
     clickedOutside() {
@@ -243,9 +243,9 @@ class ColorPicker extends HTMLElement {
         document.addEventListener('click', this.clickedOutside);
 
         // custom event from other parts of the app
-        document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
-        document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.colorHueChangedCustomEvent);
-        document.addEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.colorAlphaChangedCustomEvent);
+        document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+        document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
+        document.addEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.alphaChanged);
     }
 
     /**
@@ -256,9 +256,9 @@ class ColorPicker extends HTMLElement {
         this.$button.removeEventListener('keydown', this.onKeyDown);
         document.removeEventListener('click', this.clickedOutside);
 
-        document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
-        document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.colorHueChangedCustomEvent);
-        document.removeEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.colorAlphaChangedCustomEvent);
+        document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+        document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
+        document.removeEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.alphaChanged);
     }
 
     /**

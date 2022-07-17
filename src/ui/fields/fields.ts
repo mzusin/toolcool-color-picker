@@ -6,7 +6,7 @@ import {
     CUSTOM_EVENT_COLOR_HUE_CHANGED,
     sendAlphaCustomEvent, sendHsvCustomEvent
 } from '../../domain/events-provider';
-import tinycolor from 'tinycolor2';
+import { TinyColor } from '@ctrl/tinycolor';
 import { fixPercent, fixRGB, parseColor } from '../../domain/color-provider';
 import { getUniqueId } from '../../domain/common-provider';
 
@@ -15,11 +15,11 @@ import { getUniqueId } from '../../domain/common-provider';
  ------
  <toolcool-color-picker-fields color="#000" cid="..."></toolcool-color-picker-fields>
  */
-class ColorPickerFields extends HTMLElement {
+class Fields extends HTMLElement {
 
     // this id attribute is used for custom events
     private cid: string;
-    private color: tinycolor.Instance = tinycolor('#000');
+    private color: TinyColor = new TinyColor('#000');
 
     private $fields: HTMLElement;
     private $hex: HTMLInputElement;
@@ -41,12 +41,12 @@ class ColorPickerFields extends HTMLElement {
             mode: 'open', // 'closed', 'open',
         });
 
-        this.colorHsvChangedCustomEvent = this.colorHsvChangedCustomEvent.bind(this);
-        this.colorHueChangedCustomEvent = this.colorHueChangedCustomEvent.bind(this);
-        this.colorAlphaChangedCustomEvent = this.colorAlphaChangedCustomEvent.bind(this);
+        this.hsvChanged = this.hsvChanged.bind(this);
+        this.hueChanged = this.hueChanged.bind(this);
+        this.alphaChanged = this.alphaChanged.bind(this);
 
         this.onHexChange = this.onHexChange.bind(this);
-        this.performUpdate = this.performUpdate.bind(this);
+        this.render = this.render.bind(this);
         this.onRedChange = this.onRedChange.bind(this);
         this.onGreenChange = this.onGreenChange.bind(this);
         this.onBlueChange = this.onBlueChange.bind(this);
@@ -57,7 +57,7 @@ class ColorPickerFields extends HTMLElement {
         this.onAlphaKeyDown = this.onAlphaKeyDown.bind(this);
     }
 
-    colorHueChangedCustomEvent(evt: CustomEvent) {
+    hueChanged(evt: CustomEvent) {
 
         if(!evt || !evt.detail || !evt.detail.cid) return;
 
@@ -66,16 +66,17 @@ class ColorPickerFields extends HTMLElement {
 
         const hsv = this.color.toHsv();
 
-        this.color = tinycolor.fromRatio({
-            h: evt.detail.h,
+        this.color = new TinyColor({
+            h: Number(evt.detail.h),
             s: hsv.s,
             v: hsv.v,
             a: hsv.a,
         });
-        this.performUpdate();
+        
+        this.render();
     }
 
-    colorAlphaChangedCustomEvent(evt: CustomEvent) {
+    alphaChanged(evt: CustomEvent) {
 
         if(!evt || !evt.detail || !evt.detail.cid) return;
 
@@ -85,27 +86,27 @@ class ColorPickerFields extends HTMLElement {
         const rgba = this.color.toRgb();
         rgba.a = evt.detail.a;
 
-        this.color = tinycolor(rgba);
-        this.performUpdate();
+        this.color = new TinyColor(rgba);
+        this.render();
     }
 
-    colorHsvChangedCustomEvent(evt: CustomEvent) {
+    hsvChanged(evt: CustomEvent) {
         if(!evt || !evt.detail || !evt.detail.cid) return;
 
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        this.color = tinycolor.fromRatio({
+        this.color = new TinyColor({
             h: evt.detail.h,
             s: evt.detail.s,
             v: evt.detail.v,
             a: this.color.toHsv().a,
         });
 
-        this.performUpdate();
+        this.render();
     }
 
-    performUpdate() {
+    render() {
         const rgba = this.color.toRgb();
         this.r = rgba.r;
         this.g = rgba.g;
@@ -142,27 +143,27 @@ class ColorPickerFields extends HTMLElement {
                 if(type === 'r'){
                     this.r = Math.min(255, rgba.r + 1);
                     rgba.r = this.r;
-                    const hsv = tinycolor(rgba).toHsv();
+                    const hsv = new TinyColor(rgba).toHsv();
                     sendHsvCustomEvent(this.cid, hsv.h, hsv.s, hsv.v);
                     this.$r.value = this.r.toString();
-                    this.performUpdate();
+                    this.render();
                 }
                 if(type === 'g'){
                     this.g = Math.min(255, rgba.g + 1);
                     rgba.g = this.g;
 
-                    const hsv = tinycolor(rgba).toHsv();
+                    const hsv = new TinyColor(rgba).toHsv();
                     sendHsvCustomEvent(this.cid, hsv.h, hsv.s, hsv.v);
                     this.$g.value = this.g.toString();
-                    this.performUpdate();
+                    this.render();
                 }
                 if(type === 'b'){
                     this.b = Math.min(255, rgba.b + 1);
                     rgba.b = this.b
-                    const hsv = tinycolor(rgba).toHsv();
+                    const hsv = new TinyColor(rgba).toHsv();
                     sendHsvCustomEvent(this.cid, hsv.h, hsv.s, hsv.v);
                     this.$b.value = this.b.toString();
-                    this.performUpdate();
+                    this.render();
                 }
                 if(type === 'a'){
                     this.a = Math.min(100, this.a + 0.01);
@@ -170,9 +171,9 @@ class ColorPickerFields extends HTMLElement {
 
                     const rgba = this.color.toRgb();
                     rgba.a = this.a;
-                    this.color = tinycolor(rgba);
+                    this.color = new TinyColor(rgba);
 
-                    this.performUpdate();
+                    this.render();
                     sendAlphaCustomEvent(this.cid, this.a);
                 }
                 break;
@@ -181,27 +182,27 @@ class ColorPickerFields extends HTMLElement {
                 if(type === 'r'){
                     this.r = Math.max(0, rgba.r - 1);
                     rgba.r = this.r;
-                    const hsv = tinycolor(rgba).toHsv();
+                    const hsv = new TinyColor(rgba).toHsv();
                     sendHsvCustomEvent(this.cid, hsv.h, hsv.s, hsv.v);
                     this.$r.value = this.r.toString();
-                    this.performUpdate();
+                    this.render();
                 }
                 if(type === 'g'){
                     this.g = Math.max(0, rgba.g - 1);
                     rgba.g = this.g;
 
-                    const hsv = tinycolor(rgba).toHsv();
+                    const hsv = new TinyColor(rgba).toHsv();
                     sendHsvCustomEvent(this.cid, hsv.h, hsv.s, hsv.v);
                     this.$g.value = this.g.toString();
-                    this.performUpdate();
+                    this.render();
                 }
                 if(type === 'b'){
                     this.b = Math.max(0, rgba.b - 1);
                     rgba.b = this.b
-                    const hsv = tinycolor(rgba).toHsv();
+                    const hsv = new TinyColor(rgba).toHsv();
                     sendHsvCustomEvent(this.cid, hsv.h, hsv.s, hsv.v);
                     this.$b.value = this.b.toString();
-                    this.performUpdate();
+                    this.render();
                 }
                 if(type === 'a'){
                     this.a = Math.max(0, this.a - 0.01);
@@ -209,9 +210,9 @@ class ColorPickerFields extends HTMLElement {
 
                     const rgba = this.color.toRgb();
                     rgba.a = this.a;
-                    this.color = tinycolor(rgba);
+                    this.color = new TinyColor(rgba);
 
-                    this.performUpdate();
+                    this.render();
                     sendAlphaCustomEvent(this.cid, this.a);
                 }
                 break;
@@ -222,7 +223,7 @@ class ColorPickerFields extends HTMLElement {
                     $el.blur();
                 }
 
-                this.performUpdate();
+                this.render();
                 break;
             }
             case 'Enter': {
@@ -231,7 +232,7 @@ class ColorPickerFields extends HTMLElement {
                     $el.blur();
                 }
 
-                this.performUpdate();
+                this.render();
                 break;
             }
         }
@@ -258,9 +259,9 @@ class ColorPickerFields extends HTMLElement {
         const $target = evt.target as HTMLInputElement;
         if($target.value.length !== 6) return;
 
-        const updatedColor = tinycolor(`#${ $target.value }`);
+        const updatedColor = new TinyColor(`#${ $target.value }`);
 
-        if(updatedColor.isValid()){
+        if(updatedColor.isValid){
             this.color = updatedColor;
 
             const hsv = this.color.toHsv();
@@ -278,7 +279,7 @@ class ColorPickerFields extends HTMLElement {
         if(fixedValue.toString() === $target.value){
             const rgba = this.color.toRgb();
             rgba.r = fixedValue;
-            const hsv = tinycolor(rgba).toHsv();
+            const hsv = new TinyColor(rgba).toHsv();
 
             // update outer color to change the button, and
             // send the updated color to the user
@@ -293,7 +294,7 @@ class ColorPickerFields extends HTMLElement {
         if(fixedValue.toString() === $target.value){
             const rgba = this.color.toRgb();
             rgba.g = fixedValue;
-            const hsv = tinycolor(rgba).toHsv();
+            const hsv = new TinyColor(rgba).toHsv();
 
             // update outer color to change the button, and
             // send the updated color to the user
@@ -308,7 +309,7 @@ class ColorPickerFields extends HTMLElement {
         if(fixedValue.toString() === $target.value){
             const rgba = this.color.toRgb();
             rgba.b = fixedValue;
-            const hsv = tinycolor(rgba).toHsv();
+            const hsv = new TinyColor(rgba).toHsv();
 
             // update outer color to change the button, and
             // send the updated color to the user
@@ -371,9 +372,9 @@ class ColorPickerFields extends HTMLElement {
         this.$a = this.shadowRoot.getElementById(`a-${ aId }`) as HTMLInputElement;
 
         // custom event from other parts of the app
-        document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
-        document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.colorHueChangedCustomEvent);
-        document.addEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.colorAlphaChangedCustomEvent);
+        document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+        document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
+        document.addEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.alphaChanged);
 
         this.$hex.addEventListener('input', this.onHexChange);
         this.$r.addEventListener('input', this.onRedChange);
@@ -381,11 +382,11 @@ class ColorPickerFields extends HTMLElement {
         this.$b.addEventListener('input', this.onBlueChange);
         this.$a.addEventListener('input', this.onAlphaChange);
 
-        this.$hex.addEventListener('blur', this.performUpdate);
-        this.$r.addEventListener('blur', this.performUpdate);
-        this.$g.addEventListener('blur', this.performUpdate);
-        this.$b.addEventListener('blur', this.performUpdate);
-        this.$a.addEventListener('blur', this.performUpdate);
+        this.$hex.addEventListener('blur', this.render);
+        this.$r.addEventListener('blur', this.render);
+        this.$g.addEventListener('blur', this.render);
+        this.$b.addEventListener('blur', this.render);
+        this.$a.addEventListener('blur', this.render);
 
         this.$r.addEventListener('keydown', this.onRedKeyDown);
         this.$g.addEventListener('keydown', this.onGreenKeyDown);
@@ -397,9 +398,9 @@ class ColorPickerFields extends HTMLElement {
      * when the custom element disconnected from DOM
      */
     disconnectedCallback(){
-        document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
-        document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.colorHueChangedCustomEvent);
-        document.removeEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.colorAlphaChangedCustomEvent);
+        document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+        document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
+        document.removeEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.alphaChanged);
 
         this.$hex.removeEventListener('input', this.onHexChange);
         this.$r.removeEventListener('input', this.onRedChange);
@@ -407,11 +408,11 @@ class ColorPickerFields extends HTMLElement {
         this.$b.removeEventListener('input', this.onBlueChange);
         this.$a.removeEventListener('input', this.onAlphaChange);
 
-        this.$hex.removeEventListener('blur', this.performUpdate);
-        this.$r.removeEventListener('blur', this.performUpdate);
-        this.$g.removeEventListener('blur', this.performUpdate);
-        this.$b.removeEventListener('blur', this.performUpdate);
-        this.$a.removeEventListener('blur', this.performUpdate);
+        this.$hex.removeEventListener('blur', this.render);
+        this.$r.removeEventListener('blur', this.render);
+        this.$g.removeEventListener('blur', this.render);
+        this.$b.removeEventListener('blur', this.render);
+        this.$a.removeEventListener('blur', this.render);
 
         this.$r.removeEventListener('keydown', this.onRedKeyDown);
         this.$g.removeEventListener('keydown', this.onGreenKeyDown);
@@ -424,8 +425,8 @@ class ColorPickerFields extends HTMLElement {
      */
     attributeChangedCallback(){
         this.color = parseColor(this.getAttribute('color'));
-        this.performUpdate();
+        this.render();
     }
 }
 
-export default ColorPickerFields;
+export default Fields;

@@ -24,12 +24,14 @@
     "uglify-js": "^3.16.2",
     "uglifycss": "^0.0.29"
   },
-  "dependencies": {
-    "tinycolor2": "^1.4.2"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "@ctrl/tinycolor": "^3.4.1",
+    "install": "^0.13.0",
+    "npm": "^8.14.0"
+  }
 }
