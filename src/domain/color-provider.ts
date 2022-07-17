@@ -1,3 +1,5 @@
+import tinycolor, { Instance } from 'tinycolor2';
+
 export const SATURATION_STEP = 0.01;
 
 /**
@@ -13,6 +15,20 @@ export const getHueBackground = (hue: number) => {
         hue = 360;
     }
     return `hsl(${ Math.round(hue) }, 100%, 50%)`;
+};
+
+/**
+ * This alpha color background is used in the alpha component.
+ * The hsl color is supported in 99.5% browsers - https://caniuse.com/?search=rgba
+ */
+export const getAlphaColorBackground = (color: Instance) => {
+    const rgba = color.toRgb();
+    return `linear-gradient(to right, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 0) 0%, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 1) 100%)`;
+};
+
+export const getRgbaBackground = (color: Instance) => {
+    const rgba = color.toRgb();
+    return `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
 };
 
 /**
@@ -99,4 +115,10 @@ export const fixPercent = (updatedValue: any) => {
     value = Math.max(0, value);
     value = Math.min(100, value);
     return value;
+};
+
+export const parseColor = (colorString: string) => {
+    const color = tinycolor(colorString || '#000');
+    color.setAlpha(color.getAlpha());
+    return color;
 };

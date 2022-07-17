@@ -8,6 +8,7 @@ import {
     CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
 } from '../domain/events-provider';
 import { getUniqueId } from '../domain/common-provider';
+import { getRgbaBackground, parseColor } from '../domain/color-provider';
 
 /*
  Usage:
@@ -24,8 +25,7 @@ class ColorPicker extends HTMLElement {
 
     // ----------- APIs ------------------------
     public get value() {
-        const rgba = this.state.color.toRgb();
-        return `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
+        return getRgbaBackground(this.state.color)
     }
 
     public set value(updateColor: string) {
@@ -107,14 +107,12 @@ class ColorPicker extends HTMLElement {
     onPopupVisibilityChange() {
         if(!this.$popupBox) return true;
         this.$popupBox.innerHTML = this.state.isPopupVisible ?
-            `<toolcool-color-picker-popup color="${ this.state.color.toHexString() }" cid="${ this.cid }" />` :
+            `<toolcool-color-picker-popup color="${ this.state.color.toRgbString() }" cid="${ this.cid }" />` :
             '';
     }
 
     onInitialColorChange() {
-
-        const rgba = this.state.color.toRgb();
-        const bgColor = `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
+        const bgColor = getRgbaBackground(this.state.color);
 
         if(this.$buttonColor){
             this.$buttonColor.style.backgroundColor = bgColor;
@@ -127,11 +125,10 @@ class ColorPicker extends HTMLElement {
     }
 
     onColorChange() {
-        const rgba = this.state.color.toRgb();
-        const bgColor = `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
+        const bgColor = getRgbaBackground(this.state.color);
 
         if(this.$buttonColor){
-            this.$buttonColor.style.backgroundColor = bgColor;
+            this.$buttonColor.style.backgroundColor = getRgbaBackground(this.state.color);
         }
 
         this.dispatchEvent(new CustomEvent('change', {
@@ -211,10 +208,9 @@ class ColorPicker extends HTMLElement {
      * when the custom element connected to DOM
      */
     connectedCallback() {
-        this.state.initialColor = tinycolor(this.getAttribute('color') || '#000');
-        this.state.color = tinycolor(this.getAttribute('color') || '#000');
 
-        const rgba = this.state.color.toRgb();
+        this.state.initialColor = parseColor(this.getAttribute('color'));
+        this.state.color = parseColor(this.getAttribute('color'));
 
         this.shadowRoot.innerHTML = `
             <style>${ styles }</style>
@@ -224,7 +220,7 @@ class ColorPicker extends HTMLElement {
                     tabIndex="0"
                     class="color-picker__button"
                     title="Select Color">
-                    <span class="color-picker__button-color" style="background-color: rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })"></span>
+                    <span class="color-picker__button-color" style="background: ${ getRgbaBackground(this.state.color) }"></span>
                 </button>
                 <div data-popup-box></div>
             </div>
@@ -266,8 +262,8 @@ class ColorPicker extends HTMLElement {
      * when attributes change
      */
     attributeChangedCallback(){
-        this.state.initialColor = tinycolor(this.getAttribute('color') || '#000');
-        this.state.color = tinycolor(this.getAttribute('color') || '#000');
+        this.state.initialColor = parseColor(this.getAttribute('color'));
+        this.state.color = parseColor(this.getAttribute('color'));
         this.onInitialColorChange();
     }
 }

@@ -6,7 +6,8 @@ import {
     CUSTOM_EVENT_COLOR_HUE_CHANGED,
     sendAlphaCustomEvent
 } from '../../domain/events-provider';
-import tinycolor from 'tinycolor2';
+import tinycolor, { fromRatio } from 'tinycolor2';
+import { getAlphaColorBackground, parseColor } from '../../domain/color-provider';
 
 /*
  Usage:
@@ -17,13 +18,15 @@ class ColorPickerAlpha extends HTMLElement {
 
     // this id attribute is used for custom events
     private cid: string;
-    private initialColor: tinycolor.Instance = tinycolor('#000');
 
     private $alpha: HTMLElement;
     private $color: HTMLElement;
     private $pointer: HTMLElement;
 
     private alpha: number = 1; // [0, 1]
+    private hue: number = 0; // [0, 360]
+    private saturation: number = 0; // [0, 1]
+    private value: number = 0; // [0, 1]
 
     constructor() {
         super();
@@ -42,10 +45,9 @@ class ColorPickerAlpha extends HTMLElement {
         this.colorAlphaChangedCustomEvent = this.colorAlphaChangedCustomEvent.bind(this);
     }
 
-    performUpdate(percent: number) {
-        this.alpha = percent / 100;
-        this.$pointer.style.left = `${ percent }%`;
-        sendAlphaCustomEvent(this.cid, percent / 100);
+    performUpdate() {
+        this.$pointer.style.left = `${ this.alpha * 100 }%`;
+        sendAlphaCustomEvent(this.cid, this.alpha);
     }
 
     onChange(evt: any) {
@@ -59,7 +61,8 @@ class ColorPickerAlpha extends HTMLElement {
         const left = Math.min(Math.max(0, mouseX - boxLeft), boxWidth);
         const percent = Math.min(Math.max(0, (left * 100) / boxWidth), 100);
 
-        this.performUpdate(percent);
+        this.alpha = percent / 100;
+        this.performUpdate();
     }
 
     onKeyDown(evt: KeyboardEvent) {
@@ -68,14 +71,18 @@ class ColorPickerAlpha extends HTMLElement {
 
         switch (evt.key){
             case 'ArrowLeft': {
-                const percent = this.alpha * 100;
-                this.performUpdate(Math.max(0, percent - 1));
+                let percent = this.alpha * 100;
+                percent = Math.max(0, percent - 1);
+                this.alpha = percent / 100;
+                this.performUpdate();
                 break;
             }
 
             case 'ArrowRight': {
-                const percent = this.alpha * 100;
-                this.performUpdate(Math.min(100, percent + 1));
+                let percent = this.alpha * 100;
+                percent = Math.min(100, percent + 1)
+                this.alpha = percent / 100;
+                this.performUpdate();
                 break;
             }
         }
@@ -87,15 +94,14 @@ class ColorPickerAlpha extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        this.initialColor = tinycolor.fromRatio({
+        const color = fromRatio({
             h: evt.detail.h,
             s: evt.detail.s,
             v: evt.detail.v,
-            a: this.initialColor.toHsv().a,
+            a: this.alpha,
         });
 
-        const rgba = this.initialColor.toRgb();
-        this.$color.style.background = `linear-gradient(to right, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 0) 0%, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 1) 100%)`;
+        this.$color.style.background = getAlphaColorBackground(color);
     }
 
     colorHueChangedCustomEvent(evt: CustomEvent) {
@@ -105,17 +111,14 @@ class ColorPickerAlpha extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        const hsv = this.initialColor.toHsv();
-
-        this.initialColor = tinycolor.fromRatio({
+        const color = fromRatio({
             h: evt.detail.h,
-            s: hsv.s,
-            v: hsv.v,
-            a: hsv.a,
+            s: this.saturation,
+            v: this.value,
+            a: this.alpha,
         });
 
-        const rgba = this.initialColor.toRgb();
-        this.$color.style.background = `linear-gradient(to right, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 0) 0%, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 1) 100%)`;
+        this.$color.style.background = getAlphaColorBackground(color);
     }
 
     colorAlphaChangedCustomEvent(evt: CustomEvent) {
@@ -125,16 +128,9 @@ class ColorPickerAlpha extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        let changed = false;
-
         if(this.alpha !== evt.detail.a){
             this.alpha = evt.detail.a;
-            changed = true;
-        }
-
-        if(changed){
-            const percent = this.alpha * 100;
-            this.performUpdate(Math.max(0, percent - 1));
+            this.performUpdate();
         }
     }
 
@@ -165,17 +161,21 @@ class ColorPickerAlpha extends HTMLElement {
     connectedCallback(){
 
         this.cid = this.getAttribute('cid');
-        this.initialColor = tinycolor(this.getAttribute('color') || '#000');
 
-        const rgba = this.initialColor.toRgb();
-        this.alpha = rgba.a;
+        const color = parseColor(this.getAttribute('color'));
+        const hsv = color.toHsv();
+
+        this.alpha = hsv.a;
+        this.hue = hsv.h;
+        this.saturation = hsv.s;
+        this.value = hsv.v;
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
            <div class="color-picker__alpha">
                 <div class="color-picker__alpha-box">
                     <div class="color-picker__alpha-transparent-bg"></div>
-                    <div class="color-picker__alpha-color-bg" style="background: linear-gradient(to right, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 0) 0%, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 1) 100%)"></div>
+                    <div class="color-picker__alpha-color-bg" style="background: ${ getAlphaColorBackground(color) }"></div>
                     
                     <div class="color-picker__alpha-pointer">
                         <div class="color-picker__alpha-pointer-box" tabindex="0" style="left: ${ this.alpha * 100 }%;" >
@@ -214,6 +214,22 @@ class ColorPickerAlpha extends HTMLElement {
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
         document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.colorHueChangedCustomEvent);
         document.removeEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.colorAlphaChangedCustomEvent);
+    }
+
+    /**
+     * when attributes change
+     */
+    attributeChangedCallback(){
+
+        const color = parseColor(this.getAttribute('color'));
+        const hsv = color.toHsv();
+
+        this.alpha = hsv.a;
+        this.hue = hsv.h;
+        this.saturation = hsv.s;
+        this.value = hsv.v;
+
+        this.performUpdate();
     }
 }
 

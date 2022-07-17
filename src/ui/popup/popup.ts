@@ -17,7 +17,7 @@ class ColorPickerPopup extends HTMLElement {
     private readonly cid: string;
 
     private $popup: HTMLElement;
-    private initialColor: string = '#000';
+    private color: string = '#000';
 
     constructor() {
         super();
@@ -56,15 +56,15 @@ class ColorPickerPopup extends HTMLElement {
      * when the custom element connected to DOM
      */
     connectedCallback(){
-        this.initialColor = this.getAttribute('color') || '#000';
+        this.color = this.getAttribute('color') || '#000';
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
            <div class="color-picker__popup">
-                <toolcool-color-picker-saturation color="${ this.initialColor }" cid="${ this.cid }"></toolcool-color-picker-saturation>
-                <toolcool-color-picker-hue color="${ this.initialColor }" cid="${ this.cid }"></toolcool-color-picker-hue>
-                <toolcool-color-picker-alpha color="${ this.initialColor }" cid="${ this.cid }"></toolcool-color-picker-alpha>
-                <toolcool-color-picker-fields color="${ this.initialColor }" cid="${ this.cid }"></toolcool-color-picker-fields>
+                <toolcool-color-picker-saturation color="${ this.color }" cid="${ this.cid }"></toolcool-color-picker-saturation>
+                <toolcool-color-picker-hue color="${ this.color }" cid="${ this.cid }"></toolcool-color-picker-hue>
+                <toolcool-color-picker-alpha color="${ this.color }" cid="${ this.cid }"></toolcool-color-picker-alpha>
+                <toolcool-color-picker-fields color="${ this.color }" cid="${ this.cid }"></toolcool-color-picker-fields>
            </div>
         `;
 
@@ -83,7 +83,7 @@ class ColorPickerPopup extends HTMLElement {
      * when attributes change
      */
     attributeChangedCallback(){
-        this.initialColor = this.getAttribute('color') || '#000';
+        this.color = this.getAttribute('color') || '#000';
 
         const $saturation = this.shadowRoot.querySelector('toolcool-color-picker-saturation');
         const $hue = this.shadowRoot.querySelector('toolcool-color-picker-hue');
@@ -91,19 +91,19 @@ class ColorPickerPopup extends HTMLElement {
         const $fields = this.shadowRoot.querySelector('toolcool-color-picker-fields');
 
         if($saturation){
-            $saturation.setAttribute('color',  this.initialColor);
+            $saturation.setAttribute('color',  this.color);
         }
 
         if($hue){
-            $hue.setAttribute('color',  this.initialColor);
+            $hue.setAttribute('color',  this.color);
         }
 
         if($alpha){
-            $alpha.setAttribute('color',  this.initialColor);
+            $alpha.setAttribute('color',  this.color);
         }
 
         if($fields){
-            $fields.setAttribute('color',  this.initialColor);
+            $fields.setAttribute('color',  this.color);
         }
     }
 }

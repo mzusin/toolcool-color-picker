@@ -2,7 +2,13 @@
 import styles from './saturation.pcss';
 import tinycolor from 'tinycolor2';
 import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, sendHsvCustomEvent } from '../../domain/events-provider';
-import { getHueBackground, getLeftBySaturation, getTopByValue, SATURATION_STEP } from '../../domain/color-provider';
+import {
+    getHueBackground,
+    getLeftBySaturation,
+    getTopByValue,
+    parseColor,
+    SATURATION_STEP
+} from '../../domain/color-provider';
 
 /*
  Usage:
@@ -168,7 +174,7 @@ class ColorPickerSaturation extends HTMLElement {
 
         this.cid = this.getAttribute('cid');
 
-        const color = tinycolor(this.getAttribute('color') || '#000');
+        const color = parseColor(this.getAttribute('color'));
         const hsv = color.toHsv();
 
         this.hue = hsv.h;
@@ -226,7 +232,7 @@ class ColorPickerSaturation extends HTMLElement {
      */
     attributeChangedCallback(){
 
-        const color = tinycolor(this.getAttribute('color') || '#000');
+        const color = parseColor(this.getAttribute('color'));
         const hsv = color.toHsv();
 
         this.hue = hsv.h;

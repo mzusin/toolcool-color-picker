@@ -7,7 +7,7 @@ import {
     sendAlphaCustomEvent, sendHsvCustomEvent
 } from '../../domain/events-provider';
 import tinycolor from 'tinycolor2';
-import { fixPercent, fixRGB } from '../../domain/color-provider';
+import { fixPercent, fixRGB, parseColor } from '../../domain/color-provider';
 import { getUniqueId } from '../../domain/common-provider';
 
 /*
@@ -331,7 +331,7 @@ class ColorPickerFields extends HTMLElement {
     connectedCallback(){
 
         this.cid = this.getAttribute('cid');
-        this.initialColor = tinycolor(this.getAttribute('color') || '#000');
+        this.initialColor = parseColor(this.getAttribute('color'));
 
         const rgba = this.initialColor.toRgb();
         this.r = rgba.r;
@@ -423,7 +423,7 @@ class ColorPickerFields extends HTMLElement {
      * when attributes change
      */
     attributeChangedCallback(){
-        this.initialColor = tinycolor(this.getAttribute('color') || '#000');
+        this.initialColor = parseColor(this.getAttribute('color'));
         this.performUpdate();
     }
 }

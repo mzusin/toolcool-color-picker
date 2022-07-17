@@ -2,7 +2,7 @@
 import styles from './hue.pcss';
 import { CUSTOM_EVENT_COLOR_HSV_CHANGED, sendHueCustomEvent } from '../../domain/events-provider';
 import tinycolor from 'tinycolor2';
-import { getHueByLeft, getLeftByHue } from '../../domain/color-provider';
+import { getHueByLeft, getLeftByHue, parseColor } from '../../domain/color-provider';
 
 /*
  Usage:
@@ -120,7 +120,7 @@ class ColorPickerHue extends HTMLElement {
 
         this.cid = this.getAttribute('cid');
 
-        const color = tinycolor(this.getAttribute('color') || '#000');
+        const color = parseColor(this.getAttribute('color'));
         this.hue = color.toHsv().h;
 
         this.shadowRoot.innerHTML = `
@@ -171,7 +171,7 @@ class ColorPickerHue extends HTMLElement {
      */
     attributeChangedCallback(){
 
-        const color = tinycolor(this.getAttribute('color') || '#000');
+        const color = parseColor(this.getAttribute('color'));
         const hsv = color.toHsv();
 
         this.hue = hsv.h;
