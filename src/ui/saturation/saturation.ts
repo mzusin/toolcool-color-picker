@@ -242,7 +242,7 @@ class Saturation extends HTMLElement {
      */
     attributeChangedCallback(attrName, oldVal, newVal){
 
-        const color = parseColor(this.getAttribute('color'));
+        const color = parseColor(newVal);
         const hsv = color.toHsv();
 
         this.hue = hsv.h;
