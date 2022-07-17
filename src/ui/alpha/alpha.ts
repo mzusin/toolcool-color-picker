@@ -23,10 +23,10 @@ class ColorPickerAlpha extends HTMLElement {
     private $color: HTMLElement;
     private $pointer: HTMLElement;
 
-    private alpha: number = 1; // [0, 1]
-    private hue: number = 0; // [0, 360]
-    private saturation: number = 0; // [0, 1]
-    private value: number = 0; // [0, 1]
+    private alpha = 1; // [0, 1]
+    private hue = 0; // [0, 360]
+    private saturation = 0; // [0, 1]
+    private value = 0; // [0, 1]
 
     constructor() {
         super();
@@ -50,6 +50,9 @@ class ColorPickerAlpha extends HTMLElement {
         sendAlphaCustomEvent(this.cid, this.alpha);
     }
 
+
+    // we need to handle both MouseEvent and TouchEvent --->
+    // eslint-disable-next-line
     onChange(evt: any) {
         if(!this.$alpha) return;
 

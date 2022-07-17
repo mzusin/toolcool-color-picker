@@ -28,11 +28,11 @@ class ColorPickerFields extends HTMLElement {
     private $b: HTMLInputElement;
     private $a: HTMLInputElement;
 
-    private hex: string = '';
-    private r: number = 0;
-    private g: number = 0;
-    private b: number = 0;
-    private a: number = 1;
+    private hex = '';
+    private r = 0;
+    private g = 0;
+    private b = 0;
+    private a = 1;
 
     constructor() {
         super();

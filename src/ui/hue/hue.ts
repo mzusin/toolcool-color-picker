@@ -1,7 +1,6 @@
 // @ts-ignore: esbuild custom loader
 import styles from './hue.pcss';
 import { CUSTOM_EVENT_COLOR_HSV_CHANGED, sendHueCustomEvent } from '../../domain/events-provider';
-import tinycolor from 'tinycolor2';
 import { getHueByLeft, getLeftByHue, parseColor } from '../../domain/color-provider';
 
 /*
@@ -17,7 +16,7 @@ class ColorPickerHue extends HTMLElement {
     private $hue: HTMLElement;
     private $pointer: HTMLElement;
 
-    private hue: number = 0; // [0, 360]
+    private hue = 0; // [0, 360]
 
     constructor() {
         super();
@@ -55,6 +54,8 @@ class ColorPickerHue extends HTMLElement {
         }
     }
 
+    // we need to handle both MouseEvent and TouchEvent --->
+    // eslint-disable-next-line
     onChange(evt: any) {
         if(!this.$hue) return;
 

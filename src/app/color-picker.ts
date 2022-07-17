@@ -82,8 +82,11 @@ class ColorPicker extends HTMLElement {
     }
 
     initState() {
+        // eslint-disable-next-line
         const scope = this;
         this.state = new Proxy(scope.stateDefaults, {
+
+            // eslint-disable-next-line
             set(target: IColorPickerState, key: string | symbol, value: any, receiver: any): boolean {
                 target[key] = value;
 
@@ -186,7 +189,7 @@ class ColorPicker extends HTMLElement {
         this.state.isPopupVisible = false;
     }
 
-    toggle(evt: MouseEvent) {
+    toggle() {
         const isVisible = this.state.isPopupVisible;
 
         // setTimeout is used instead stopPropagation

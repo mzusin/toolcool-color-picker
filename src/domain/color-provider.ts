@@ -98,7 +98,7 @@ export const getHueByLeft = (left: number) => {
 /**
  * returns a number in the range [0, 255]
  */
-export const fixRGB = (updatedValue: any) => {
+export const fixRGB = (updatedValue: string|number) => {
     let value = Number(updatedValue) || 0;
     value = Math.round(value);
     value = Math.max(0, value);
@@ -109,7 +109,7 @@ export const fixRGB = (updatedValue: any) => {
 /**
  * returns a number in the range [0, 100]
  */
-export const fixPercent = (updatedValue: any) => {
+export const fixPercent = (updatedValue: string|number) => {
     let value = Number(updatedValue) || 100;
     value = Math.round(value);
     value = Math.max(0, value);

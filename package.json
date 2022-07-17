@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node run/build.js",
     "watch": "node run/watch.js",
-    "test": "node ./run/test.js"
+    "test": "node ./run/test.js",
+    "eslint": "eslint ./src/**"
   },
   "type": "module",
   "keywords": [],
@@ -13,8 +14,11 @@
   "license": "MIT",
   "devDependencies": {
     "@types/tinycolor2": "^1.4.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
     "autoprefixer": "^10.4.7",
     "esbuild": "^0.14.49",
+    "eslint": "^8.20.0",
     "open": "^8.4.0",
     "postcss": "^8.4.14",
     "uglify-js": "^3.16.2",

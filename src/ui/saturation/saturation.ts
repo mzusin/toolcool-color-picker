@@ -1,6 +1,5 @@
 // @ts-ignore: esbuild custom loader
 import styles from './saturation.pcss';
-import tinycolor from 'tinycolor2';
 import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, sendHsvCustomEvent } from '../../domain/events-provider';
 import {
     getHueBackground,
@@ -24,9 +23,9 @@ class ColorPickerSaturation extends HTMLElement {
     private $color: HTMLElement;
     private $pointer: HTMLElement;
 
-    private hue: number = 0; // [0, 360]
-    private saturation: number = 0; // [0, 1]
-    private value: number = 0; // [0, 1]
+    private hue = 0; // [0, 360]
+    private saturation = 0; // [0, 1]
+    private value = 0; // [0, 1]
 
     constructor() {
         super();
@@ -44,7 +43,7 @@ class ColorPickerSaturation extends HTMLElement {
         this.colorHueChangedCustomEvent = this.colorHueChangedCustomEvent.bind(this);
     }
 
-    performUpdate(sendEvent: boolean = true) {
+    performUpdate(sendEvent = true) {
 
         // re-render
         this.$pointer.style.left = getLeftBySaturation(this.saturation);
@@ -58,6 +57,8 @@ class ColorPickerSaturation extends HTMLElement {
         }
     }
 
+    // we need to handle both MouseEvent and TouchEvent --->
+    // eslint-disable-next-line
     onChange(evt: any) {
         if(!this.$saturation) return;
 
@@ -67,8 +68,8 @@ class ColorPickerSaturation extends HTMLElement {
         const mouseX = typeof evt.clientX === 'number' ? evt.clientX : evt.touches[0].clientX;
         const mouseY = typeof evt.clientY === 'number' ? evt.clientY : evt.touches[0].clientY;
 
-        let lPos = Math.min(Math.max(0, mouseX - boxLeft), boxWidth);
-        let tPos = Math.min(Math.max(0, mouseY - boxTop), boxHeight);
+        const lPos = Math.min(Math.max(0, mouseX - boxLeft), boxWidth);
+        const tPos = Math.min(Math.max(0, mouseY - boxTop), boxHeight);
 
         this.saturation = lPos / boxWidth;
         this.value = 1 - (tPos / boxHeight);

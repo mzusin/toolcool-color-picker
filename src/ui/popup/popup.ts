@@ -4,7 +4,6 @@ import ColorPickerSaturation from '../saturation/saturation';
 import ColorPickerHue from '../hue/hue';
 import ColorPickerAlpha from '../alpha/alpha';
 import ColorPickerFields from '../fields/fields';
-import tinycolor from 'tinycolor2';
 
 /*
  Usage:
@@ -17,7 +16,7 @@ class ColorPickerPopup extends HTMLElement {
     private readonly cid: string;
 
     private $popup: HTMLElement;
-    private color: string = '#000';
+    private color = '#000';
 
     constructor() {
         super();
