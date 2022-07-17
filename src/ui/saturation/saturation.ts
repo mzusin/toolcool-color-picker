@@ -33,7 +33,6 @@ class ColorPickerSaturation extends HTMLElement {
         this.onMouseUp = this.onMouseUp.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onPointerKeyDown = this.onPointerKeyDown.bind(this);
-        this.updateColorBackground = this.updateColorBackground.bind(this);
 
         this.colorHsvChangedCustomEvent = this.colorHsvChangedCustomEvent.bind(this);
         this.colorHueChangedCustomEvent = this.colorHueChangedCustomEvent.bind(this);
@@ -44,7 +43,7 @@ class ColorPickerSaturation extends HTMLElement {
         // re-render
         this.$pointer.style.left = getLeftBySaturation(this.saturation);
         this.$pointer.style.top = getTopByValue(this.value);
-        this.updateColorBackground();
+        this.$color.setAttribute('style', `background: ${ getHueBackground(this.hue) }`);
 
         if(sendEvent) {
             // update outer color to change the button, and
@@ -150,10 +149,6 @@ class ColorPickerSaturation extends HTMLElement {
         }
     }
 
-    updateColorBackground() {
-        this.$color.setAttribute('style', `background: ${ getHueBackground(this.hue) }`);
-    }
-
     colorHueChangedCustomEvent(evt: CustomEvent) {
 
         if(!evt || !evt.detail || !evt.detail.cid) return;
@@ -163,7 +158,7 @@ class ColorPickerSaturation extends HTMLElement {
 
         this.hue = evt.detail.h;
 
-        this.updateColorBackground();
+        this.performUpdate();
     }
 
     /**
