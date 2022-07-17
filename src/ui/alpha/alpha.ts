@@ -6,7 +6,7 @@ import {
     CUSTOM_EVENT_COLOR_HUE_CHANGED,
     sendAlphaCustomEvent
 } from '../../domain/events-provider';
-import tinycolor, { fromRatio } from 'tinycolor2';
+import { fromRatio } from 'tinycolor2';
 import { getAlphaColorBackground, parseColor } from '../../domain/color-provider';
 
 /*
