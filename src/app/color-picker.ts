@@ -7,8 +7,9 @@ import {
     CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
 } from '../domain/events-provider';
 import { getUniqueId } from '../domain/common-provider';
-import { getRgbaBackground, parseColor } from '../domain/color-provider';
-import { TinyColor } from '@ctrl/tinycolor';
+import { hslaToString, hsvaToString, parseColor, rgbaToString } from '../domain/color-provider';
+import { TinyColor } from '@ctrl/tinycolor'; // https://github.com/scttcper/tinycolor
+import { ColorInput } from '@ctrl/tinycolor/dist';
 
 /*
  Usage:
@@ -24,12 +25,74 @@ interface IColorPickerState {
 class ColorPicker extends HTMLElement {
 
     // ----------- APIs ------------------------
-    public get value() {
-        return getRgbaBackground(this.state.color)
+    /**
+     * set any color that TinyColor accepts
+     */
+    public set color(userColor: ColorInput) {
+        this.state.color = new TinyColor(userColor);
     }
 
-    public set value(updateColor: string) {
-        this.state.color = new TinyColor(updateColor);
+    /**
+     * returns TinyColor object
+     */
+    public get color() {
+        return this.state.color;
+    }
+
+    /**
+     * hex format getter
+     */
+    public get hex() {
+        return this.state.color.toHexString().toUpperCase();
+    }
+
+    /**
+     * hex with alpha format getter
+     */
+    public get hex8() {
+        return this.state.color.toHex8String().toUpperCase();
+    }
+
+    /**
+     * rgb format getter
+     */
+    public get rgb() {
+        return this.state.color.toRgbString();
+    }
+
+    /**
+     * rgba format getter
+     */
+    public get rgba() {
+        return rgbaToString(this.state.color);
+    }
+
+    /**
+     * hsl format getter
+     */
+    public get hsl() {
+        return this.state.color.toHslString();
+    }
+
+    /**
+     * hsla format getter
+     */
+    public get hsla() {
+        return hslaToString(this.state.color);
+    }
+
+    /**
+     * hsv format getter
+     */
+    public get hsv() {
+        return this.state.color.toHsvString();
+    }
+
+    /**
+     * hsva format getter
+     */
+    public get hsva() {
+        return hsvaToString(this.state.color);
     }
 
     public get opened() {
@@ -115,7 +178,7 @@ class ColorPicker extends HTMLElement {
     }
 
     onInitialColorChange() {
-        const bgColor = getRgbaBackground(this.state.color);
+        const bgColor = rgbaToString(this.state.color);
 
         if(this.$buttonColor){
             this.$buttonColor.style.backgroundColor = bgColor;
@@ -128,10 +191,10 @@ class ColorPicker extends HTMLElement {
     }
 
     onColorChange() {
-        const bgColor = getRgbaBackground(this.state.color);
+        const bgColor = rgbaToString(this.state.color);
 
         if(this.$buttonColor){
-            this.$buttonColor.style.backgroundColor = getRgbaBackground(this.state.color);
+            this.$buttonColor.style.backgroundColor = rgbaToString(this.state.color);
         }
 
         this.dispatchEvent(new CustomEvent('change', {
@@ -223,7 +286,7 @@ class ColorPicker extends HTMLElement {
                     tabIndex="0"
                     class="button"
                     title="Select Color">
-                    <span class="button-color" style="background: ${ getRgbaBackground(this.state.color) }"></span>
+                    <span class="button-color" style="background: ${ rgbaToString(this.state.color) }"></span>
                 </button>
                 <div data-popup-box></div>
             </div>

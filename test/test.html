@@ -22,42 +22,83 @@
             QUnit.module('Color', () => {
                 QUnit.test('initial color should be red', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    assert.equal($colorPicker.value, 'rgba(255, 0, 0, 1)');
+                    assert.equal($colorPicker.rgba, 'rgba(255, 0, 0, 1)');
                 });
 
                 QUnit.test('if initial color is not provided ---> it should be black', (assert) => {
                     const $colorPicker = document.querySelector('#black');
-                    assert.equal($colorPicker.value, 'rgba(0, 0, 0, 1)');
+                    assert.equal($colorPicker.rgba, 'rgba(0, 0, 0, 1)');
                 });
 
                 QUnit.test('change color to #282e5c', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#282e5c';
-                    assert.equal($colorPicker.value, 'rgba(40, 46, 92, 1)');
+                    $colorPicker.color = '#282e5c';
+                    assert.equal($colorPicker.rgba, 'rgba(40, 46, 92, 1)');
                 });
 
                 QUnit.test('change color to rgb(100, 200, 125)', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgb(100, 200, 125)';
-                    assert.equal($colorPicker.value, 'rgba(100, 200, 125, 1)');
+                    $colorPicker.color = 'rgb(100, 200, 125)';
+                    assert.equal($colorPicker.rgba, 'rgba(100, 200, 125, 1)');
                 });
 
                 QUnit.test('change color to rgba(100, 200, 125, 0.25)', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 125, 0.25)';
-                    assert.equal($colorPicker.value, 'rgba(100, 200, 125, 0.25)');
+                    $colorPicker.color = 'rgba(100, 200, 125, 0.25)';
+                    assert.equal($colorPicker.rgba, 'rgba(100, 200, 125, 0.25)');
+                });
+
+                QUnit.test('red hex should be #FF0000', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.hex, '#FF0000');
+                });
+
+                QUnit.test('rgba(255, 0, 0, 0.5) hex8 should be FF000080', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.color = 'rgba(255, 0, 0, 0.5)';
+                    assert.equal($colorPicker.hex8, '#FF000080');
+                });
+
+                QUnit.test('red rgb should be rgb(255, 0, 0)', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.rgb, 'rgb(255, 0, 0)');
+                });
+
+                QUnit.test('red rgba should be rgb(255, 0, 0, 1)', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.rgba, 'rgba(255, 0, 0, 1)');
+                });
+
+                QUnit.test('red hsl should be hsl(0, 100%, 50%)', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.hsl, 'hsl(0, 100%, 50%)');
+                });
+
+                QUnit.test('red hsla should be hsla(0, 100%, 50%, 1)', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.hsla, 'hsla(0%, 100%, 50%, 1)');
+                });
+
+                QUnit.test('red hsv should be hsv(0, 100%, 100%)', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.hsv, 'hsv(0, 100%, 100%)');
+                });
+
+                QUnit.test('red hsva should be hsva(0%, 100%, 100%, 1)', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    assert.equal($colorPicker.hsva, 'hsva(0%, 100%, 100%, 1)');
                 });
             });
 
             QUnit.module('Popup', () => {
                 QUnit.test('initial color should be red', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    assert.equal($colorPicker.value, 'rgba(255, 0, 0, 1)');
+                    assert.equal($colorPicker.rgba, 'rgba(255, 0, 0, 1)');
                 });
 
                 QUnit.test('if initial color is not provided ---> it should be black', (assert) => {
                     const $colorPicker = document.querySelector('#black');
-                    assert.equal($colorPicker.value, 'rgba(0, 0, 0, 1)');
+                    assert.equal($colorPicker.rgba, 'rgba(0, 0, 0, 1)');
                 });
 
                 QUnit.test('color picker popup should be closed by default', (assert) => {
@@ -75,6 +116,13 @@
                     const $colorPicker = document.querySelector('#red');
                     $colorPicker.opened = true;
                     assert.equal($colorPicker.opened, true);
+                });
+
+                QUnit.test('after "opened = true and the opened = false---> color picker popup should be closed', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+                    $colorPicker.opened = false;
+                    assert.equal($colorPicker.opened, false);
                 });
 
                 QUnit.test('color picker popup element should appear', (assert) => {
@@ -135,7 +183,7 @@
 
                 QUnit.test('for #001aff color saturation background should have 234 saturation', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#001aff';
+                    $colorPicker.color = '#001aff';
                     $colorPicker.opened = true;
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -147,7 +195,7 @@
 
                 QUnit.test('for #282e5c color saturation background should have 233 saturation', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#282e5c';
+                    $colorPicker.color = '#282e5c';
                     $colorPicker.opened = true;
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -184,7 +232,7 @@
 
                 QUnit.test('for #7EC6A8 color pointer left position should be 36.36%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -198,7 +246,7 @@
 
                 QUnit.test('for #7EC6A8 color pointer top position should be 22.35%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -211,7 +259,7 @@
 
                 QUnit.test('for #0a010f color pointer left position should be 93.33%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#0a010f';
+                    $colorPicker.color = '#0a010f';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -225,7 +273,7 @@
 
                 QUnit.test('for #0a010f color pointer top position should be 94.12%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#0a010f';
+                    $colorPicker.color = '#0a010f';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -290,7 +338,7 @@
 
                 QUnit.test('pointer arrow right twice ---> left position has changed from 0% to 2%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.color = '#B1B1B1';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -317,7 +365,7 @@
 
                 QUnit.test('pointer arrow right twice ---> top position should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.color = '#B1B1B1';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -344,7 +392,7 @@
 
                 QUnit.test('pointer arrow up twice ---> top position should change from 30.59% to 28.59%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.color = '#B1B1B1';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -371,7 +419,7 @@
 
                 QUnit.test('pointer arrow up twice ---> left position should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.color = '#B1B1B1';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -398,7 +446,7 @@
 
                 QUnit.test('pointer arrow down twice ---> top position should change from 30.59% to 32.59%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.color = '#B1B1B1';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -425,7 +473,7 @@
 
                 QUnit.test('pointer arrow down twice ---> left position should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.color = '#B1B1B1';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -490,7 +538,7 @@
 
                 QUnit.test('pointer arrow left border case ---> left position should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#B1B1B1';
+                    $colorPicker.color = '#B1B1B1';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -510,7 +558,7 @@
 
                 QUnit.test('pointer arrow down border case ---> top position should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#000000';
+                    $colorPicker.color = '#000000';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -550,12 +598,12 @@
                         key: 'ArrowLeft',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(255, 5, 5, 1)');
+                    assert.equal($colorPicker.rgba, 'rgba(255, 5, 5, 1)');
                 });
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -577,7 +625,7 @@
 
                 QUnit.test('when hsv has changed from outside to (320, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -599,7 +647,7 @@
 
                 QUnit.test('when hsv has changed from outside to (320, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -621,7 +669,7 @@
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> pointer left position should be 93%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -643,7 +691,7 @@
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> pointer top position should be 94%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -665,7 +713,7 @@
 
                 QUnit.test('when hue has changed from outside to 79 ---> saturation bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -685,7 +733,7 @@
 
                 QUnit.test('when hue has changed from outside to 200 ---> saturation bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -705,7 +753,7 @@
 
                 QUnit.test('when hue has changed from outside to 79 ---> pointer left position should be 36.36%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -725,7 +773,7 @@
 
                 QUnit.test('when hue has changed from outside to 79 ---> pointer top position should be 22.35%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#7EC6A8';
+                    $colorPicker.color = '#7EC6A8';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -781,7 +829,7 @@
 
                 QUnit.test('after color change to #001aff ---> color pointer left position should be 64.97%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#001aff';
+                    $colorPicker.color = '#001aff';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -794,7 +842,7 @@
 
                 QUnit.test('after color change to #05FF00 ---> color pointer left position should be 33.01%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#05FF00';
+                    $colorPicker.color = '#05FF00';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -807,7 +855,7 @@
 
                 QUnit.test('pointer arrow left twice ---> left position has changed from 56.01% to 54.01%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#00A3FF';
+                    $colorPicker.color = '#00A3FF';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -834,7 +882,7 @@
 
                 QUnit.test('pointer arrow right twice ---> left position has changed from 56.01% to 58.01%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#00A3FF';
+                    $colorPicker.color = '#00A3FF';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -880,7 +928,7 @@
 
                 QUnit.test('pointer arrow right border case ---> left position should remain 100%', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#FF000F';
+                    $colorPicker.color = '#FF000F';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -914,7 +962,7 @@
 
                 QUnit.test('pointer arrow left twice ---> color picker value should change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#00A3FF';
+                    $colorPicker.color = '#00A3FF';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -935,12 +983,12 @@
                         key: 'ArrowLeft',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(0, 194, 255, 1)'); // 00C2FF
+                    assert.equal($colorPicker.rgba, 'rgba(0, 194, 255, 1)'); // 00C2FF
                 });
 
                 QUnit.test('pointer arrow right twice ---> color picker value should change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#00A3FF';
+                    $colorPicker.color = '#00A3FF';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -961,12 +1009,12 @@
                         key: 'ArrowRight',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(0, 132, 255, 1)');
+                    assert.equal($colorPicker.rgba, 'rgba(0, 132, 255, 1)');
                 });
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> pointer position should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#fff';
+                    $colorPicker.color = '#fff';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -988,7 +1036,7 @@
 
                 QUnit.test('when hsv has changed from outside to (320, 0.93, 0.06) ---> pointer position should change too', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#fff';
+                    $colorPicker.color = '#fff';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1046,7 +1094,7 @@
 
                 QUnit.test('for 0% opacity color pointer left position should be 0%', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1059,7 +1107,7 @@
 
                 QUnit.test('for 25% opacity color pointer left position should be 25%', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1072,7 +1120,7 @@
 
                 QUnit.test('pointer arrow left twice ---> left position has changed from 25% to 23%', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1099,7 +1147,7 @@
 
                 QUnit.test('pointer arrow right twice ---> left position has changed from 25% to 27%', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1126,7 +1174,7 @@
 
                 QUnit.test('pointer arrow left border case', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1146,7 +1194,7 @@
 
                 QUnit.test('pointer arrow right border case', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 1)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 1)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1166,7 +1214,7 @@
 
                 QUnit.test('pointer arrow left twice ---> color picker value should change', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1187,12 +1235,12 @@
                         key: 'ArrowLeft',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 200, 255, 0.23)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 200, 255, 0.23)');
                 });
 
                 QUnit.test('pointer arrow right twice ---> color picker value should change', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1213,12 +1261,12 @@
                         key: 'ArrowRight',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 200, 255, 0.27)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 200, 255, 0.27)');
                 });
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> pointer position should not change', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1240,7 +1288,7 @@
 
                 QUnit.test('when hue has changed from outside to (79) ---> pointer position should not change', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1272,7 +1320,7 @@
 
                 QUnit.test('for red with 50% opacity ---> bg color should be red', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(255, 0, 0, 0.5)';
+                    $colorPicker.color = 'rgba(255, 0, 0, 0.5)';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1285,7 +1333,7 @@
 
                 QUnit.test('for #FFC80A color ---> bg color should be #FFC80A', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = '#FFC80A';
+                    $colorPicker.color = '#FFC80A';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1298,7 +1346,7 @@
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1320,7 +1368,7 @@
 
                 QUnit.test('when hue has changed from outside to (79) ---> bg color should change too', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1340,7 +1388,7 @@
 
                 QUnit.test('when alpha has changed from outside to (0.45) ---> pointer position should change too', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1360,7 +1408,7 @@
 
                 QUnit.test('when alpha has changed from outside to (0.37) ---> pointer position should change too', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1380,7 +1428,7 @@
 
                 QUnit.test('pointer arrow left twice ---> left position has changed from 25% to 23%', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1401,12 +1449,12 @@
                         key: 'ArrowLeft',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 200, 255, 0.23)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 200, 255, 0.23)');
                 });
 
                 QUnit.test('pointer arrow right twice ---> left position has changed from 25% to 27%', (assert) => {
                     const $colorPicker = document.querySelector('#alpha-0-5');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1427,7 +1475,7 @@
                         key: 'ArrowRight',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 200, 255, 0.27)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 200, 255, 0.27)');
                 });
             });
 
@@ -1644,7 +1692,7 @@
 
                 QUnit.test('change color to rgba(255, 255, 255, 0.5) ---> hex element should contain the correct value', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(255, 255, 255, 0.5)';
+                    $colorPicker.color = 'rgba(255, 255, 255, 0.5)';
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1655,7 +1703,7 @@
 
                 QUnit.test('change color to rgba(255, 255, 255, 0.5) ---> red field element should contain the correct value', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(255, 255, 255, 0.5)';
+                    $colorPicker.color = 'rgba(255, 255, 255, 0.5)';
                     $colorPicker.opened = true;
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1666,7 +1714,7 @@
 
                 QUnit.test('change color to rgba(255, 255, 255, 0.5) ---> green field element should contain the correct value', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(255, 255, 255, 0.5)';
+                    $colorPicker.color = 'rgba(255, 255, 255, 0.5)';
                     $colorPicker.opened = true;
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1677,7 +1725,7 @@
 
                 QUnit.test('change color to rgba(255, 255, 255, 0.5) ---> blue field element should contain the correct value', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(255, 255, 255, 0.5)';
+                    $colorPicker.color = 'rgba(255, 255, 255, 0.5)';
                     $colorPicker.opened = true;
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1688,7 +1736,7 @@
 
                 QUnit.test('change color to rgba(255, 255, 255, 0.5) ---> alpha field element should contain the correct value', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(255, 255, 255, 0.5)';
+                    $colorPicker.color = 'rgba(255, 255, 255, 0.5)';
                     $colorPicker.opened = true;
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1699,7 +1747,7 @@
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> hex value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1720,7 +1768,7 @@
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> red value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1741,7 +1789,7 @@
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> green value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1762,7 +1810,7 @@
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> blue value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1783,7 +1831,7 @@
 
                 QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> alpha value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1804,7 +1852,7 @@
 
                 QUnit.test('when hue has changed from outside to 79 ---> hex value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1823,7 +1871,7 @@
 
                 QUnit.test('when hue has changed from outside to 79 ---> red value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1842,7 +1890,7 @@
 
                 QUnit.test('when hue has changed from outside to 79 ---> green value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1861,7 +1909,7 @@
 
                 QUnit.test('when hue has changed from outside to 79 ---> blue value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1880,7 +1928,7 @@
 
                 QUnit.test('when hue has changed from outside to 79 ---> alpha value should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1899,7 +1947,7 @@
 
                 QUnit.test('when alpha has changed from outside to 10 ---> hex value should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1918,7 +1966,7 @@
 
                 QUnit.test('when alpha has changed from outside to 10 ---> red value should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1937,7 +1985,7 @@
 
                 QUnit.test('when alpha has changed from outside to 10 ---> green value should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1956,7 +2004,7 @@
 
                 QUnit.test('when alpha has changed from outside to 10 ---> blue value should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1975,7 +2023,7 @@
 
                 QUnit.test('when alpha has changed from outside to 10 ---> alpha value should not change', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -1994,7 +2042,7 @@
 
                 QUnit.test('change hex field to c464ff ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2008,12 +2056,12 @@
                         cancelable: true,
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(196, 100, 255, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(196, 100, 255, 0.25)');
                 });
 
                 QUnit.test('change hex field to c464ff ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 255, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2027,12 +2075,12 @@
                         cancelable: true,
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(196, 100, 255, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(196, 100, 255, 0.25)');
                 });
 
                 QUnit.test('change red field to 50 ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2046,12 +2094,12 @@
                         cancelable: true,
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(50, 200, 120, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(50, 200, 120, 0.25)');
                 });
 
                 QUnit.test('change green field to 50 ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 150, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 150, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2065,12 +2113,12 @@
                         cancelable: true,
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 50, 120, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 50, 120, 0.25)');
                 });
 
                 QUnit.test('change blue field to 50 ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 12, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 12, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2084,12 +2132,12 @@
                         cancelable: true,
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 12, 50, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 12, 50, 0.25)');
                 });
 
                 QUnit.test('change alpha field to 11 ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 12, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 12, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2103,12 +2151,12 @@
                         cancelable: true,
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 12, 120, 0.11)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 12, 120, 0.11)');
                 });
 
                 QUnit.test('red field arrow up ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2122,12 +2170,12 @@
                         key: 'ArrowUp',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(101, 200, 120, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(101, 200, 120, 0.25)');
                 });
 
                 QUnit.test('red field arrow down ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 200, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 200, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2141,12 +2189,12 @@
                         key: 'ArrowDown',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(99, 200, 120, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(99, 200, 120, 0.25)');
                 });
 
                 QUnit.test('green field arrow up ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 150, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 150, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2160,12 +2208,12 @@
                         key: 'ArrowUp',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 151, 120, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 151, 120, 0.25)');
                 });
 
                 QUnit.test('green field arrow down ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 150, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 150, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2179,12 +2227,12 @@
                         key: 'ArrowDown',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 149, 120, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 149, 120, 0.25)');
                 });
 
                 QUnit.test('blue field arrow up ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 12, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 12, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2198,12 +2246,12 @@
                         key: 'ArrowUp',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 12, 121, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 12, 121, 0.25)');
                 });
 
                 QUnit.test('blue field arrow down ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 12, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 12, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2217,12 +2265,12 @@
                         key: 'ArrowDown',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 12, 119, 0.25)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 12, 119, 0.25)');
                 });
 
                 QUnit.test('alpha field arrow up ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 12, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 12, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2236,12 +2284,12 @@
                         key: 'ArrowUp',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 12, 120, 0.26)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 12, 120, 0.26)');
                 });
 
                 QUnit.test('alpha field arrow down ---> color picker value should be correct', (assert) => {
                     const $colorPicker = document.querySelector('#red');
-                    $colorPicker.value = 'rgba(100, 12, 120, 0.25)'
+                    $colorPicker.color = 'rgba(100, 12, 120, 0.25)'
                     $colorPicker.opened = true;
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
@@ -2255,15 +2303,28 @@
                         key: 'ArrowDown',
                     }));
 
-                    assert.equal($colorPicker.value, 'rgba(100, 12, 120, 0.24)');
+                    assert.equal($colorPicker.rgba, 'rgba(100, 12, 120, 0.24)');
                 });
             });
 
-            // TODO: add API to get hsv, hex, etc. using tinycolor2
             // TODO: close on outer click causes bug when hovering outside without purpose
             // TODO: initial and changed hsl color and other color formats
             // TODO: open popup to the left if there is no enough place
             // TODO: open tests in different browsers and iphone
+            // TODO: linear gradient tests bug in ff and safari
+
+            /*
+            // TEST - TO REMOVE
+            const $colorPicker = document.querySelector('toolcool-color-picker') as ColorPicker;
+
+            $colorPicker.addEventListener('change', (evt: CustomEvent) => {
+                console.log(evt.detail.color);
+            });
+
+            $colorPicker.color = 'red';
+            console.log($colorPicker.rgba);
+
+            export {}*/
         </script>
 
     </body>

@@ -26,9 +26,19 @@ export const getAlphaColorBackground = (color: TinyColor) => {
     return `linear-gradient(to right, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 0) 0%, rgba(${ rgba.r },${ rgba.g },${ rgba.b }, 1) 100%)`;
 };
 
-export const getRgbaBackground = (color: TinyColor) => {
+export const rgbaToString = (color: TinyColor) => {
     const rgba = color.toRgb();
     return `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
+};
+
+export const hslaToString = (color: TinyColor) => {
+    const hsla = color.toHsl();
+    return `hsla(${ hsla.h * 100 }%, ${ hsla.s * 100 }%, ${ hsla.l * 100 }%, ${ hsla.a })`;
+};
+
+export const hsvaToString = (color: TinyColor) => {
+    const hsva = color.toHsv();
+    return `hsva(${ hsva.h * 100 }%, ${ hsva.s * 100 }%, ${ hsva.v * 100 }%, ${ hsva.a })`;
 };
 
 /**
