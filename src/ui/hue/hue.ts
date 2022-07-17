@@ -2,6 +2,7 @@
 import styles from './hue.pcss';
 import { CUSTOM_EVENT_COLOR_HSV_CHANGED, sendHueCustomEvent } from '../../domain/events-provider';
 import tinycolor from 'tinycolor2';
+import { getHueByLeft, getLeftByHue } from '../../domain/color-provider';
 
 /*
  Usage:
@@ -12,7 +13,6 @@ class ColorPickerHue extends HTMLElement {
 
     // this id attribute is used for custom events
     private cid: string;
-    private initialColor: tinycolor.Instance = tinycolor('#000');
 
     private $hue: HTMLElement;
     private $pointer: HTMLElement;
@@ -34,10 +34,8 @@ class ColorPickerHue extends HTMLElement {
         this.colorHsvChangedCustomEvent = this.colorHsvChangedCustomEvent.bind(this);
     }
 
-    performUpdate(percent: number) {
-        this.$pointer.style.left = `${ percent }%`;
-
-        this.hue = (360 * percent) / 100;
+    performUpdate() {
+        this.$pointer.style.left = `${ getLeftByHue(this.hue) }%`;
 
         // update outer color to change the button, and
         // send the updated color to the user
@@ -59,8 +57,7 @@ class ColorPickerHue extends HTMLElement {
         }
 
         if(changed){
-            const percent = (this.hue * 100) / 360;
-            this.performUpdate(Math.max(0, percent));
+            this.performUpdate();
         }
     }
 
@@ -75,7 +72,8 @@ class ColorPickerHue extends HTMLElement {
         const left = Math.min(Math.max(0, mouseX - boxLeft), boxWidth);
         const percent = Math.min(Math.max(0, Math.round((left * 100) / boxWidth)), 100);
 
-        this.performUpdate(percent);
+        this.hue = getHueByLeft(percent);
+        this.performUpdate();
     }
 
     onKeyDown(evt: KeyboardEvent) {
@@ -84,14 +82,18 @@ class ColorPickerHue extends HTMLElement {
 
         switch (evt.key){
             case 'ArrowLeft': {
-                const percent = (this.hue * 100) / 360;
-                this.performUpdate(Math.max(0, percent - 1));
+                let percent = getLeftByHue(this.hue);
+                percent = Math.max(0, percent - 1);
+                this.hue = getHueByLeft(percent);
+                this.performUpdate();
                 break;
             }
 
             case 'ArrowRight': {
-                const percent = (this.hue * 100) / 360;
-                this.performUpdate(Math.min(100, percent + 1));
+                let percent = getLeftByHue(this.hue);
+                percent = Math.min(100, percent + 1);
+                this.hue = getHueByLeft(percent);
+                this.performUpdate();
                 break;
             }
         }
@@ -123,8 +125,9 @@ class ColorPickerHue extends HTMLElement {
     connectedCallback(){
 
         this.cid = this.getAttribute('cid');
-        this.initialColor = tinycolor(this.getAttribute('color') || '#000');
-        this.hue = this.initialColor.toHsv().h;
+
+        const color = tinycolor(this.getAttribute('color') || '#000');
+        this.hue = color.toHsv().h;
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
@@ -135,7 +138,7 @@ class ColorPickerHue extends HTMLElement {
                     </div>
                     
                     <div class="color-picker__hue-pointer">
-                        <div class="color-picker__hue-pointer-box" tabindex="0" style="left: ${ this.hue } ">
+                        <div class="color-picker__hue-pointer-box" tabindex="0" style="left: ${ getLeftByHue(this.hue) }%">
                             <div class="color-picker__hue-pointer-handler"></div>
                         </div>
                     </div>
@@ -151,10 +154,6 @@ class ColorPickerHue extends HTMLElement {
         this.$hue.addEventListener('touchmove', this.onChange);
         this.$hue.addEventListener('touchstart', this.onChange);
 
-        // init handler position
-        const percent = Math.min(Math.max(0, this.hue), 100);
-        this.$pointer.style.left = `${ percent }%`;
-
         this.$pointer.addEventListener('keydown', this.onKeyDown);
         document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
     }
@@ -163,12 +162,26 @@ class ColorPickerHue extends HTMLElement {
      * when the custom element disconnected from DOM
      */
     disconnectedCallback(){
+
         this.$hue.removeEventListener('mousedown', this.onMouseDown);
         this.$hue.removeEventListener('mouseup', this.onMouseUp);
         this.$hue.removeEventListener('touchmove', this.onChange);
         this.$hue.removeEventListener('touchstart', this.onChange);
         this.$pointer.removeEventListener('keydown', this.onKeyDown);
+
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.colorHsvChangedCustomEvent);
+    }
+
+    /**
+     * when attributes change
+     */
+    attributeChangedCallback(){
+
+        const color = tinycolor(this.getAttribute('color') || '#000');
+        const hsv = color.toHsv();
+
+        this.hue = hsv.h;
+        this.performUpdate();
     }
 }
 

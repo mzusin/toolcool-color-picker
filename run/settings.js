@@ -1,4 +1,5 @@
-import pcssPlugin from './esbuild-pcss-plugin.js';
+import pcssPlugin from './esbuild-plugins/esbuild-pcss-plugin.js';
+import esbuildCopyPlugin from './esbuild-plugins/esbuild-copy-plugin.js';
 
 export default {
     entryPoints: ['./src/index.ts'],
@@ -14,5 +15,5 @@ export default {
         '.svg': 'dataurl',
         '.pcss': 'text',
     },
-    plugins: [pcssPlugin],
+    plugins: [pcssPlugin, esbuildCopyPlugin],
 }
