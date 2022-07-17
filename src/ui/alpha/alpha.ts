@@ -62,6 +62,10 @@ class Alpha extends HTMLElement {
     onChange(evt: any) {
         if(!this.$alpha) return;
 
+        if(evt.preventDefault){
+            evt.preventDefault();
+        }
+
         const { width: boxWidth, left: boxLeft } = this.$alpha.getBoundingClientRect();
         if(boxWidth === 0) return;
 

@@ -65,6 +65,10 @@ class Hue extends HTMLElement {
     onChange(evt: any) {
         if(!this.$hue) return;
 
+        if(evt.preventDefault){
+            evt.preventDefault();
+        }
+
         const { width: boxWidth, left: boxLeft } = this.$hue.getBoundingClientRect();
         if(boxWidth === 0) return;
 
