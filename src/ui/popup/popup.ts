@@ -52,7 +52,6 @@ class ColorPickerPopup extends HTMLElement {
     }
 
     prevent(evt: MouseEvent) {
-        evt.preventDefault();
         evt.stopPropagation();
     }
 
@@ -74,7 +73,7 @@ class ColorPickerPopup extends HTMLElement {
         `;
 
         this.$popup = this.shadowRoot.querySelector('.popup');
-        this.$popup.addEventListener('click', this.prevent);
+        this.$popup.addEventListener('mousedown', this.prevent); // disable 'click outside' feature inside the popup
         this.$popup.classList.toggle('right', this.popupPosition === 'right');
     }
 
@@ -82,7 +81,7 @@ class ColorPickerPopup extends HTMLElement {
      * when the custom element disconnected from DOM
      */
     disconnectedCallback(){
-        this.$popup.removeEventListener('click', this.prevent);
+        this.$popup.removeEventListener('mousedown', this.prevent);
     }
 
     /**

@@ -44,14 +44,22 @@ QUnit.module('Popup', () => {
     QUnit.test('when clicked outside popup should close', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.opened = true;
-        document.body.click();
+        document.body.dispatchEvent(new MouseEvent('mousedown', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+        }));
         assert.equal($colorPicker.opened, false);
     });
 
     QUnit.test('when clicked outside popup element should not appear', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.opened = true;
-        document.body.click();
+        document.body.dispatchEvent(new MouseEvent('mousedown', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+        }));
         const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
         assert.equal($popup, null);
     });
@@ -105,5 +113,34 @@ QUnit.module('Popup', () => {
         const $popupBox = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
         const $popup = $popupBox.shadowRoot.querySelector('.popup');
         assert.equal($popup.className, 'popup');
+    });
+
+    QUnit.test('click on color picker button ---> popup should open', (assert) => {
+        const $colorPicker1 = document.querySelector('#red');
+        const $button1 = $colorPicker1.shadowRoot.querySelector('.button');
+        $button1.click();
+
+        const done = assert.async();
+
+        window.setTimeout(() => {
+            assert.equal($colorPicker1.opened, true);
+            done();
+        }, 1);
+    });
+
+    QUnit.test('open one popup, the click on another popup ---> the second popup should be opened', (assert) => {
+        const $colorPicker1 = document.querySelector('#red');
+        $colorPicker1.opened = true;
+
+        const $colorPicker2 = document.querySelector('#black');
+        const $button2 = $colorPicker2.shadowRoot.querySelector('.button');
+        $button2.click();
+
+        const done = assert.async();
+
+        window.setTimeout(() => {
+            assert.equal($colorPicker2.opened, true);
+            done();
+        }, 1);
     });
 });

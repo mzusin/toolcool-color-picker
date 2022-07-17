@@ -273,6 +273,7 @@ class ColorPicker extends HTMLElement {
     }
 
     toggle() {
+
         const isVisible = this.state.isPopupVisible;
 
         // setTimeout is used instead stopPropagation
@@ -323,8 +324,10 @@ class ColorPicker extends HTMLElement {
         // init popup container
         this.$popupBox = this.shadowRoot.querySelector('[data-popup-box]');
 
-        // close popup when clicked outside
-        document.addEventListener('click', this.clickedOutside);
+        // close popup when clicked outside - we use mousedown instead of click to fix strange behaviour when
+        // user drags some inner element like saturation point from the bounds of the window,
+        // and the popup is suddenly closed
+        document.addEventListener('mousedown', this.clickedOutside);
 
         // custom event from other parts of the app
         document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
@@ -338,7 +341,7 @@ class ColorPicker extends HTMLElement {
     disconnectedCallback(){
         this.$button.removeEventListener('click', this.toggle);
         this.$button.removeEventListener('keydown', this.onKeyDown);
-        document.removeEventListener('click', this.clickedOutside);
+        document.removeEventListener('mousedown', this.clickedOutside);
 
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
         document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
