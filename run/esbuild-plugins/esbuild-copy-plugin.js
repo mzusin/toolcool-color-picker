@@ -8,8 +8,16 @@ const esbuildCopyPlugin = {
             const dirname = process.cwd();
             const sourceAbsPath = path.join(dirname, build.initialOptions.outfile);
             const fileName = path.basename(build.initialOptions.outfile);
-            const targetAbsPath = path.join(dirname, '/dist/', fileName);
-            fs.cpSync(sourceAbsPath, targetAbsPath,{
+
+            const distAbsPath = path.join(dirname, '/dist/', fileName);
+            fs.cpSync(sourceAbsPath, distAbsPath,{
+                recursive: true,
+                force: true,
+                dereference: true
+            });
+
+            const testAbsPath = path.join(dirname, '/test/', fileName);
+            fs.cpSync(sourceAbsPath, testAbsPath,{
                 recursive: true,
                 force: true,
                 dereference: true
