@@ -14,6 +14,8 @@
             <toolcool-color-picker id="color-001aff" color="#001aff"></toolcool-color-picker>
             <toolcool-color-picker id="color-328ba8" color="#328ba8"></toolcool-color-picker>
             <toolcool-color-picker id="alpha-0-5" color="rgba(255, 255, 255, 0.5)"></toolcool-color-picker>
+            <toolcool-color-picker id="blue" color="blue" popup-position="right"></toolcool-color-picker>
+            <toolcool-color-picker id="green" color="green" popup-position="left"></toolcool-color-picker>
             <script src="toolcool-color-picker.min.js"></script>
         </div>
 
@@ -27,22 +29,8 @@
 
         <script>
             // TODO: close on outer click causes bug when hovering outside without purpose
-            // TODO: initial and changed hsl color and other color formats
             // TODO: open popup to the left if there is no enough place
-            // TODO: open tests in different browsers and iphone
-
-            /*
-            // TEST - TO REMOVE
-            const $colorPicker = document.querySelector('toolcool-color-picker') as ColorPicker;
-
-            $colorPicker.addEventListener('change', (evt: CustomEvent) => {
-                console.log(evt.detail.color);
-            });
-
-            $colorPicker.color = 'red';
-            console.log($colorPicker.rgba);
-
-            export {}*/
+            // TODO: scroll on iphone issue
         </script>
 
     </body>

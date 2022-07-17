@@ -18,6 +18,10 @@ class Hue extends HTMLElement {
 
     private hue = 0; // [0, 360]
 
+    static get observedAttributes() {
+        return ['color'];
+    }
+
     constructor() {
         super();
 
@@ -34,7 +38,9 @@ class Hue extends HTMLElement {
     }
 
     render() {
-        this.$pointer.style.left = `${ getLeftByHue(this.hue) }%`;
+        if(this.$pointer){
+            this.$pointer.style.left = `${ getLeftByHue(this.hue) }%`;
+        }
 
         // update outer color to change the button, and
         // send the updated color to the user
@@ -170,7 +176,7 @@ class Hue extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(){
+    attributeChangedCallback(attrName, oldVal, newVal){
 
         const color = parseColor(this.getAttribute('color'));
         const hsv = color.toHsv();

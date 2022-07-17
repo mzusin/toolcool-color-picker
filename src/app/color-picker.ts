@@ -14,17 +14,23 @@ import { ColorInput } from '@ctrl/tinycolor/dist';
 /*
  Usage:
  ------
- <toolcool-color-picker color="#ff0000"></toolcool-color-picker>
+ <toolcool-color-picker color="#ff0000" popup-position="left"></toolcool-color-picker>
  */
 interface IColorPickerState {
     isPopupVisible: boolean,
+    popupPosition: string,
     initialColor: TinyColor,
     color: TinyColor,
 }
 
 class ColorPicker extends HTMLElement {
 
+    static get observedAttributes() {
+        return ['color', 'popup-position'];
+    }
+
     // ----------- APIs ------------------------
+
     /**
      * set any color that TinyColor accepts
      */
@@ -114,6 +120,7 @@ class ColorPicker extends HTMLElement {
 
     private stateDefaults: IColorPickerState = {
         isPopupVisible: false,
+        popupPosition: 'left',
         initialColor: new TinyColor('#000'),
         color: new TinyColor('#000'),
     };
@@ -157,6 +164,10 @@ class ColorPicker extends HTMLElement {
                     scope.onPopupVisibilityChange();
                 }
 
+                if(key === 'popupPosition'){
+                    scope.onPopupPosChange();
+                }
+
                 if(key === 'initialColor'){
                     scope.onInitialColorChange();
                 }
@@ -171,10 +182,19 @@ class ColorPicker extends HTMLElement {
     }
 
     onPopupVisibilityChange() {
-        if(!this.$popupBox) return true;
+        if(!this.$popupBox) return;
         this.$popupBox.innerHTML = this.state.isPopupVisible ?
-            `<toolcool-color-picker-popup color="${ this.state.color.toRgbString() }" cid="${ this.cid }" />` :
+            `<toolcool-color-picker-popup color="${ this.state.color.toRgbString() }" cid="${ this.cid }" popup-position="${ this.state.popupPosition }" />` :
             '';
+    }
+
+    onPopupPosChange() {
+        if(!this.$popupBox) return;
+
+        const $popup = this.$popupBox.querySelector('toolcool-color-picker-popup');
+        if(!$popup) return;
+
+        $popup.setAttribute('popup-position', this.state.popupPosition);
     }
 
     onInitialColorChange() {
@@ -277,6 +297,7 @@ class ColorPicker extends HTMLElement {
 
         this.state.initialColor = parseColor(this.getAttribute('color'));
         this.state.color = parseColor(this.getAttribute('color'));
+        this.state.popupPosition = this.getAttribute('popup-position') || 'left';
 
         this.shadowRoot.innerHTML = `
             <style>${ styles }</style>
@@ -327,10 +348,18 @@ class ColorPicker extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(){
-        this.state.initialColor = parseColor(this.getAttribute('color'));
-        this.state.color = parseColor(this.getAttribute('color'));
-        this.onInitialColorChange();
+    attributeChangedCallback(attrName){
+
+        if(attrName === 'color') {
+            this.state.initialColor = parseColor(this.getAttribute('color'));
+            this.state.color = parseColor(this.getAttribute('color'));
+            this.onInitialColorChange();
+        }
+
+        if(attrName === 'popup-position') {
+            this.state.popupPosition = this.getAttribute('popup-position') || 'left';
+            this.onPopupPosChange();
+        }
     }
 }
 

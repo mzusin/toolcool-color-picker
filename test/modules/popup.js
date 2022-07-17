@@ -55,4 +55,55 @@ QUnit.module('Popup', () => {
         const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
         assert.equal($popup, null);
     });
+
+    QUnit.test('default popup position is left', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.opened = true;
+        const $popupBox = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $popup = $popupBox.shadowRoot.querySelector('.popup');
+        assert.equal($popup.className, 'popup');
+    });
+
+    QUnit.test('popup-position="right"', (assert) => {
+        const $colorPicker = document.querySelector('#blue');
+        $colorPicker.opened = true;
+        const $popupBox = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $popup = $popupBox.shadowRoot.querySelector('.popup');
+        assert.equal($popup.className, 'popup right');
+    });
+
+    QUnit.test('popup-position="left"', (assert) => {
+        const $colorPicker = document.querySelector('#green');
+        $colorPicker.opened = true;
+        const $popupBox = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $popup = $popupBox.shadowRoot.querySelector('.popup');
+        assert.equal($popup.className, 'popup');
+    });
+
+    QUnit.test('update popup-position property from "none" to "right"', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('popup-position', 'right');
+        const $popupBox = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $popup = $popupBox.shadowRoot.querySelector('.popup');
+        assert.equal($popup.className, 'popup right');
+    });
+
+    QUnit.test('update popup-position property from "left" to "right"', (assert) => {
+        const $colorPicker = document.querySelector('#green');
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('popup-position', 'right');
+        const $popupBox = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $popup = $popupBox.shadowRoot.querySelector('.popup');
+        assert.equal($popup.className, 'popup right');
+    });
+
+    QUnit.test('update popup-position property from "right" to "left"', (assert) => {
+        const $colorPicker = document.querySelector('#blue');
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('popup-position', 'left');
+        const $popupBox = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $popup = $popupBox.shadowRoot.querySelector('.popup');
+        assert.equal($popup.className, 'popup');
+    });
 });

@@ -27,6 +27,10 @@ class Saturation extends HTMLElement {
     private saturation = 0; // [0, 1]
     private value = 0; // [0, 1]
 
+    static get observedAttributes() {
+        return ['color'];
+    }
+
     constructor() {
         super();
 
@@ -46,9 +50,14 @@ class Saturation extends HTMLElement {
     render(sendEvent = true) {
 
         // re-render
-        this.$pointer.style.left = getLeftBySaturation(this.saturation);
-        this.$pointer.style.top = getTopByValue(this.value);
-        this.$color.setAttribute('style', `background: ${ getHueBackground(this.hue) }`);
+        if(this.$pointer) {
+            this.$pointer.style.left = getLeftBySaturation(this.saturation);
+            this.$pointer.style.top = getTopByValue(this.value);
+        }
+
+        if(this.$color){
+            this.$color.setAttribute('style', `background: ${ getHueBackground(this.hue) }`);
+        }
 
         if(sendEvent) {
             // update outer color to change the button, and
@@ -231,7 +240,7 @@ class Saturation extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(){
+    attributeChangedCallback(attrName, oldVal, newVal){
 
         const color = parseColor(this.getAttribute('color'));
         const hsv = color.toHsv();
@@ -240,7 +249,7 @@ class Saturation extends HTMLElement {
         this.saturation = hsv.s;
         this.value = hsv.v;
 
-        this.render();
+        this.render(false);
     }
 }
 

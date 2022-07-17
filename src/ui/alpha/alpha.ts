@@ -16,6 +16,10 @@ import { TinyColor } from '@ctrl/tinycolor';
  */
 class Alpha extends HTMLElement {
 
+    static get observedAttributes() {
+        return ['color'];
+    }
+
     // this id attribute is used for custom events
     private cid: string;
 
@@ -46,7 +50,10 @@ class Alpha extends HTMLElement {
     }
 
     render() {
-        this.$pointer.style.left = `${ this.alpha * 100 }%`;
+        if(this.$pointer){
+            this.$pointer.style.left = `${ this.alpha * 100 }%`;
+        }
+
         sendAlphaCustomEvent(this.cid, this.alpha);
     }
     
@@ -221,9 +228,9 @@ class Alpha extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(){
+    attributeChangedCallback(attrName, oldVal, newVal){
 
-        const color = parseColor(this.getAttribute('color'));
+        const color = parseColor(newVal);
         const hsv = color.toHsv();
 
         this.alpha = hsv.a;

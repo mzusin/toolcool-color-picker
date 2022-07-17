@@ -8,15 +8,20 @@ import Fields from '../fields/fields';
 /*
  Usage:
  ------
- <toolcool-color-picker-popup color="#000" cid="..."></toolcool-color-picker-popup>
+ <toolcool-color-picker-popup color="#000" cid="..." popup-position="left"></toolcool-color-picker-popup>
  */
 class ColorPickerPopup extends HTMLElement {
 
     // this id attribute is used for custom events
     private readonly cid: string;
+    private popupPosition = 'left';
 
     private $popup: HTMLElement;
     private color = '#000';
+
+    static get observedAttributes() {
+        return ['color', 'popup-position'];
+    }
 
     constructor() {
         super();
@@ -56,6 +61,7 @@ class ColorPickerPopup extends HTMLElement {
      */
     connectedCallback(){
         this.color = this.getAttribute('color') || '#000';
+        this.popupPosition = this.getAttribute('popup-position') || 'left';
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
@@ -69,6 +75,7 @@ class ColorPickerPopup extends HTMLElement {
 
         this.$popup = this.shadowRoot.querySelector('.popup');
         this.$popup.addEventListener('click', this.prevent);
+        this.$popup.classList.toggle('right', this.popupPosition === 'right');
     }
 
     /**
@@ -81,28 +88,39 @@ class ColorPickerPopup extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(){
-        this.color = this.getAttribute('color') || '#000';
+    attributeChangedCallback(attrName, oldVal, newVal){
 
-        const $saturation = this.shadowRoot.querySelector('toolcool-color-picker-saturation');
-        const $hue = this.shadowRoot.querySelector('toolcool-color-picker-hue');
-        const $alpha = this.shadowRoot.querySelector('toolcool-color-picker-alpha');
-        const $fields = this.shadowRoot.querySelector('toolcool-color-picker-fields');
+        if(attrName === 'popup-position'){
+            this.popupPosition = newVal;
 
-        if($saturation){
-            $saturation.setAttribute('color',  this.color);
+            if(this.$popup){
+                this.$popup.classList.toggle('right', this.popupPosition === 'right');
+            }
         }
 
-        if($hue){
-            $hue.setAttribute('color',  this.color);
-        }
+        if(attrName === 'color') {
+            this.color = newVal;
 
-        if($alpha){
-            $alpha.setAttribute('color',  this.color);
-        }
+            const $saturation = this.shadowRoot.querySelector('toolcool-color-picker-saturation');
+            const $hue = this.shadowRoot.querySelector('toolcool-color-picker-hue');
+            const $alpha = this.shadowRoot.querySelector('toolcool-color-picker-alpha');
+            const $fields = this.shadowRoot.querySelector('toolcool-color-picker-fields');
 
-        if($fields){
-            $fields.setAttribute('color',  this.color);
+            if($saturation){
+                $saturation.setAttribute('color',  this.color);
+            }
+
+            if($hue){
+                $hue.setAttribute('color',  this.color);
+            }
+
+            if($alpha){
+                $alpha.setAttribute('color',  this.color);
+            }
+
+            if($fields){
+                $fields.setAttribute('color',  this.color);
+            }
         }
     }
 }

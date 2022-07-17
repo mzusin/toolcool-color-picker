@@ -34,6 +34,10 @@ class Fields extends HTMLElement {
     private b = 0;
     private a = 1;
 
+    static get observedAttributes() {
+        return ['color'];
+    }
+
     constructor() {
         super();
 
@@ -114,23 +118,23 @@ class Fields extends HTMLElement {
         this.a = rgba.a;
         this.hex = this.color.toHex();
 
-        if(this.shadowRoot.activeElement !== this.$hex){
+        if(this.$hex && this.shadowRoot.activeElement !== this.$hex){
             this.$hex.value = this.hex.toUpperCase();
         }
 
-        if(this.shadowRoot.activeElement !== this.$r){
+        if(this.$r && this.shadowRoot.activeElement !== this.$r){
             this.$r.value = this.r.toString();
         }
 
-        if(this.shadowRoot.activeElement !== this.$g){
+        if(this.$g && this.shadowRoot.activeElement !== this.$g){
             this.$g.value = this.g.toString();
         }
 
-        if(this.shadowRoot.activeElement !== this.$b){
+        if(this.$b && this.shadowRoot.activeElement !== this.$b){
             this.$b.value = this.b.toString();
         }
 
-        if(this.shadowRoot.activeElement !== this.$a){
+        if(this.$a && this.shadowRoot.activeElement !== this.$a){
             this.$a.value = Math.round(this.a * 100).toString();
         }
     }
@@ -423,8 +427,8 @@ class Fields extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(){
-        this.color = parseColor(this.getAttribute('color'));
+    attributeChangedCallback(attrName, oldVal, newVal){
+        this.color = parseColor(newVal);
         this.render();
     }
 }
