@@ -2,8 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Test Suite</title>
-        <link rel="stylesheet" href="qunit-2.19.1.css" />
+        <title>Tool Cool Color Picker Tests</title>
+        <link rel="stylesheet" href="qunit/qunit-2.19.1.css" />
     </head>
     <body>
         <div id="qunit"></div>
@@ -12,11 +12,12 @@
             <toolcool-color-picker id="red" color="#ff0000"></toolcool-color-picker>
             <toolcool-color-picker id="black"></toolcool-color-picker>
             <toolcool-color-picker id="color-001aff" color="#001aff"></toolcool-color-picker>
+            <toolcool-color-picker id="color-328ba8" color="#328ba8"></toolcool-color-picker>
             <toolcool-color-picker id="alpha-0-5" color="rgba(255, 255, 255, 0.5)"></toolcool-color-picker>
             <script src="toolcool-color-picker.min.js"></script>
         </div>
 
-        <script src="qunit-2.19.1.js"></script>
+        <script src="qunit/qunit-2.19.1.js"></script>
         <script>
             QUnit.module('Color', () => {
                 QUnit.test('initial color should be red', (assert) => {
@@ -1418,13 +1419,232 @@
                 });
             });
 
+            QUnit.module('Fields', () => {
+                QUnit.test('when popup is opened ---> fields element should exist', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    assert.notEqual($fields, null);
+                });
+
+                QUnit.test('when popup is opened ---> hex element should exist', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $hex = $fields.shadowRoot.querySelector('[data-type="hex"]');
+                    assert.notEqual($hex, null);
+                });
+
+                QUnit.test('when popup is opened ---> red field element should exist', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $red = $fields.shadowRoot.querySelector('[data-type="r"]');
+                    assert.notEqual($red, null);
+                });
+
+                QUnit.test('when popup is opened ---> green field element should exist', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $green = $fields.shadowRoot.querySelector('[data-type="g"]');
+                    assert.notEqual($green, null);
+                });
+
+                QUnit.test('when popup is opened ---> blue field element should exist', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $blue = $fields.shadowRoot.querySelector('[data-type="b"]');
+                    assert.notEqual($blue, null);
+                });
+
+                QUnit.test('when popup is opened ---> alpha field element should exist', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $alpha = $fields.shadowRoot.querySelector('[data-type="a"]');
+                    assert.notEqual($alpha, null);
+                });
+
+                QUnit.test('initial color red ---> hex element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $hex = $fields.shadowRoot.querySelector('[data-type="hex"]');
+                    assert.equal($hex.value, 'FF0000');
+                });
+
+                QUnit.test('initial color red ---> red field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $red = $fields.shadowRoot.querySelector('[data-type="r"]');
+                    assert.equal($red.value, '255');
+                });
+
+                QUnit.test('initial color red ---> green field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $green = $fields.shadowRoot.querySelector('[data-type="g"]');
+                    assert.equal($green.value, '0');
+                });
+
+                QUnit.test('initial color red ---> blue field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $blue = $fields.shadowRoot.querySelector('[data-type="b"]');
+                    assert.equal($blue.value, '0');
+                });
+
+                QUnit.test('initial color red ---> alpha field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#red');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $alpha = $fields.shadowRoot.querySelector('[data-type="a"]');
+                    assert.equal($alpha.value, '100');
+                });
+
+                QUnit.test('initial color #328ba8 ---> hex element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#color-328ba8');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $hex = $fields.shadowRoot.querySelector('[data-type="hex"]');
+                    assert.equal($hex.value, '328BA8');
+                });
+
+                QUnit.test('initial color #328ba8 ---> red field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#color-328ba8');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $red = $fields.shadowRoot.querySelector('[data-type="r"]');
+                    assert.equal($red.value, '50');
+                });
+
+                QUnit.test('initial color #328ba8 ---> green field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#color-328ba8');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $green = $fields.shadowRoot.querySelector('[data-type="g"]');
+                    assert.equal($green.value, '139');
+                });
+
+                QUnit.test('initial color #328ba8 ---> blue field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#color-328ba8');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $blue = $fields.shadowRoot.querySelector('[data-type="b"]');
+                    assert.equal($blue.value, '168');
+                });
+
+                QUnit.test('initial color #328ba8 ---> alpha field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#color-328ba8');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $alpha = $fields.shadowRoot.querySelector('[data-type="a"]');
+                    assert.equal($alpha.value, '100');
+                });
+
+                QUnit.test('initial color rgba(255, 255, 255, 0.5) ---> hex element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#alpha-0-5');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $hex = $fields.shadowRoot.querySelector('[data-type="hex"]');
+                    assert.equal($hex.value, 'FFFFFF');
+                });
+
+                QUnit.test('initial color rgba(255, 255, 255, 0.5) ---> red field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#alpha-0-5');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $red = $fields.shadowRoot.querySelector('[data-type="r"]');
+                    assert.equal($red.value, '255');
+                });
+
+                QUnit.test('initial color rgba(255, 255, 255, 0.5) ---> green field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#alpha-0-5');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $green = $fields.shadowRoot.querySelector('[data-type="g"]');
+                    assert.equal($green.value, '255');
+                });
+
+                QUnit.test('initial color rgba(255, 255, 255, 0.5) ---> blue field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#alpha-0-5');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $blue = $fields.shadowRoot.querySelector('[data-type="b"]');
+                    assert.equal($blue.value, '255');
+                });
+
+                QUnit.test('initial color rgba(255, 255, 255, 0.5) ---> alpha field element should contain the correct value', (assert) => {
+                    const $colorPicker = document.querySelector('#alpha-0-5');
+                    $colorPicker.opened = true;
+
+                    const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+                    const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+                    const $alpha = $fields.shadowRoot.querySelector('[data-type="a"]');
+                    assert.equal($alpha.value, '50');
+                });
+            });
+
             // TODO: add API to get hsv, hex, etc. using tinycolor2
             // TODO: close on outer click causes bug when hovering outside without purpose
             // TODO: rename performUpdate to render, and shorten other names
             // TODO: try to tree shake tinycolor2
             // TODO: add eslint
+            // TODO: initial and changed hsl color and other color formats
+            // TODO: open popup to the left if there is no enough place
+            // TODO: make event names shorter
 
             // TODO: fields tests
+            // TODO: changed color ---> values should be correct
+            // TODO: after outside events ---> values should be correct
+            // TODO: change field value ---> color picker value should change
+            // TODO: change field value with arrows ---> color picker value should change
+            // TODO: escape and enter
         </script>
 
     </body>

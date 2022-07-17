@@ -19,7 +19,7 @@ class ColorPickerFields extends HTMLElement {
 
     // this id attribute is used for custom events
     private cid: string;
-    private initialColor: tinycolor.Instance = tinycolor('#000');
+    private color: tinycolor.Instance = tinycolor('#000');
 
     private $fields: HTMLElement;
     private $hex: HTMLInputElement;
@@ -64,9 +64,9 @@ class ColorPickerFields extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        const hsv = this.initialColor.toHsv();
+        const hsv = this.color.toHsv();
 
-        this.initialColor = tinycolor.fromRatio({
+        this.color = tinycolor.fromRatio({
             h: evt.detail.h,
             s: hsv.s,
             v: hsv.v,
@@ -82,10 +82,10 @@ class ColorPickerFields extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        const rgba = this.initialColor.toRgb();
+        const rgba = this.color.toRgb();
         rgba.a = evt.detail.a;
 
-        this.initialColor = tinycolor(rgba);
+        this.color = tinycolor(rgba);
         this.performUpdate();
     }
 
@@ -95,23 +95,23 @@ class ColorPickerFields extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        this.initialColor = tinycolor.fromRatio({
+        this.color = tinycolor.fromRatio({
             h: evt.detail.h,
             s: evt.detail.s,
             v: evt.detail.v,
-            a: this.initialColor.toHsv().a,
+            a: this.color.toHsv().a,
         });
 
         this.performUpdate();
     }
 
     performUpdate() {
-        const rgba = this.initialColor.toRgb();
+        const rgba = this.color.toRgb();
         this.r = rgba.r;
         this.g = rgba.g;
         this.b = rgba.b;
         this.a = rgba.a;
-        this.hex = this.initialColor.toHex();
+        this.hex = this.color.toHex();
 
         if(this.shadowRoot.activeElement !== this.$hex){
             this.$hex.value = this.hex.toUpperCase();
@@ -135,7 +135,7 @@ class ColorPickerFields extends HTMLElement {
     }
 
     onFieldKeyDown(evt: KeyboardEvent, type: string) {
-        const rgba = this.initialColor.toRgb();
+        const rgba = this.color.toRgb();
 
         switch (evt.key){
             case 'ArrowUp': {
@@ -168,9 +168,9 @@ class ColorPickerFields extends HTMLElement {
                     this.a = Math.min(100, this.a + 0.01);
                     this.$a.value = Math.round(this.a * 100).toString();
 
-                    const rgba = this.initialColor.toRgb();
+                    const rgba = this.color.toRgb();
                     rgba.a = this.a;
-                    this.initialColor = tinycolor(rgba);
+                    this.color = tinycolor(rgba);
 
                     this.performUpdate();
                     sendAlphaCustomEvent(this.cid, this.a);
@@ -207,9 +207,9 @@ class ColorPickerFields extends HTMLElement {
                     this.a = Math.max(0, this.a - 0.01);
                     this.$a.value = Math.round(this.a * 100).toString();
 
-                    const rgba = this.initialColor.toRgb();
+                    const rgba = this.color.toRgb();
                     rgba.a = this.a;
-                    this.initialColor = tinycolor(rgba);
+                    this.color = tinycolor(rgba);
 
                     this.performUpdate();
                     sendAlphaCustomEvent(this.cid, this.a);
@@ -261,9 +261,9 @@ class ColorPickerFields extends HTMLElement {
         const updatedColor = tinycolor(`#${ $target.value }`);
 
         if(updatedColor.isValid()){
-            this.initialColor = updatedColor;
+            this.color = updatedColor;
 
-            const hsv = this.initialColor.toHsv();
+            const hsv = this.color.toHsv();
 
             // update outer color to change the button, and
             // send the updated color to the user
@@ -276,7 +276,7 @@ class ColorPickerFields extends HTMLElement {
         const fixedValue = fixRGB($target.value);
 
         if(fixedValue.toString() === $target.value){
-            const rgba = this.initialColor.toRgb();
+            const rgba = this.color.toRgb();
             rgba.r = fixedValue;
             const hsv = tinycolor(rgba).toHsv();
 
@@ -291,7 +291,7 @@ class ColorPickerFields extends HTMLElement {
         const fixedValue = fixRGB($target.value);
 
         if(fixedValue.toString() === $target.value){
-            const rgba = this.initialColor.toRgb();
+            const rgba = this.color.toRgb();
             rgba.g = fixedValue;
             const hsv = tinycolor(rgba).toHsv();
 
@@ -306,7 +306,7 @@ class ColorPickerFields extends HTMLElement {
         const fixedValue = fixRGB($target.value);
 
         if(fixedValue.toString() === $target.value){
-            const rgba = this.initialColor.toRgb();
+            const rgba = this.color.toRgb();
             rgba.b = fixedValue;
             const hsv = tinycolor(rgba).toHsv();
 
@@ -331,14 +331,14 @@ class ColorPickerFields extends HTMLElement {
     connectedCallback(){
 
         this.cid = this.getAttribute('cid');
-        this.initialColor = parseColor(this.getAttribute('color'));
+        this.color = parseColor(this.getAttribute('color'));
 
-        const rgba = this.initialColor.toRgb();
+        const rgba = this.color.toRgb();
         this.r = rgba.r;
         this.g = rgba.g;
         this.b = rgba.b;
         this.a = rgba.a;
-        this.hex = this.initialColor.toHex();
+        this.hex = this.color.toHex();
 
         const hexId = getUniqueId();
         const rId = getUniqueId();
@@ -349,11 +349,11 @@ class ColorPickerFields extends HTMLElement {
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
            <div class="color-picker__fields">
-               <input id="hex-${ hexId }" type="text" value="${ this.hex.toUpperCase() }" />
-               <input id="r-${ rId }" type="text" value="${ this.r }" />
-               <input id="g-${ gId }" type="text" value="${ this.g }" />
-               <input id="b-${ bId }" type="text" value="${ this.b }" />
-               <input id="a-${ aId }" type="text" value="${ Math.round(this.a * 100) }" />
+               <input id="hex-${ hexId }" type="text" value="${ this.hex.toUpperCase() }" data-type="hex" />
+               <input id="r-${ rId }" type="text" value="${ this.r }" data-type="r" />
+               <input id="g-${ gId }" type="text" value="${ this.g }" data-type="g" />
+               <input id="b-${ bId }" type="text" value="${ this.b }" data-type="b" />
+               <input id="a-${ aId }" type="text" value="${ Math.round(this.a * 100) }" data-type="a" />
                
                <label for="hex-${ hexId }">Hex</label>
                <label for="r-${ rId }">R</label>
@@ -423,7 +423,7 @@ class ColorPickerFields extends HTMLElement {
      * when attributes change
      */
     attributeChangedCallback(){
-        this.initialColor = parseColor(this.getAttribute('color'));
+        this.color = parseColor(this.getAttribute('color'));
         this.performUpdate();
     }
 }
