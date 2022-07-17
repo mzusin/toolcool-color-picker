@@ -24,6 +24,7 @@
     "postcss": "^8.4.14",
     "ts-jest": "^28.0.6",
     "ts-node": "^10.9.1",
+    "uglify-js": "^3.16.2",
     "uglifycss": "^0.0.29"
   },
   "dependencies": {
