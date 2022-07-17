@@ -221,17 +221,17 @@ class ColorPicker extends HTMLElement {
                 <button
                     type="button"
                     tabIndex="0"
-                    class="color-picker__button"
+                    class="button"
                     title="Select Color">
-                    <span class="color-picker__button-color" style="background: ${ getRgbaBackground(this.state.color) }"></span>
+                    <span class="button-color" style="background: ${ getRgbaBackground(this.state.color) }"></span>
                 </button>
                 <div data-popup-box></div>
             </div>
         `;
 
         // init button and its events
-        this.$button = this.shadowRoot.querySelector('.color-picker__button');
-        this.$buttonColor = this.shadowRoot.querySelector('.color-picker__button-color');
+        this.$button = this.shadowRoot.querySelector('.button');
+        this.$buttonColor = this.shadowRoot.querySelector('.button-color');
 
         this.$button.addEventListener('click', this.toggle);
         this.$button.addEventListener('keydown', this.onKeyDown);

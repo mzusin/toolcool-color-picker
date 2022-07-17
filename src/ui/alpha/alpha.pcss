@@ -1,42 +1,27 @@
-.color-picker__alpha{
+.alpha{
     overflow: hidden;
     height: 0.625rem;
     position: relative;
 }
 
-.color-picker__alpha-box{
+.box{
     width: 100%;
     height: 100%;
     position: absolute;
 }
 
-.color-picker__alpha-transparent-bg{
+.transparent-bg{
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAADFJREFUOE9jZGBgEGHAD97gk2YcNYBhmIQBgWSAP52AwoAQwJvQRg1gACckQoC2gQgAIF8IscwEtKYAAAAASUVORK5CYII=);
     overflow: hidden;
-    width: 100%;
-    height: 100%;
-    position: absolute;
 }
 
-.color-picker__alpha-color-bg{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-
-.color-picker__alpha-pointer{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-
-.color-picker__alpha-pointer-box{
+.pointer-box{
     left: 100%;
     position: absolute;
     outline: none;
 }
 
-.color-picker__alpha-pointer-handler{
+.handler{
     background: #fff;
     box-shadow: 0 0 2px rgb(0 0 0 / 60%);
     box-sizing: border-box;
@@ -49,6 +34,6 @@
     outline: none;
 }
 
-.color-picker__alpha-pointer-box:focus .color-picker__alpha-pointer-handler{
+.alpha-pointer-box:focus .alpha-pointer-handler{
     border: 2px solid hsla(0, 0%, 88%, 1);
 }

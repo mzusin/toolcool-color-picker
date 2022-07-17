@@ -174,23 +174,23 @@ class Alpha extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
-           <div class="color-picker__alpha">
-                <div class="color-picker__alpha-box">
-                    <div class="color-picker__alpha-transparent-bg"></div>
-                    <div class="color-picker__alpha-color-bg" style="background: ${ getAlphaColorBackground(color) }"></div>
+           <div class="alpha">
+                <div class="box">
+                    <div class="transparent-bg box"></div>
+                    <div class="color-bg box" style="background: ${ getAlphaColorBackground(color) }"></div>
                     
-                    <div class="color-picker__alpha-pointer">
-                        <div class="color-picker__alpha-pointer-box" tabindex="0" style="left: ${ this.alpha * 100 }%;" >
-                            <div class="color-picker__alpha-pointer-handler"></div>
+                    <div class="pointer box">
+                        <div class="pointer-box" tabindex="0" style="left: ${ this.alpha * 100 }%;" >
+                            <div class="handler"></div>
                         </div>
                     </div>
                 </div>
            </div>
         `;
 
-        this.$alpha = this.shadowRoot.querySelector('.color-picker__alpha');
-        this.$color = this.shadowRoot.querySelector('.color-picker__alpha-color-bg');
-        this.$pointer = this.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+        this.$alpha = this.shadowRoot.querySelector('.alpha');
+        this.$color = this.shadowRoot.querySelector('.color-bg');
+        this.$pointer = this.shadowRoot.querySelector('.pointer-box');
 
         this.$alpha.addEventListener('mousedown', this.onMouseDown);
         this.$alpha.addEventListener('mouseup', this.onMouseUp);

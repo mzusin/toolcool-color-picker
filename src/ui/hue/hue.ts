@@ -126,23 +126,23 @@ class Hue extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
-           <div class="color-picker__hue">
-                <div class="color-picker__hue-box">
-                    <div class="color-picker__hue-v">
-                        <div class="color-picker__hue-h"></div>
+           <div class="hue">
+                <div class="box">
+                    <div class="hue-v box">
+                        <div class="hue-h"></div>
                     </div>
                     
-                    <div class="color-picker__hue-pointer">
-                        <div class="color-picker__hue-pointer-box" tabindex="0" style="left: ${ getLeftByHue(this.hue) }%">
-                            <div class="color-picker__hue-pointer-handler"></div>
+                    <div class="pointer box">
+                        <div class="pointer-box" tabindex="0" style="left: ${ getLeftByHue(this.hue) }%">
+                            <div class="handler"></div>
                         </div>
                     </div>
                 </div>
            </div>
         `;
 
-        this.$hue = this.shadowRoot.querySelector('.color-picker__hue');
-        this.$pointer = this.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+        this.$hue = this.shadowRoot.querySelector('.hue');
+        this.$pointer = this.shadowRoot.querySelector('.pointer-box');
 
         this.$hue.addEventListener('mousedown', this.onMouseDown);
         this.$hue.addEventListener('mouseup', this.onMouseUp);

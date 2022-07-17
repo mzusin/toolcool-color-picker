@@ -30,8 +30,6 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@ctrl/tinycolor": "^3.4.1",
-    "install": "^0.13.0",
-    "npm": "^8.14.0"
+    "@ctrl/tinycolor": "^3.4.1"
   }
 }

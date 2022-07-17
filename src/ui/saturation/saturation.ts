@@ -187,22 +187,22 @@ class Saturation extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
-           <div class="color-picker__saturation">
-                <div class="color-picker__saturation-box" style="background: ${ getHueBackground(this.hue) }">
-                    <div class="color-picker__saturation-white">
-                        <div class="color-picker__saturation-black"></div>
+           <div class="saturation">
+                <div class="box" style="background: ${ getHueBackground(this.hue) }">
+                    <div class="white box">
+                        <div class="black box"></div>
                         
-                        <div class="color-picker__saturation-pointer" tabindex="0" style="top: ${ top }; left: ${ left };">
-                            <div class="color-picker__saturation-pointer-handler"></div>
+                        <div class="pointer" tabindex="0" style="top: ${ top }; left: ${ left };">
+                            <div class="handler"></div>
                         </div>
                     </div>
                 </div>
            </div>
         `;
 
-        this.$saturation = this.shadowRoot.querySelector('.color-picker__saturation');
-        this.$color = this.shadowRoot.querySelector('.color-picker__saturation-box');
-        this.$pointer = this.shadowRoot.querySelector('.color-picker__saturation-pointer');
+        this.$saturation = this.shadowRoot.querySelector('.saturation');
+        this.$color = this.shadowRoot.querySelector('.box');
+        this.$pointer = this.shadowRoot.querySelector('.pointer');
 
         this.$pointer.addEventListener('keydown', this.onPointerKeyDown);
         this.$saturation.addEventListener('mousedown', this.onMouseDown);

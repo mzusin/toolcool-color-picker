@@ -349,7 +349,7 @@ class Fields extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
-           <div class="color-picker__fields">
+           <div class="fields">
                <input id="hex-${ hexId }" type="text" value="${ this.hex.toUpperCase() }" data-type="hex" />
                <input id="r-${ rId }" type="text" value="${ this.r }" data-type="r" />
                <input id="g-${ gId }" type="text" value="${ this.g }" data-type="g" />
@@ -364,7 +364,7 @@ class Fields extends HTMLElement {
            </div>
         `;
 
-        this.$fields = this.shadowRoot.querySelector('.color-picker__fields');
+        this.$fields = this.shadowRoot.querySelector('.fields');
         this.$hex = this.shadowRoot.getElementById(`hex-${ hexId }`) as HTMLInputElement;
         this.$r = this.shadowRoot.getElementById(`r-${ rId }`) as HTMLInputElement;
         this.$g = this.shadowRoot.getElementById(`g-${ gId }`) as HTMLInputElement;

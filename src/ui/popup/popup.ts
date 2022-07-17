@@ -59,7 +59,7 @@ class ColorPickerPopup extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
            <style>${ styles }</style>
-           <div class="color-picker__popup">
+           <div class="popup">
                 <toolcool-color-picker-saturation color="${ this.color }" cid="${ this.cid }"></toolcool-color-picker-saturation>
                 <toolcool-color-picker-hue color="${ this.color }" cid="${ this.cid }"></toolcool-color-picker-hue>
                 <toolcool-color-picker-alpha color="${ this.color }" cid="${ this.cid }"></toolcool-color-picker-alpha>
@@ -67,7 +67,7 @@ class ColorPickerPopup extends HTMLElement {
            </div>
         `;
 
-        this.$popup = this.shadowRoot.querySelector('.color-picker__popup');
+        this.$popup = this.shadowRoot.querySelector('.popup');
         this.$popup.addEventListener('click', this.prevent);
     }
 

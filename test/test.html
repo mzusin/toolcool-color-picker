@@ -117,7 +117,7 @@
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
                     const style = $saturationColor.getAttribute('style');
                     assert.equal(style, 'background: hsl(0, 100%, 50%)');
                 });
@@ -128,7 +128,7 @@
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
                     const style = $saturationColor.getAttribute('style');
                     assert.equal(style, 'background: hsl(234, 100%, 50%)');
                 });
@@ -140,7 +140,7 @@
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
                     const style = $saturationColor.getAttribute('style');
                     assert.equal(style, 'background: hsl(234, 100%, 50%)');
                 });
@@ -152,7 +152,7 @@
 
                     const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
                     const style = $saturationColor.getAttribute('style');
                     assert.equal(style, 'background: hsl(233, 100%, 50%)');
                 });
@@ -163,7 +163,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     const left = $pointer.style.left;
 
@@ -176,7 +176,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     const top = $pointer.style.top;
                     assert.equal(top, '0%');
@@ -189,7 +189,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     const left = $pointer.style.left;
 
@@ -203,7 +203,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     const top = $pointer.style.top;
                     assert.equal(top, '22.35%');
@@ -216,7 +216,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     const left = $pointer.style.left;
 
@@ -230,7 +230,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     const top = $pointer.style.top;
                     assert.equal(top, '94.12%');
@@ -242,7 +242,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -268,7 +268,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -295,7 +295,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -322,7 +322,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -349,7 +349,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -376,7 +376,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -403,7 +403,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -430,7 +430,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -456,7 +456,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -475,7 +475,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -495,7 +495,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -515,7 +515,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -534,7 +534,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -560,7 +560,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -582,7 +582,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -604,7 +604,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -626,7 +626,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -648,7 +648,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -670,7 +670,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
 
                     document.dispatchEvent(new CustomEvent('tc-hue-changed', {
                         detail: {
@@ -690,7 +690,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $saturationColor = $saturation.shadowRoot.querySelector('.color-picker__saturation-box');
+                    const $saturationColor = $saturation.shadowRoot.querySelector('.box');
 
                     document.dispatchEvent(new CustomEvent('tc-hue-changed', {
                         detail: {
@@ -710,7 +710,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     document.dispatchEvent(new CustomEvent('tc-hue-changed', {
                         detail: {
@@ -730,7 +730,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
-                    const $pointer = $saturation.shadowRoot.querySelector('.color-picker__saturation-pointer');
+                    const $pointer = $saturation.shadowRoot.querySelector('.pointer');
 
                     document.dispatchEvent(new CustomEvent('tc-hue-changed', {
                         detail: {
@@ -761,7 +761,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     const left = $pointer.style.left;
                     assert.equal(left, '0%');
@@ -773,7 +773,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     const left = $pointer.style.left;
                     assert.equal(left, `64.97%`);
@@ -786,7 +786,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     const left = $pointer.style.left;
                     assert.equal(left, `64.97%`);
@@ -799,7 +799,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     const left = $pointer.style.left;
                     assert.equal(left, `33.01%`);
@@ -812,7 +812,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -839,7 +839,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -865,7 +865,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -885,7 +885,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -919,7 +919,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -945,7 +945,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -971,7 +971,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -993,7 +993,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
-                    const $pointer = $hue.shadowRoot.querySelector('.color-picker__hue-pointer-box');
+                    const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -1026,7 +1026,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     const left = $pointer.style.left;
                     assert.equal(left, '100%');
@@ -1038,7 +1038,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     const left = $pointer.style.left;
                     assert.equal(left, '50%');
@@ -1051,7 +1051,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     const left = $pointer.style.left;
                     assert.equal(left, '0%');
@@ -1064,7 +1064,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     const left = $pointer.style.left;
                     assert.equal(left, '25%');
@@ -1077,7 +1077,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -1104,7 +1104,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -1131,7 +1131,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -1151,7 +1151,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -1171,7 +1171,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -1197,7 +1197,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -1223,7 +1223,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -1245,7 +1245,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     document.dispatchEvent(new CustomEvent('tc-hue-changed', {
                         detail: {
@@ -1264,7 +1264,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $bg = $alpha.shadowRoot.querySelector('.color-picker__alpha-color-bg');
+                    const $bg = $alpha.shadowRoot.querySelector('.color-bg');
 
                     const style = $bg.getAttribute('style');
                     assert.equal(style, 'background: linear-gradient(to right, rgba(255,0,0, 0) 0%, rgba(255,0,0, 1) 100%)');
@@ -1277,7 +1277,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $bg = $alpha.shadowRoot.querySelector('.color-picker__alpha-color-bg');
+                    const $bg = $alpha.shadowRoot.querySelector('.color-bg');
 
                     const style = $bg.getAttribute('style');
                     assert.equal(style, 'background: linear-gradient(to right, rgba(255,0,0, 0) 0%, rgba(255,0,0, 1) 100%)');
@@ -1290,7 +1290,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $bg = $alpha.shadowRoot.querySelector('.color-picker__alpha-color-bg');
+                    const $bg = $alpha.shadowRoot.querySelector('.color-bg');
 
                     const style = $bg.getAttribute('style');
                     assert.equal(style, 'background: linear-gradient(to right, rgba(255,200,10, 0) 0%, rgba(255,200,10, 1) 100%)');
@@ -1303,7 +1303,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $bg = $alpha.shadowRoot.querySelector('.color-picker__alpha-color-bg');
+                    const $bg = $alpha.shadowRoot.querySelector('.color-bg');
 
                     document.dispatchEvent(new CustomEvent('tc-hsv-changed', {
                         detail: {
@@ -1325,7 +1325,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $bg = $alpha.shadowRoot.querySelector('.color-picker__alpha-color-bg');
+                    const $bg = $alpha.shadowRoot.querySelector('.color-bg');
 
                     document.dispatchEvent(new CustomEvent('tc-hue-changed', {
                         detail: {
@@ -1345,7 +1345,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     document.dispatchEvent(new CustomEvent('tc-alpha-changed', {
                         detail: {
@@ -1365,7 +1365,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     document.dispatchEvent(new CustomEvent('tc-alpha-changed', {
                         detail: {
@@ -1385,7 +1385,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
@@ -1411,7 +1411,7 @@
 
                     const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
                     const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
-                    const $pointer = $alpha.shadowRoot.querySelector('.color-picker__alpha-pointer-box');
+                    const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
 
                     $pointer.dispatchEvent(new KeyboardEvent('keydown', {
                         view: window,
