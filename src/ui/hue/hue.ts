@@ -49,14 +49,8 @@ class ColorPickerHue extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        let changed = false;
-
         if(this.hue !== evt.detail.h){
             this.hue = evt.detail.h;
-            changed = true;
-        }
-
-        if(changed){
             this.performUpdate();
         }
     }
