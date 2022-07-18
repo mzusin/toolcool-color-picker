@@ -16,8 +16,22 @@ const esbuildCopyPlugin = {
                 dereference: true
             });
 
+            const distAbsPathMap = path.join(dirname, '/dist/', `${ fileName }.map`);
+            fs.cpSync(sourceAbsPath, distAbsPathMap,{
+                recursive: true,
+                force: true,
+                dereference: true
+            });
+
             const testAbsPath = path.join(dirname, '/test/', fileName);
             fs.cpSync(sourceAbsPath, testAbsPath,{
+                recursive: true,
+                force: true,
+                dereference: true
+            });
+
+            const testAbsPathMap = path.join(dirname, '/test/', `${ fileName }.map`);
+            fs.cpSync(sourceAbsPath, testAbsPathMap,{
                 recursive: true,
                 force: true,
                 dereference: true
