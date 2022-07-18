@@ -1,6 +1,6 @@
 # Tool Cool Color Picker
 
-Tool Cool Color Picker is a  color picker library written in typescript and using web component technologies.
+Tool Cool Color Picker is a color picker library written in typescript and using web component technologies.
 
 ![Tool Cool Color Picker](https://github.com/toolcool-org/toolcool-color-picker/blob/main/examples/img/preview/preview-1.png?raw=true)
 
@@ -11,6 +11,19 @@ Download [toolcool-color-picker.min.js](https://github.com/toolcool-org/toolcool
 Add the following html to the page:
 ```html
 <toolcool-color-picker color="#e76ff1"></toolcool-color-picker>
+
+<script type='text/javascript' src='toolcool-color-picker.min.js'></script>
+```
+
+Or with other color formats:
+
+```html
+<toolcool-color-picker color="rgb(96, 245, 66)"></toolcool-color-picker>
+<toolcool-color-picker color="rgba(96, 245, 66, 1)"></toolcool-color-picker>
+<toolcool-color-picker color="hsv(110, 73%, 96%)"></toolcool-color-picker>
+<toolcool-color-picker color="hsva(110, 73%, 96%, 1)"></toolcool-color-picker>
+<toolcool-color-picker color="hsl(110, 90%, 61%)"></toolcool-color-picker>
+<toolcool-color-picker color="hsla(110, 90%, 61%, 1)"></toolcool-color-picker>
 
 <script type='text/javascript' src='toolcool-color-picker.min.js'></script>
 ```
