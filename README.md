@@ -153,7 +153,7 @@ console.log($colorPicker.color);
 
 ## APIs: Popup
 
-Open cor close color picker popup with the following API:
+Open or close color picker popup with the following API:
 
 ```html
 <toolcool-color-picker color="#e76ff1" id="color-picker"></toolcool-color-picker>
