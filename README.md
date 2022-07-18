@@ -36,7 +36,7 @@ Color picker popup can be aligned to the right:
 
 ## Node.js usage
 
-Color picker may also be included as a [node](http://nodejs.org/) module like this:
+Color picker may also be included as a [node module](https://www.npmjs.com/package/toolcool-color-picker) like this:
 
 `npm i toolcool-color-picker`
 
@@ -45,6 +45,8 @@ And then you can include it in your application like this:
 ```js
 import 'toolcool-color-picker';
 ```
+
+NPM package can fe found [here](https://www.npmjs.com/package/toolcool-color-picker).
 
 ## APIs
 You can control the color picker by referencing the `toolcool-color-picker` HTML tag.
