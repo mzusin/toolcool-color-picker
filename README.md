@@ -71,6 +71,26 @@ You can control the color picker by referencing the `toolcool-color-picker` HTML
 </script>
 ```
 
+## APIs: Listen to the change event
+
+```js
+// listen to the color change event
+const $colorPicker = document.getElementById('color-picker');
+
+$colorPicker.addEventListener('change', (evt) => {
+    
+    console.log(evt.detail.hex);
+    console.log(evt.detail.hex8);
+    console.log(evt.detail.rgb);
+    console.log(evt.detail.rgba);
+    console.log(evt.detail.hsl);
+    console.log(evt.detail.hsla);
+    console.log(evt.detail.hsv);
+    console.log(evt.detail.hsva);
+    console.log(evt.detail.color);
+});
+```
+
 ## APIs: Change Color
 The color picker uses the awesome [TinyColor library](https://github.com/scttcper/tinycolor) for color manipulation. Each color format supported by the TinyColor library can be passed in a color property:
 

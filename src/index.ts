@@ -6,7 +6,7 @@ import ColorPicker from './app/color-picker';
  const $colorPicker = document.querySelector('toolcool-color-picker') as ColorPicker;
 
  $colorPicker.addEventListener('change', (evt: CustomEvent) => {
-    console.log(evt.detail.color);
+    console.log(evt.detail.value);
  });
 
  $colorPicker.color = 'red';

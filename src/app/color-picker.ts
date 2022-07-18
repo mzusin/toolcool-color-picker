@@ -211,7 +211,6 @@ class ColorPicker extends HTMLElement {
     }
 
     onColorChange() {
-        const bgColor = rgbaToString(this.state.color);
 
         if(this.$buttonColor){
             this.$buttonColor.style.backgroundColor = rgbaToString(this.state.color);
@@ -219,7 +218,15 @@ class ColorPicker extends HTMLElement {
 
         this.dispatchEvent(new CustomEvent('change', {
             detail: {
-                value: bgColor,
+                hex: this.hex,
+                hex8: this.hex8,
+                rgb: this.rgb,
+                rgba: this.rgba,
+                hsl: this.hsl,
+                hsla: this.hsla,
+                hsv: this.hsv,
+                hsva: this.hsva,
+                color: this.color,
             }
         }));
     }

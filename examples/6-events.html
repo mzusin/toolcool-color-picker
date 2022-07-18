@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <title>Color Picker Events | Tool Cool</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link id="favicon-48" rel="icon" type="image/png" sizes="48x48" href="img/favicon/favicon-48.png">
+    <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32.png">
+    <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16.png">
+</head>
+<body>
+
+    <toolcool-color-picker color="#e76ff1" id="color-picker"></toolcool-color-picker>
+    <script src="js/toolcool-color-picker.min.js"></script>
+
+    <script>
+        // listen to the color change event
+        const $colorPicker = document.getElementById('color-picker');
+
+        $colorPicker.addEventListener('change', (evt) => {
+            console.log('-------------------')
+            console.log(evt.detail.hex);
+            console.log(evt.detail.hex8);
+            console.log(evt.detail.rgb);
+            console.log(evt.detail.rgba);
+            console.log(evt.detail.hsl);
+            console.log(evt.detail.hsla);
+            console.log(evt.detail.hsv);
+            console.log(evt.detail.hsva);
+            console.log(evt.detail.color);
+        });
+    </script>
+</body>
+</html>

@@ -103,4 +103,116 @@ QUnit.module('Color', () => {
         $colorPicker.color = 'rgba(100, 12, 18, 0.21)';
         assert.equal($colorPicker.hsva, 'hsva(356, 88%, 39%, 0.21)');
     });
+
+    QUnit.test('listen to color change event - hex', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+
+        const done = assert.async();
+
+        $colorPicker.addEventListener('change', (evt) => {
+
+            assert.equal(evt.detail.hex, '#EF77AA');
+            done();
+        });
+
+        $colorPicker.color = '#ef77aa';
+    });
+
+    QUnit.test('listen to color change event - hex8', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+
+        const done = assert.async();
+
+        $colorPicker.addEventListener('change', (evt) => {
+
+            assert.equal(evt.detail.hex8, '#0038FF80');
+            done();
+        });
+
+        $colorPicker.color = 'rgba(0, 56, 255, 0.5)';
+    });
+
+    QUnit.test('listen to color change event - rgb', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+
+        const done = assert.async();
+
+        $colorPicker.addEventListener('change', (evt) => {
+
+            assert.equal(evt.detail.rgb, 'rgb(255, 255, 255)');
+            done();
+        });
+
+        $colorPicker.color = '#ffffff';
+    });
+
+    QUnit.test('listen to color change event - rgba', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+
+        const done = assert.async();
+
+        $colorPicker.addEventListener('change', (evt) => {
+
+            assert.equal(evt.detail.rgba, 'rgba(0, 56, 255, 0.5)');
+            done();
+        });
+
+        $colorPicker.color = '#0038FF80';
+    });
+
+    QUnit.test('listen to color change event - hsl', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+
+        const done = assert.async();
+
+        $colorPicker.addEventListener('change', (evt) => {
+
+            assert.equal(evt.detail.hsl, 'hsl(50, 100%, 80%)');
+            done();
+        });
+
+        $colorPicker.color = '#ffee99';
+    });
+
+    QUnit.test('listen to color change event - hsla', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+
+        const done = assert.async();
+
+        $colorPicker.addEventListener('change', (evt) => {
+
+            assert.equal(evt.detail.hsl, 'hsla(227, 100%, 50%, 0.5)');
+            done();
+        });
+
+        $colorPicker.color = 'rgba(0, 56, 255, 0.5)';
+    });
+
+    QUnit.test('listen to color change event - hsv', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+
+        const done = assert.async();
+
+        $colorPicker.addEventListener('change', (evt) => {
+
+            assert.equal(evt.detail.hsv, 'hsv(50, 40%, 100%)');
+            done();
+        });
+
+        $colorPicker.color = '#ffee99';
+    });
+
+    QUnit.test('listen to color change event - hsla', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+
+        const done = assert.async();
+
+        $colorPicker.addEventListener('change', (evt) => {
+
+            assert.equal(evt.detail.hsva, 'hsva(227, 100%, 100%, 0.5)');
+            done();
+        });
+
+        $colorPicker.color = 'rgba(0, 56, 255, 0.5)';
+    });
 });

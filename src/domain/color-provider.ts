@@ -1,4 +1,5 @@
 import { TinyColor } from '@ctrl/tinycolor';
+import { round2places } from './common-provider';
 
 export const SATURATION_STEP = 0.01;
 
@@ -28,17 +29,17 @@ export const getAlphaColorBackground = (color: TinyColor) => {
 
 export const rgbaToString = (color: TinyColor) => {
     const rgba = color.toRgb();
-    return `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
+    return `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ round2places(rgba.a) })`;
 };
 
 export const hslaToString = (color: TinyColor) => {
     const hsla = color.toHsl();
-    return `hsla(${ Math.round(hsla.h) }, ${ Math.round(hsla.s * 100) }%, ${ Math.round(hsla.l * 100) }%, ${ hsla.a })`;
+    return `hsla(${ Math.round(hsla.h) }, ${ Math.round(hsla.s * 100) }%, ${ Math.round(hsla.l * 100) }%, ${ round2places(hsla.a) })`;
 };
 
 export const hsvaToString = (color: TinyColor) => {
     const hsva = color.toHsv();
-    return `hsva(${ Math.round(hsva.h) }, ${ Math.round(hsva.s * 100) }%, ${ Math.round(hsva.v * 100) }%, ${ hsva.a })`;
+    return `hsva(${ Math.round(hsva.h) }, ${ Math.round(hsva.s * 100) }%, ${ Math.round(hsva.v * 100) }%, ${ round2places(hsva.a) })`;
 };
 
 /**
