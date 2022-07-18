@@ -83,16 +83,16 @@ web_modules/
 .cache
 .parcel-cache
 
-# Next.js run output
+# Next.static run output
 .next
 out
 
-# Nuxt.js run / generate output
+# Nuxt.static run / generate output
 .nuxt
 
 # Gatsby files
 .cache/
-# Comment in the public line in if your project uses Gatsby and not Next.js
+# Comment in the public line in if your project uses Gatsby and not Next.static
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 

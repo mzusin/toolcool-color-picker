@@ -193,7 +193,7 @@
   // in all supported environments.
   function getGlobalThis() {
     if (typeof globalThis !== 'undefined') {
-      // For SpiderMonkey, modern browsers, and recent Node.js
+      // For SpiderMonkey, modern browsers, and recent Node.static
       // eslint-disable-next-line no-undef
       return globalThis;
     }
@@ -210,7 +210,7 @@
     }
 
     if (typeof global !== 'undefined') {
-      // For Node.js
+      // For Node.static
       // eslint-disable-next-line no-undef
       return global;
     }
@@ -313,7 +313,7 @@
   var toString = Object.prototype.toString;
   var hasOwn$1 = Object.prototype.hasOwnProperty;
   var nativePerf = getNativePerf(); // TODO: Consider using globalThis instead so that perf marks work
-  // in Node.js as well. As they can have overhead, we should also
+  // in Node.static as well. As they can have overhead, we should also
   // have a way to disable these, and/or make them an opt-in reporter
   // in QUnit 3 and then support globalThis.
   // For example: `QUnit.addReporter(QUnit.reporters.perf)`.
@@ -867,7 +867,7 @@
     //
     // Since this module isn't explicitly created by the user, they have no
     // access to add hooks for it. The hooks object is defined to comply
-    // with internal expectations of test.js, but they will be empty.
+    // with internal expectations of test.static, but they will be empty.
     // To apply hooks, place tests explicitly in a QUnit.module(), and use
     // its hooks accordingly.
     //
@@ -914,7 +914,7 @@
   }; // Apply a predefined QUnit.config object
   //
   // Ignore QUnit.config if it is a QUnit distribution instead of preconfig.
-  // That means QUnit was loaded twice! (Use the same approach as export.js)
+  // That means QUnit was loaded twice! (Use the same approach as export.static)
 
   var preConfig = g && g.QUnit && !g.QUnit.version && g.QUnit.config;
 
@@ -1377,7 +1377,7 @@
       testsIgnored: 0,
       childModules: [],
       suiteReport: new SuiteReport(name, parentSuite),
-      // Initialised by test.js when the module start executing,
+      // Initialised by test.static when the module start executing,
       // i.e. before the first test in this module (or a child).
       stats: null,
       // Pass along `skip` and `todo` properties from parent module, in case
@@ -2510,7 +2510,7 @@
   }
   /**
    * Process the first task on the taskQueue as a promise.
-   * Each task is a function added by Test#queue() in /src/test.js
+   * Each task is a function added by Test#queue() in /src/test.static
    */
 
 
@@ -3157,7 +3157,7 @@
         } else {
           storage.removeItem('qunit-test-' + moduleName + '-' + testName);
         }
-      } // After emitting the js-reporters event we cleanup the assertion data to
+      } // After emitting the static-reporters event we cleanup the assertion data to
       // avoid leaking it. It is not used by the legacy testDone callbacks.
 
 
@@ -3843,7 +3843,7 @@
 
       window$1.QUnit = QUnit;
       exportedModule = true;
-    } // For Node.js
+    } // For Node.static
 
 
     if (typeof module !== 'undefined' && module && module.exports) {
@@ -4431,8 +4431,8 @@
   // function. Since it isn't, add the missing suiteReport property to it now that
   // we have loaded all source code required to do so.
   //
-  // TODO: Consider defining currentModule in core.js or module.js in its entirely
-  // rather than partly in config.js and partly here.
+  // TODO: Consider defining currentModule in core.static or module.static in its entirely
+  // rather than partly in config.static and partly here.
 
   config.currentModule.suiteReport = runSuite;
   var globalStartCalled = false;
@@ -6272,8 +6272,8 @@
     QUnit.begin(function (beginDetails) {
       // Initialize QUnit elements
       // This is done from begin() instead of runStart, because
-      // urlparams.js uses begin(), which we need to wait for.
-      // urlparams.js in turn uses begin() to allow plugins to
+      // urlparams.static uses begin(), which we need to wait for.
+      // urlparams.static in turn uses begin() to allow plugins to
       // add entries to QUnit.config.urlConfig, which may be done
       // asynchronously.
       // <https://github.com/qunitjs/qunit/issues/1657>
