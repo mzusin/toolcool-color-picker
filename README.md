@@ -40,7 +40,7 @@ Color picker may also be included as a [node](http://nodejs.org/) module like th
 
 `npm i toolcool-color-picker`
 
-Then it can be used in your application like this:
+And then you can include it in your application like this:
 
 ```js
 import 'toolcool-color-picker';
