@@ -33,3 +33,34 @@ You can control the color picker by referencing the `toolcool-color-picker` HTML
     console.log($colorPicker.rgba);
 </script>
 ```
+
+## APIs: Change Color
+The color picker uses the awesome [TinyColor library](https://github.com/scttcper/tinycolor) for color manipulation. Each color format supported by the TinyColor library can be passed in a color property:
+
+```js
+const $colorPicker = document.getElementById('color-picker');
+
+// HEX format
+$colorPicker.color = '#60f542';
+
+// OR HEX with opacity
+$colorPicker.color = '#60f542ff';
+
+// OR rgb
+$colorPicker.color = 'rgb(96, 245, 66)';
+
+// OR rgb with opacity
+$colorPicker.color = 'rgba(96, 245, 66, 1)';
+
+// OR hsv
+$colorPicker.color = 'hsv(110, 73%, 96%)';
+
+// OR hsv with opacity
+$colorPicker.color = 'hsva(110, 73%, 96%, 1)';
+
+// OR hsl
+$colorPicker.color = 'hsl(110, 90%, 61%)';
+
+// OR hsl with opacity
+$colorPicker.color = 'hsla(110, 90%, 61%, 1)';
+```
