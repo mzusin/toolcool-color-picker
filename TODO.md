@@ -1,1 +1,2 @@
 - add to npm
+- travis

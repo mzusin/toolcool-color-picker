@@ -28,6 +28,12 @@ Or with other color formats:
 <script type='text/javascript' src='toolcool-color-picker.min.js'></script>
 ```
 
+Color picker popup can be aligned to the right:
+
+```html
+<toolcool-color-picker color="rgb(255, 200, 10)" popup-position="right"></toolcool-color-picker>
+```
+
 ## APIs
 You can control the color picker by referencing the `toolcool-color-picker` HTML tag.
 
@@ -105,5 +111,24 @@ You can also access the color object of the [TinyColor library](https://github.c
 
 ```js
 console.log($colorPicker.color); 
+```
+
+## APIs: Popup
+
+Open cor close color picker popup with the following API:
+
+```html
+<toolcool-color-picker color="#e76ff1" id="color-picker"></toolcool-color-picker>
+<script src="js/toolcool-color-picker.min.js"></script>
+
+<script>
+    const $colorPicker = document.getElementById('color-picker');
+
+    // open color picker popup
+    $colorPicker.opened = true;
+
+    // close color picker popup
+    $colorPicker.opened = false;
+</script>
 ```
 
