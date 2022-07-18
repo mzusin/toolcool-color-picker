@@ -1,7 +1,10 @@
-- add to npm
 - add readme to github - with documentation
+- add to npm
 - examples folder
 - add technologies list to the readme
   - web components
   - typescript
   - esbuild
+- reinit library after async tags generation
+- write about tiny color dependency
+- write about APIs - get set color

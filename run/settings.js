@@ -9,7 +9,7 @@ export default {
     target: [
         'es6',
     ],
-    outfile: './public/lib/toolcool-color-picker.min.js',
+    outfile: './examples/js/toolcool-color-picker.min.js',
     loader: {
         '.png': 'text',
         '.svg': 'dataurl',
