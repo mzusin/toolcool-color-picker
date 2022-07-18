@@ -1,3 +1,1 @@
 - add to npm
-- reinit library after async tags generation
-- write about APIs - get set color
