@@ -1,5 +1,9 @@
 # Tool Cool Color Picker
 
+[![GitHub license](https://img.shields.io/github/license/toolcool-org/toolcool-color-picker)](https://github.com/toolcool-org/toolcool-color-picker/blob/main/LICENSE) 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/toolcool-org/toolcool-color-picker) 
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker) 
+
 Tool Cool Color Picker is a color picker library written in typescript and using web component technologies.
 
 ![Tool Cool Color Picker](https://github.com/toolcool-org/toolcool-color-picker/blob/main/examples/img/preview/preview-1.png?raw=true)
@@ -12,7 +16,7 @@ Add the following html to the page:
 ```html
 <toolcool-color-picker color="#e76ff1"></toolcool-color-picker>
 
-<script type='text/javascript' src='toolcool-color-picker.min.js'></script>
+<script type="text/javascript" src="toolcool-color-picker.min.js"></script>
 ```
 
 Or with other color formats:
@@ -25,7 +29,7 @@ Or with other color formats:
 <toolcool-color-picker color="hsl(110, 90%, 61%)"></toolcool-color-picker>
 <toolcool-color-picker color="hsla(110, 90%, 61%, 1)"></toolcool-color-picker>
 
-<script type='text/javascript' src='toolcool-color-picker.min.js'></script>
+<script type="text/javascript" src="toolcool-color-picker.min.js"></script>
 ```
 
 Color picker popup can be aligned to the right:
@@ -146,3 +150,9 @@ Open cor close color picker popup with the following API:
 </script>
 ```
 
+## Credits
+An awesome [TinyColor Library](https://github.com/scttcper/tinycolor)
+
+## License
+
+[MIT license](https://github.com/toolcool-org/toolcool-color-picker/blob/main/LICENSE)
