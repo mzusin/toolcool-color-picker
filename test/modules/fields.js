@@ -265,7 +265,7 @@ QUnit.module('Fields', () => {
         assert.equal($alpha.value, '50');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> hex value should be correct', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (79, 0.93, 0.06) ---> hex value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -286,7 +286,7 @@ QUnit.module('Fields', () => {
         assert.equal($hex.value, '0B0F01');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> red value should be correct', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (79, 0.93, 0.06) ---> red value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -307,7 +307,7 @@ QUnit.module('Fields', () => {
         assert.equal($red.value, '11');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> green value should be correct', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (79, 0.93, 0.06) ---> green value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -328,7 +328,7 @@ QUnit.module('Fields', () => {
         assert.equal($green.value, '15');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> blue value should be correct', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (79, 0.93, 0.06) ---> blue value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -349,7 +349,7 @@ QUnit.module('Fields', () => {
         assert.equal($blue.value, '1');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> alpha value should be correct', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (79, 0.93, 0.06) ---> alpha value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -370,7 +370,7 @@ QUnit.module('Fields', () => {
         assert.equal($alpha.value, '25');
     });
 
-    QUnit.test('when hue has changed from outside to 79 ---> hex value should be correct', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 79 ---> hex value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -389,7 +389,7 @@ QUnit.module('Fields', () => {
         assert.equal($hex.value, 'CEFF64');
     });
 
-    QUnit.test('when hue has changed from outside to 79 ---> red value should be correct', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 79 ---> red value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -408,7 +408,7 @@ QUnit.module('Fields', () => {
         assert.equal($red.value, '206');
     });
 
-    QUnit.test('when hue has changed from outside to 79 ---> green value should be correct', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 79 ---> green value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -427,7 +427,7 @@ QUnit.module('Fields', () => {
         assert.equal($green.value, '255');
     });
 
-    QUnit.test('when hue has changed from outside to 79 ---> blue value should be correct', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 79 ---> blue value should be correct', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -446,7 +446,7 @@ QUnit.module('Fields', () => {
         assert.equal($blue.value, '100');
     });
 
-    QUnit.test('when hue has changed from outside to 79 ---> alpha value should not change', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 79 ---> alpha value should not change', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -465,7 +465,7 @@ QUnit.module('Fields', () => {
         assert.equal($alpha.value, '25');
     });
 
-    QUnit.test('when alpha has changed from outside to 10 ---> hex value should not change', (assert) => {
+    QUnit.test('when alpha has changed from outside via events to 10 ---> hex value should not change', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -484,7 +484,7 @@ QUnit.module('Fields', () => {
         assert.equal($hex.value, '64C8FF');
     });
 
-    QUnit.test('when alpha has changed from outside to 10 ---> red value should not change', (assert) => {
+    QUnit.test('when alpha has changed from outside via events to 10 ---> red value should not change', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -503,7 +503,7 @@ QUnit.module('Fields', () => {
         assert.equal($red.value, '100');
     });
 
-    QUnit.test('when alpha has changed from outside to 10 ---> green value should not change', (assert) => {
+    QUnit.test('when alpha has changed from outside via events to 10 ---> green value should not change', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -522,7 +522,7 @@ QUnit.module('Fields', () => {
         assert.equal($green.value, '200');
     });
 
-    QUnit.test('when alpha has changed from outside to 10 ---> blue value should not change', (assert) => {
+    QUnit.test('when alpha has changed from outside via events to 10 ---> blue value should not change', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -541,7 +541,67 @@ QUnit.module('Fields', () => {
         assert.equal($blue.value, '255');
     });
 
-    QUnit.test('when alpha has changed from outside to 10 ---> alpha value should not change', (assert) => {
+    QUnit.test('when color has changed from outside via property to (79, 0.93, 0.06) ---> hex value should be correct', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.setAttribute('color', 'hsv(79, 93%, 6%)');
+        $colorPicker.opened = true;
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+        const $hex = $fields.shadowRoot.querySelector('[data-type="hex"]');
+
+        assert.equal($hex.value, '0B0F01');
+    });
+
+    QUnit.test('when color has changed from outside via property to rgba(100, 15, 18, 0.1) ---> red value should be correct', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.setAttribute('color', 'rgba(100, 15, 18, 0.1)');
+        $colorPicker.opened = true;
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+        const $red = $fields.shadowRoot.querySelector('[data-type="r"]');
+
+        assert.equal($red.value, '100');
+    });
+
+    QUnit.test('when color has changed from outside via property to rgba(100, 15, 18, 0.1) ---> green value should be correct', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.setAttribute('color', 'rgba(100, 15, 18, 0.1)');
+        $colorPicker.opened = true;
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+        const $green = $fields.shadowRoot.querySelector('[data-type="g"]');
+
+        assert.equal($green.value, '15');
+    });
+
+    QUnit.test('when color has changed from outside via property to rgba(100, 15, 18, 0.1) ---> blue value should be correct', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.setAttribute('color', 'rgba(100, 15, 18, 0.1)');
+        $colorPicker.opened = true;
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+        const $blue = $fields.shadowRoot.querySelector('[data-type="b"]');
+
+        assert.equal($blue.value, '18');
+    });
+
+    QUnit.test('when color has changed from outside via property to rgba(100, 15, 18, 0.1) ---> alpha value should be correct', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.setAttribute('color', 'rgba(100, 15, 18, 0.1)');
+        $colorPicker.opened = true;
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+        const $alpha = $fields.shadowRoot.querySelector('[data-type="a"]');
+
+        assert.equal($alpha.value, '10');
+    });
+
+    QUnit.test('when alpha has changed from outside via events to 10 ---> alpha value should not change', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
         $colorPicker.opened = true;
@@ -558,25 +618,6 @@ QUnit.module('Fields', () => {
         }));
 
         assert.equal($alpha.value, '10');
-    });
-
-    QUnit.test('change hex field to c464ff ---> color picker value should be correct', (assert) => {
-        const $colorPicker = document.querySelector('#red');
-        $colorPicker.color = 'rgba(100, 200, 255, 0.25)'
-        $colorPicker.opened = true;
-
-        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
-        const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
-        const $hex = $fields.shadowRoot.querySelector('[data-type="hex"]');
-        $hex.value = 'c464ff';
-
-        $hex.dispatchEvent(new Event('input', {
-            view: window,
-            bubbles: true,
-            cancelable: true,
-        }));
-
-        assert.equal($colorPicker.rgba, 'rgba(196, 100, 255, 0.25)');
     });
 
     QUnit.test('change hex field to c464ff ---> color picker value should be correct', (assert) => {

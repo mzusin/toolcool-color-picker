@@ -451,7 +451,7 @@ QUnit.module('Saturation', () => {
         assert.equal($colorPicker.rgba, 'rgba(255, 5, 5, 1)');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (79, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -473,7 +473,7 @@ QUnit.module('Saturation', () => {
         assert.equal(style, 'background: hsl(79, 100%, 50%)');
     });
 
-    QUnit.test('when hsv has changed from outside to (320, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (320, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -495,7 +495,7 @@ QUnit.module('Saturation', () => {
         assert.equal(style, 'background: hsl(320, 100%, 50%)');
     });
 
-    QUnit.test('when hsv has changed from outside to (320, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (320, 0.93, 0.06) ---> saturation bg color should change too', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -517,7 +517,7 @@ QUnit.module('Saturation', () => {
         assert.equal(style, 'background: hsl(360, 100%, 50%)');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> pointer left position should be 93%', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (79, 0.93, 0.06) ---> pointer left position should be 93%', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -539,7 +539,7 @@ QUnit.module('Saturation', () => {
         assert.equal(left, '93%');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> pointer top position should be 94%', (assert) => {
+    QUnit.test('when hsv has changed from outside via events to (79, 0.93, 0.06) ---> pointer top position should be 94%', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -561,7 +561,7 @@ QUnit.module('Saturation', () => {
         assert.equal(top, '94%');
     });
 
-    QUnit.test('when hue has changed from outside to 79 ---> saturation bg color should change too', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 79 ---> saturation bg color should change too', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -581,7 +581,7 @@ QUnit.module('Saturation', () => {
         assert.equal(style, 'background: hsl(79, 100%, 50%)');
     });
 
-    QUnit.test('when hue has changed from outside to 200 ---> saturation bg color should change too', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 200 ---> saturation bg color should change too', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -601,7 +601,7 @@ QUnit.module('Saturation', () => {
         assert.equal(style, 'background: hsl(200, 100%, 50%)');
     });
 
-    QUnit.test('when hue has changed from outside to 79 ---> pointer left position should be 36.36%', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 79 ---> pointer left position should be 36.36%', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -621,7 +621,7 @@ QUnit.module('Saturation', () => {
         assert.equal(left, '36.36%');
     });
 
-    QUnit.test('when hue has changed from outside to 79 ---> pointer top position should be 22.35%', (assert) => {
+    QUnit.test('when hue has changed from outside via events to 79 ---> pointer top position should be 22.35%', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#7EC6A8';
         $colorPicker.opened = true;
@@ -639,5 +639,32 @@ QUnit.module('Saturation', () => {
 
         const top = $pointer.style.top;
         assert.equal(top, '22.35%');
+    });
+
+    QUnit.test('when color has changed from outside via property to hsv(79, 36%, 78%) ---> pointer left position should be 36.18%', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('color', 'hsv(79, 36%, 78%)');
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+        const $pointer = $saturation.shadowRoot.querySelector('.pointer');
+
+        const left = $pointer.style.left;
+        assert.equal(left, '36.18%');
+    });
+
+    QUnit.test('when hue has changed from outside via property to hsl(11, 36%, 78%) ---> saturation bg color should change too', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.color = '#7EC6A8';
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('color', 'hsl(11, 36%, 78%)');
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $saturation = $popup.shadowRoot.querySelector('toolcool-color-picker-saturation');
+        const $saturationColor = $saturation.shadowRoot.querySelector('.box');
+
+        const style = $saturationColor.getAttribute('style');
+        assert.equal(style, 'background: hsl(11, 100%, 50%)');
     });
 });

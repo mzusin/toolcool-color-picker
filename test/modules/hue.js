@@ -219,7 +219,7 @@ QUnit.module('Hue', () => {
         assert.equal($colorPicker.rgba, 'rgba(0, 132, 255, 1)');
     });
 
-    QUnit.test('when hsv has changed from outside to (79, 0.93, 0.06) ---> pointer position should change too', (assert) => {
+    QUnit.test('when hsv has changed from outside via event to (79, 0.93, 0.06) ---> pointer position should change too', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#fff';
         $colorPicker.opened = true;
@@ -241,7 +241,7 @@ QUnit.module('Hue', () => {
         assert.equal(left, '21.94%');
     });
 
-    QUnit.test('when hsv has changed from outside to (320, 0.93, 0.06) ---> pointer position should change too', (assert) => {
+    QUnit.test('when hsv has changed from outside via event to (320, 0.93, 0.06) ---> pointer position should change too', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.color = '#fff';
         $colorPicker.opened = true;
@@ -261,5 +261,32 @@ QUnit.module('Hue', () => {
 
         const left = $pointer.style.left;
         assert.equal(left, '88.89%');
+    });
+
+    QUnit.test('when hsv has changed from outside via attribute to (79, 0.93, 0.06) ---> pointer position should change too', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('color', 'rgb(11, 15, 1)');
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
+        const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
+
+        const left = $pointer.style.left;
+        assert.equal(left, '21.43%');
+    });
+
+    QUnit.test('when hsv has changed from outside via attribute to (320, 0.93, 0.06) ---> pointer position should change too', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.color = '#fff';
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('color', 'rgb(15, 1, 11)');
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $hue = $popup.shadowRoot.querySelector('toolcool-color-picker-hue');
+        const $pointer = $hue.shadowRoot.querySelector('.pointer-box');
+
+        const left = $pointer.style.left;
+        assert.equal(left, '88.1%');
     });
 });
