@@ -1,2 +1,0 @@
-- add to npm
-- travis

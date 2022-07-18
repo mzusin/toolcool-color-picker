@@ -34,6 +34,19 @@ Color picker popup can be aligned to the right:
 <toolcool-color-picker color="rgb(255, 200, 10)" popup-position="right"></toolcool-color-picker>
 ```
 
+## Node.js usage
+
+Color picker may also be included as a [node](http://nodejs.org/) module like this:
+
+`npm i toolcool-color-picker`
+
+Then it can be used in your application like this:
+
+```js
+var tinycolor = require("tinycolor2");
+var color = tinycolor("red");
+```
+
 ## APIs
 You can control the color picker by referencing the `toolcool-color-picker` HTML tag.
 
