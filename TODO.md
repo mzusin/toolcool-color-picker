@@ -1,4 +1,3 @@
-- add license to the min js file
 - add to npm
 - add readme to github - with documentation
 - examples folder
