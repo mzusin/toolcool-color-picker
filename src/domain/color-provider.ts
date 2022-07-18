@@ -33,12 +33,12 @@ export const rgbaToString = (color: TinyColor) => {
 
 export const hslaToString = (color: TinyColor) => {
     const hsla = color.toHsl();
-    return `hsla(${ hsla.h * 100 }%, ${ hsla.s * 100 }%, ${ hsla.l * 100 }%, ${ hsla.a })`;
+    return `hsla(${ Math.round(hsla.h) }, ${ Math.round(hsla.s * 100) }%, ${ Math.round(hsla.l * 100) }%, ${ hsla.a })`;
 };
 
 export const hsvaToString = (color: TinyColor) => {
     const hsva = color.toHsv();
-    return `hsva(${ hsva.h * 100 }%, ${ hsva.s * 100 }%, ${ hsva.v * 100 }%, ${ hsva.a })`;
+    return `hsva(${ Math.round(hsva.h) }, ${ Math.round(hsva.s * 100) }%, ${ Math.round(hsva.v * 100) }%, ${ hsva.a })`;
 };
 
 /**

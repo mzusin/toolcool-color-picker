@@ -77,3 +77,33 @@ $colorPicker.color = 'hsl(110, 90%, 61%)';
 // OR hsl with opacity
 $colorPicker.color = 'hsla(110, 90%, 61%, 1)';
 ```
+
+## APIs: Get current color in different formats
+
+```js
+const $colorPicker = document.getElementById('color-picker');
+$colorPicker.color = '#367E95';
+
+console.log($colorPicker.hex); // #367E95
+
+console.log($colorPicker.hex8); // #367E95FF
+
+console.log($colorPicker.rgb); // rgb(54, 126, 149)
+
+console.log($colorPicker.rgba); // rgba(54, 126, 149, 1)
+
+console.log($colorPicker.hsl); // hsl(195, 47%, 40%)
+
+console.log($colorPicker.hsla); // hsla(195, 47%, 40%, 1)
+
+console.log($colorPicker.hsv); // hsv(195, 64%, 58%)
+
+console.log($colorPicker.hsva); // hsva(195, 64%, 58%, 1)
+```
+
+You can also access the color object of the [TinyColor library](https://github.com/scttcper/tinycolor). It should only be used to get color values and should not be modified directly.
+
+```js
+console.log($colorPicker.color); 
+```
+

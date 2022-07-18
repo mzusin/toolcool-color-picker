@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <title>Change Color Picker Color | Tool Cool</title>
+    <title>Get Color Picker Color | Tool Cool</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -16,32 +16,19 @@
     <script src="js/toolcool-color-picker.min.js"></script>
 
     <script>
-        // How to change color picker color
+        // How to get color
         const $colorPicker = document.getElementById('color-picker');
+        $colorPicker.color = '#367E95';
 
-        // HEX format
-        $colorPicker.color = '#60f542';
-
-        // OR HEX with opacity
-        // $colorPicker.color = '#60f542ff';
-
-        // OR rgb
-        //$colorPicker.color = 'rgb(96, 245, 66)';
-
-        // OR rgb with opacity
-        //$colorPicker.color = 'rgba(96, 245, 66, 1)';
-
-        // OR hsv
-        //$colorPicker.color = 'hsv(110, 73%, 96%)';
-
-        // OR hsv with opacity
-        //$colorPicker.color = 'hsva(110, 73%, 96%, 1)';
-
-        // OR hsl
-        //$colorPicker.color = 'hsl(110, 90%, 61%)';
-
-        // OR hsl with opacity
-        //$colorPicker.color = 'hsla(110, 90%, 61%, 1)';
+        console.log($colorPicker.hex);
+        console.log($colorPicker.hex8);
+        console.log($colorPicker.rgb);
+        console.log($colorPicker.rgba);
+        console.log($colorPicker.hsl);
+        console.log($colorPicker.hsla);
+        console.log($colorPicker.hsv);
+        console.log($colorPicker.hsva);
+        console.log($colorPicker.color);
     </script>
 </body>
 </html>

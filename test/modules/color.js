@@ -55,7 +55,7 @@ QUnit.module('Color', () => {
 
     QUnit.test('red hsla should be hsla(0, 100%, 50%, 1)', (assert) => {
         const $colorPicker = document.querySelector('#red');
-        assert.equal($colorPicker.hsla, 'hsla(0%, 100%, 50%, 1)');
+        assert.equal($colorPicker.hsla, 'hsla(0, 100%, 50%, 1)');
     });
 
     QUnit.test('red hsv should be hsv(0, 100%, 100%)', (assert) => {
@@ -65,6 +65,42 @@ QUnit.module('Color', () => {
 
     QUnit.test('red hsva should be hsva(0%, 100%, 100%, 1)', (assert) => {
         const $colorPicker = document.querySelector('#red');
-        assert.equal($colorPicker.hsva, 'hsva(0%, 100%, 100%, 1)');
+        assert.equal($colorPicker.hsva, 'hsva(0, 100%, 100%, 1)');
+    });
+
+    QUnit.test('#367E95 hsl color should be hsl(195, 47%, 40%)', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.color = '#367E95';
+        assert.equal($colorPicker.hsl, 'hsl(195, 47%, 40%)');
+    });
+
+    QUnit.test('#367E95 hsla color should be hsla(195, 47%, 40%)', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.color = '#367E95';
+        assert.equal($colorPicker.hsla, 'hsla(195, 47%, 40%, 1)');
+    });
+
+    QUnit.test('#367E95 hsla color should be hsla(195, 47%, 40%)', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.color = 'rgba(100, 12, 18, 0.21)';
+        assert.equal($colorPicker.hsla, 'hsla(356, 79%, 22%, 0.21)');
+    });
+
+    QUnit.test('#367E95 hsl color should be hsv(195, 64%, 58%)', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.color = '#367E95';
+        assert.equal($colorPicker.hsv, 'hsv(195, 64%, 58%)');
+    });
+
+    QUnit.test('#367E95 hsla color should be hsva(195, 64%, 58%, 1)', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.color = '#367E95';
+        assert.equal($colorPicker.hsva, 'hsva(195, 64%, 58%, 1)');
+    });
+
+    QUnit.test('#367E95 hsla color should be hsva(356, 88%, 39%, 0.21)', (assert) => {
+        const $colorPicker = document.querySelector('#red');
+        $colorPicker.color = 'rgba(100, 12, 18, 0.21)';
+        assert.equal($colorPicker.hsva, 'hsva(356, 88%, 39%, 0.21)');
     });
 });
