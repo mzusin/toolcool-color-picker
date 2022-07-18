@@ -1,0 +1,9 @@
+- add tests when attribute color or other attribute changes
+- add license to the min js file
+- add to npm
+- add readme to github - with documentation
+- examples folder
+- add technologies list to the readme
+  - web components
+  - typescript
+  - esbuild

@@ -49,12 +49,25 @@ class Alpha extends HTMLElement {
         this.alphaChanged = this.alphaChanged.bind(this);
     }
 
-    render() {
+    render(sendEvent = true) {
         if(this.$pointer){
             this.$pointer.style.left = `${ this.alpha * 100 }%`;
         }
 
-        sendAlphaCustomEvent(this.cid, this.alpha);
+        if(this.$color) {
+            const color = new TinyColor({
+                h: this.hue,
+                s: this.saturation,
+                v: this.value,
+                a: this.alpha,
+            });
+
+            this.$color.style.background = getAlphaColorBackground(color);
+        }
+
+        if(sendEvent) {
+            sendAlphaCustomEvent(this.cid, this.alpha);
+        }
     }
     
     // we need to handle both MouseEvent and TouchEvent --->
@@ -107,14 +120,11 @@ class Alpha extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        const color = new TinyColor({
-            h: evt.detail.h,
-            s: evt.detail.s,
-            v: evt.detail.v,
-            a: this.alpha,
-        });
+        this.saturation = evt.detail.h;
+        this.hue = evt.detail.s;
+        this.value = evt.detail.v;
 
-        this.$color.style.background = getAlphaColorBackground(color);
+        this.render(false);
     }
 
     hueChanged(evt: CustomEvent) {
@@ -124,14 +134,9 @@ class Alpha extends HTMLElement {
         // handle only current instance
         if(evt.detail.cid !== this.cid) return;
 
-        const color = new TinyColor({
-            h: evt.detail.h,
-            s: this.saturation,
-            v: this.value,
-            a: this.alpha,
-        });
+        this.hue = evt.detail.h;
 
-        this.$color.style.background = getAlphaColorBackground(color);
+        this.render(false);
     }
 
     alphaChanged(evt: CustomEvent) {

@@ -305,7 +305,7 @@ QUnit.module('Alpha', () => {
         }));
 
         const backgroundImage = $bg.style.backgroundImage;
-        assert.equal(backgroundImage, 'linear-gradient(to right, rgba(11, 15, 1, 0) 0%, rgb(11, 15, 1) 100%)');
+        assert.equal(backgroundImage, 'linear-gradient(to right, rgba(15, 3, 3, 0) 0%, rgb(15, 3, 3) 100%)');
     });
 
     QUnit.test('when hue has changed from outside to (79) ---> bg color should change too', (assert) => {
@@ -325,7 +325,7 @@ QUnit.module('Alpha', () => {
         }));
 
         const backgroundImage = $bg.style.backgroundImage;
-        assert.equal(backgroundImage, 'linear-gradient(to right, rgba(206, 255, 100, 0) 0%, rgb(206, 255, 100) 100%)');
+        assert.equal(backgroundImage, 'linear-gradient(to right, rgba(191, 255, 54, 0) 0%, rgb(191, 255, 54) 100%)');
     });
 
     QUnit.test('when alpha has changed from outside to (0.45) ---> pointer position should change too', (assert) => {
@@ -418,5 +418,43 @@ QUnit.module('Alpha', () => {
         }));
 
         assert.equal($colorPicker.rgba, 'rgba(100, 200, 255, 0.27)');
+    });
+
+    QUnit.test('when color picker color attribute changes ---> color property change too', (assert) => {
+        const $colorPicker = document.querySelector('#alpha-0-5');
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('color', 'rgba(100, 200, 100, 0.1');
+        assert.equal($colorPicker.rgba, 'rgba(100, 200, 100, 0.1)');
+    });
+
+    QUnit.test('when color picker color attribute changes ---> pointer position should change too', (assert) => {
+        const $colorPicker = document.querySelector('#alpha-0-5');
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('color', 'rgba(100, 200, 100, 0.1');
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
+        const $pointer = $alpha.shadowRoot.querySelector('.pointer-box');
+
+        const left = $pointer.style.left;
+        assert.equal(left, '10%');
+    });
+
+    QUnit.test('when color picker color attribute changes ---> background color should change too', (assert) => {
+        const $colorPicker = document.querySelector('#alpha-0-5');
+        $colorPicker.opened = true;
+        $colorPicker.setAttribute('color', 'rgba(100, 200, 100, 0.1');
+
+        const $popup = $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
+        const $bg = $alpha.shadowRoot.querySelector('.color-bg');
+
+        const done = assert.async();
+
+        window.setTimeout(() => {
+            const backgroundImage = $bg.style.backgroundImage;
+            assert.equal(backgroundImage, 'linear-gradient(to right, rgba(100, 200, 100, 0) 0%, rgb(100, 200, 100) 100%)');
+            done();
+        }, 0);
     });
 });
