@@ -195,6 +195,23 @@ It's possible to control color picker styles through CSS variables:
 }
 ```
 
+## TypeScript Usage
+
+```typescript
+import ColorPicker from 'toolcool-color-picker/src/app/color-picker';
+
+// ...
+
+const $colorPicker = document.getElementById('get-color-picker') as ColorPicker;
+
+$colorPicker.addEventListener('change', (evt: Event) => {
+    const customEvent = evt as CustomEvent;
+    console.log(customEvent.detail.rgba);
+});
+
+$colorPicker.hex = '#fefefe';
+```
+
 It's also possible to use CSS variables as inline styles in the following way:
 
 ```html
