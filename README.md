@@ -1,8 +1,10 @@
 # Tool Cool Color Picker
 
 [![GitHub license](https://img.shields.io/github/license/toolcool-org/toolcool-color-picker)](https://github.com/toolcool-org/toolcool-color-picker/blob/main/LICENSE) 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/toolcool-org/toolcool-color-picker) 
-[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker) 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/toolcool-org/toolcool-color-picker)
+[![NPM](https://img.shields.io/badge/npm-color_picker-brightgreen)](https://www.npmjs.com/package/toolcool-color-picker)
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)
+
 
 Tool Cool Color Picker is a color picker library written in typescript and using web component technologies. [Check out the demo at https://toolcool.org/toolcool-color-picker/](https://toolcool.org/toolcool-color-picker/)
 
