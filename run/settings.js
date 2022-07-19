@@ -15,7 +15,7 @@ catch(ex){}
 export default {
     entryPoints: ['./src/index.ts'],
     bundle: true,
-    sourcemap: true,
+    sourcemap: 'external',
     minify: true,
     target: [
         'es6',
