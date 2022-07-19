@@ -171,6 +171,36 @@ Open or close color picker popup with the following API:
 </script>
 ```
 
+## Styles
+It's possible to control color picker styles through CSS variables:
+
+```css
+:root{
+    /* button */
+    --tool-cool-color-picker-btn-bg: #b9b9b9;
+    --tool-cool-color-picker-btn-border-color: #000;
+    --tool-cool-color-picker-btn-border-color-inner: #363636;
+    --tool-cool-color-picker-btn-border-radius: 1rem;
+    --tool-cool-color-picker-btn-border-radius-inner: 1rem;
+
+    /* popup */
+    --tool-cool-color-picker-popup-bg: #b9b9b9;
+    --tool-cool-color-picker-popup-border-color: #000;
+
+    /* fields */
+    --tool-cool-color-picker-field-border-color: #363636;
+    --tool-cool-color-picker-field-label-color: #1a3c6e;
+}
+```
+
+It's also possible to use CSS variables as inline styles in the following way:
+
+```html
+<toolcool-color-picker 
+        color="rgb(255, 200, 10)" 
+        style="--tool-cool-color-picker-btn-bg: #fff"></toolcool-color-picker>
+```
+
 ## Credits
 An awesome [TinyColor Library](https://github.com/scttcper/tinycolor)
 
