@@ -195,6 +195,15 @@ It's possible to control color picker styles through CSS variables:
 }
 ```
 
+It's also possible to use CSS variables as inline styles in the following way:
+
+```html
+<toolcool-color-picker 
+        color="rgb(255, 200, 10)" 
+        style="--tool-cool-color-picker-btn-bg: #fff"></toolcool-color-picker>
+```
+
+
 ## TypeScript Usage
 
 ```typescript
@@ -210,14 +219,6 @@ $colorPicker.addEventListener('change', (evt: Event) => {
 });
 
 $colorPicker.hex = '#fefefe';
-```
-
-It's also possible to use CSS variables as inline styles in the following way:
-
-```html
-<toolcool-color-picker 
-        color="rgb(255, 200, 10)" 
-        style="--tool-cool-color-picker-btn-bg: #fff"></toolcool-color-picker>
 ```
 
 ## Credits
