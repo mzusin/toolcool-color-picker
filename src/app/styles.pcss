@@ -1,21 +1,34 @@
+:root{
+    --tool-cool-color-picker-btn-bg: #fff;
+    --tool-cool-color-picker-btn-border-color: #cecece;
+    --tool-cool-color-picker-btn-border-color-inner: #626262;
+    --tool-cool-color-picker-btn-border-radius: 0.25rem;
+    --tool-cool-color-picker-btn-border-radius-inner: 0;
+}
+
 .color-picker{
     position: relative;
 }
 
 .button{
     padding: 0.25rem;
-    background: #fff;
-    border-radius: 0.25rem;
-    border: 1px solid #cecece;
+    background: var(--tool-cool-color-picker-btn-bg, #fff);
+    border-radius: var(--tool-cool-color-picker-btn-border-radius, 0.25rem);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--tool-cool-color-picker-btn-border-color, #cecece);
     cursor: pointer;
     box-sizing: border-box;
 }
 
 .button-color{
     display: block;
-    border: 1px solid rgb(98, 98, 98);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--tool-cool-color-picker-btn-border-color-inner, #626262);
     background: #000;
     width: 2.5rem;
     height: 1rem;
     box-sizing: border-box;
+    border-radius: var(--tool-cool-color-picker-btn-border-radius-inner, 0);
 }

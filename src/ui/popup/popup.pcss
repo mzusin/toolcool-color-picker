@@ -1,14 +1,22 @@
+:root{
+    --tool-cool-color-picker-popup-bg: #fff;
+    --tool-cool-color-picker-popup-border-color: #cecece;
+    --tool-cool-color-picker-popup-width: 214px;
+}
+
 .popup{
     position: absolute;
     left: 0;
     top: calc(100% - 1px);
     z-index: 50;
 
-    width: 214px;
+    width: var(--tool-cool-color-picker-popup-width, 214px);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
-    background: #fff;
-    border: 1px solid #cecece;
+    background: var(--tool-cool-color-picker-popup-bg, #fff);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--tool-cool-color-picker-popup-border-color, #cecece);
     border-radius: 0.25rem;
 }
 

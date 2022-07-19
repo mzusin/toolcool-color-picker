@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <title>Color Picker Styling | Tool Cool</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link id="favicon-48" rel="icon" type="image/png" sizes="48x48" href="img/favicon/favicon-48.png">
+    <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32.png">
+    <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16.png">
+
+    <style>
+        /* demo page styles */
+        html{
+            background-color: #000;
+        }
+
+        /* styling using css variables */
+        :root{
+            /* button */
+            --tool-cool-color-picker-btn-bg: #b9b9b9;
+            --tool-cool-color-picker-btn-border-color: #000;
+            --tool-cool-color-picker-btn-border-color-inner: #363636;
+            --tool-cool-color-picker-btn-border-radius: 1rem;
+            --tool-cool-color-picker-btn-border-radius-inner: 1rem;
+
+            /* popup */
+            --tool-cool-color-picker-popup-bg: #b9b9b9;
+            --tool-cool-color-picker-popup-border-color: #000;
+
+            /* fields */
+            --tool-cool-color-picker-field-border-color: #363636;
+            --tool-cool-color-picker-field-label-color: #1a3c6e;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; width: 100%; justify-content: space-between">
+        <toolcool-color-picker color="#e76ff1" id="color-picker-1"></toolcool-color-picker>
+        <toolcool-color-picker color="rgba(255, 0, 0, 0.5)" id="color-picker-2"></toolcool-color-picker>
+        <toolcool-color-picker color="rgb(255, 200, 10)" popup-position="right" id="color-picker-3"></toolcool-color-picker>
+    </div>
+
+    <script src="js/toolcool-color-picker.min.js"></script>
+</body>
+</html>

@@ -1,3 +1,8 @@
+:root{
+    --tool-cool-color-picker-field-border-color: #cecece;
+    --tool-cool-color-picker-field-label-color: #000;
+}
+
 .fields{
     font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Noto Sans,Liberation Sans,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
     font-size: 11px;
@@ -6,13 +11,17 @@
     display: grid;
     gap: 0.25rem;
     margin-top: 0.25rem;
+    color: var(--tool-cool-color-picker-field-label-color, #000);
 }
 
 .fields input{
-    border: 1px solid #cecece;
+    background: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--tool-cool-color-picker-field-border-color, #cecece);
     padding: 1px 3px;
     border-radius: 2px;
-    color: inherit;
+    color: #000;
     font-family: inherit;
     font-size: 100%;
     line-height: inherit;
