@@ -1,6 +1,18 @@
 export const CUSTOM_EVENT_COLOR_HSV_CHANGED = 'tc-hsv-changed';
 export const CUSTOM_EVENT_COLOR_HUE_CHANGED = 'tc-hue-changed';
 export const CUSTOM_EVENT_COLOR_ALPHA_CHANGED = 'tc-alpha-changed';
+export const CUSTOM_EVENT_BUTTON_CLICKED = 'tc-button-clicked';
+
+export const sendButtonClickedCustomEvent = (cid: string) => {
+
+    if(!cid) return;
+
+    document.dispatchEvent(new CustomEvent(CUSTOM_EVENT_BUTTON_CLICKED, {
+        detail: {
+            cid,
+        }
+    }));
+};
 
 export const sendAlphaCustomEvent = (cid: string, a: number) => {
 

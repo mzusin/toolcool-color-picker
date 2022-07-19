@@ -143,4 +143,59 @@ QUnit.module('Popup', () => {
             done();
         }, 1);
     });
+
+    QUnit.test('open one popup, the click on another popup ---> the first popup should be closed', (assert) => {
+        const $colorPicker1 = document.querySelector('#red');
+        $colorPicker1.opened = true;
+
+        const $colorPicker2 = document.querySelector('#black');
+        const $button2 = $colorPicker2.shadowRoot.querySelector('.button');
+        $button2.click();
+
+        const done = assert.async();
+
+        window.setTimeout(() => {
+            assert.equal($colorPicker1.opened, false);
+            done();
+        }, 1);
+    });
+
+    QUnit.test('click on color picker button, then click again ---> popup should close', (assert) => {
+        const $colorPicker1 = document.querySelector('#red');
+        const $button1 = $colorPicker1.shadowRoot.querySelector('.button');
+        $button1.click();
+
+        const done = assert.async();
+
+        window.setTimeout(() => {
+            $button1.click();
+
+            window.setTimeout(() => {
+                assert.equal($colorPicker1.opened, false);
+
+                done();
+            }, 1);
+        }, 1);
+    });
+
+    QUnit.test('click on color picker button, then click again ---> popup element should not appear', (assert) => {
+        const $colorPicker1 = document.querySelector('#red');
+        const $button1 = $colorPicker1.shadowRoot.querySelector('.button');
+        $button1.click();
+
+        const done = assert.async();
+
+        window.setTimeout(() => {
+
+            $button1.click();
+
+            window.setTimeout(() => {
+                const $popup = $colorPicker1.shadowRoot.querySelector('toolcool-color-picker-popup');
+                assert.equal($popup, null);
+
+                done();
+            }, 1);
+        }, 1);
+    });
+
 });

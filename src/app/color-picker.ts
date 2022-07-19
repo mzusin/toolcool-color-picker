@@ -4,7 +4,7 @@ import ColorPickerPopup from '../ui/popup/popup';
 import {
     CUSTOM_EVENT_COLOR_HSV_CHANGED,
     CUSTOM_EVENT_COLOR_HUE_CHANGED,
-    CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
+    CUSTOM_EVENT_COLOR_ALPHA_CHANGED, sendButtonClickedCustomEvent, CUSTOM_EVENT_BUTTON_CLICKED,
 } from '../domain/events-provider';
 import { getUniqueId } from '../domain/common-provider';
 import { hslaToString, hsvaToString, parseColor, rgbaToString } from '../domain/color-provider';
@@ -143,10 +143,12 @@ class ColorPicker extends HTMLElement {
         this.toggle = this.toggle.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.clickedOutside = this.clickedOutside.bind(this);
+        this.stopPropagation = this.stopPropagation.bind(this);
 
         this.hsvChanged = this.hsvChanged.bind(this);
         this.hueChanged = this.hueChanged.bind(this);
         this.alphaChanged = this.alphaChanged.bind(this);
+        this.buttonClicked = this.buttonClicked.bind(this);
 
         this.initState();
     }
@@ -275,7 +277,18 @@ class ColorPicker extends HTMLElement {
         this.state.color = new TinyColor(rgba);
     }
 
-    clickedOutside() {
+    /**
+     * when button clicked ---> close all other color pickers
+     */
+    buttonClicked(evt: CustomEvent) {
+        if(!evt || !evt.detail || !evt.detail.cid) return;
+
+        if(evt.detail.cid === this.cid) return;
+
+        this.state.isPopupVisible = false;
+    }
+
+    clickedOutside(evt: MouseEvent) {
         this.state.isPopupVisible = false;
     }
 
@@ -287,6 +300,8 @@ class ColorPicker extends HTMLElement {
         // to close other popup instances
         window.setTimeout(() => {
             this.state.isPopupVisible = !isVisible;
+
+            sendButtonClickedCustomEvent(this.cid);
         }, 0);
     }
 
@@ -296,6 +311,10 @@ class ColorPicker extends HTMLElement {
             // close the popup
             this.state.isPopupVisible = false;
         }
+    }
+
+    stopPropagation(evt: MouseEvent){
+        evt.stopPropagation();
     }
 
     /**
@@ -327,6 +346,7 @@ class ColorPicker extends HTMLElement {
 
         this.$button.addEventListener('click', this.toggle);
         this.$button.addEventListener('keydown', this.onKeyDown);
+        this.$button.addEventListener('mousedown', this.stopPropagation);
 
         // init popup container
         this.$popupBox = this.shadowRoot.querySelector('[data-popup-box]');
@@ -340,6 +360,7 @@ class ColorPicker extends HTMLElement {
         document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
         document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
         document.addEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.alphaChanged);
+        document.addEventListener(CUSTOM_EVENT_BUTTON_CLICKED, this.buttonClicked);
     }
 
     /**
@@ -348,11 +369,13 @@ class ColorPicker extends HTMLElement {
     disconnectedCallback(){
         this.$button.removeEventListener('click', this.toggle);
         this.$button.removeEventListener('keydown', this.onKeyDown);
+        this.$button.removeEventListener('mousedown', this.stopPropagation);
         document.removeEventListener('mousedown', this.clickedOutside);
 
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
         document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
         document.removeEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.alphaChanged);
+        document.removeEventListener(CUSTOM_EVENT_BUTTON_CLICKED, this.buttonClicked);
     }
 
     /**
