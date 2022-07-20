@@ -12,7 +12,7 @@ Tool Cool Color Picker is a color picker library written in typescript and using
 
 ## Basic usage in a browser
 
-Download [toolcool-color-picker.min.js](https://github.com/toolcool-org/toolcool-color-picker/blob/main/dist/toolcool-color-picker.min.js)
+Download the latest [toolcool-color-picker.min.js](https://github.com/toolcool-org/toolcool-color-picker/blob/main/dist/toolcool-color-picker.min.js) script:
 
 Add the following html to the page:
 ```html
@@ -38,6 +38,17 @@ Color picker popup can be aligned to the right:
 
 ```html
 <toolcool-color-picker color="rgb(255, 200, 10)" popup-position="right"></toolcool-color-picker>
+```
+
+## CDN
+[![](https://data.jsdelivr.com/v1/package/npm/toolcool-color-picker/badge?style=rounded)](https://www.jsdelivr.com/package/npm/toolcool-color-picker)
+
+The ToolCool Color Picker is also available in the [jsDelivr CND](https://www.jsdelivr.com/package/npm/toolcool-color-picker): 
+
+```html
+<toolcool-color-picker color="#e76ff1"></toolcool-color-picker>
+
+<script src="https://cdn.jsdelivr.net/npm/toolcool-color-picker/dist/toolcool-color-picker.min.js"></script>
 ```
 
 ## Node.js usage
