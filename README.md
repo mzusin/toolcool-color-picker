@@ -1,8 +1,8 @@
 # Tool Cool Color Picker
 
-[![GitHub license](https://img.shields.io/github/license/toolcool-org/toolcool-color-picker)](https://github.com/toolcool-org/toolcool-color-picker/blob/main/LICENSE) 
+[![GitHub license](https://img.shields.io/github/license/toolcool-org/toolcool-color-picker)](https://github.com/toolcool-org/toolcool-color-picker/blob/main/LICENSE)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/toolcool-org/toolcool-color-picker)
-![npm](https://img.shields.io/npm/dw/toolcool-color-picker)
+[![npm](https://img.shields.io/npm/dw/toolcool-color-picker)](https://www.npmjs.com/package/toolcool-color-picker)
 [![NPM](https://img.shields.io/badge/npm-color_picker-brightgreen)](https://www.npmjs.com/package/toolcool-color-picker)
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)
 
