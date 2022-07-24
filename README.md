@@ -56,9 +56,13 @@ The ToolCool Color Picker is also available in the [jsDelivr CND](https://www.js
 
 [![Tool Cool Color Picker](https://nodei.co/npm/toolcool-color-picker.png)](https://npmjs.org/package/toolcool-color-picker)
 
-Color picker may also be included as a [node module](https://www.npmjs.com/package/toolcool-color-picker) like this:
+Color picker may also be included as a [node module](https://www.npmjs.com/package/toolcool-color-picker) using npm:
 
 `npm i toolcool-color-picker`
+
+or with Yarn:
+
+`yarn add toolcool-color-picker`
 
 And then you can include it in your application like this:
 
