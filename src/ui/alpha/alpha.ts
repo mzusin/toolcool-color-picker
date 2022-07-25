@@ -23,9 +23,9 @@ class Alpha extends HTMLElement {
     // this id attribute is used for custom events
     private cid: string;
 
-    private $alpha: HTMLElement;
-    private $color: HTMLElement;
-    private $pointer: HTMLElement;
+    private $alpha: HTMLElement | null;
+    private $color: HTMLElement | null;
+    private $pointer: HTMLElement | null;
 
     private alpha = 1; // [0, 1]
     private hue = 0; // [0, 360]
@@ -93,7 +93,7 @@ class Alpha extends HTMLElement {
 
     onKeyDown(evt: KeyboardEvent) {
 
-        this.$pointer.focus();
+        this.$pointer?.focus();
 
         switch (evt.key){
             case 'ArrowLeft': {
@@ -164,7 +164,7 @@ class Alpha extends HTMLElement {
         window.addEventListener('mouseup', this.onMouseUp);
 
         window.setTimeout(() => {
-            this.$pointer.focus();
+            this.$pointer?.focus();
         }, 0);
     }
 
@@ -178,7 +178,9 @@ class Alpha extends HTMLElement {
      */
     connectedCallback(){
 
-        this.cid = this.getAttribute('cid');
+        if(!this.shadowRoot) return;
+
+        this.cid = this.getAttribute('cid') || '';
 
         const color = parseColor(this.getAttribute('color'));
         const hsv = color.toHsv();
@@ -208,11 +210,11 @@ class Alpha extends HTMLElement {
         this.$color = this.shadowRoot.querySelector('.color-bg');
         this.$pointer = this.shadowRoot.querySelector('.pointer-box');
 
-        this.$alpha.addEventListener('mousedown', this.onMouseDown);
-        this.$alpha.addEventListener('mouseup', this.onMouseUp);
-        this.$alpha.addEventListener('touchmove', this.onChange);
-        this.$alpha.addEventListener('touchstart', this.onChange);
-        this.$pointer.addEventListener('keydown', this.onKeyDown);
+        this.$alpha?.addEventListener('mousedown', this.onMouseDown);
+        this.$alpha?.addEventListener('mouseup', this.onMouseUp);
+        this.$alpha?.addEventListener('touchmove', this.onChange);
+        this.$alpha?.addEventListener('touchstart', this.onChange);
+        this.$pointer?.addEventListener('keydown', this.onKeyDown);
 
         document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
         document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
@@ -223,11 +225,11 @@ class Alpha extends HTMLElement {
      * when the custom element disconnected from DOM
      */
     disconnectedCallback(){
-        this.$alpha.removeEventListener('mousedown', this.onMouseDown);
-        this.$alpha.removeEventListener('mouseup', this.onMouseUp);
-        this.$alpha.removeEventListener('touchmove', this.onChange);
-        this.$alpha.removeEventListener('touchstart', this.onChange);
-        this.$pointer.removeEventListener('keydown', this.onKeyDown);
+        this.$alpha?.removeEventListener('mousedown', this.onMouseDown);
+        this.$alpha?.removeEventListener('mouseup', this.onMouseUp);
+        this.$alpha?.removeEventListener('touchmove', this.onChange);
+        this.$alpha?.removeEventListener('touchstart', this.onChange);
+        this.$pointer?.removeEventListener('keydown', this.onKeyDown);
 
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
         document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
@@ -237,7 +239,7 @@ class Alpha extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName, oldVal, newVal){
+    attributeChangedCallback(attrName: string, oldVal: string, newVal: string){
 
         const color = parseColor(newVal);
         const hsv = color.toHsv();

@@ -6,6 +6,18 @@
     "esModuleInterop": true,
     "useDefineForClassFields": true,
     "moduleResolution": "node",
-    "module": "es6",
-  }
+    "module": "esnext",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "importHelpers": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

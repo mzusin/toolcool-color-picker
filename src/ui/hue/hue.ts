@@ -13,8 +13,8 @@ class Hue extends HTMLElement {
     // this id attribute is used for custom events
     private cid: string;
 
-    private $hue: HTMLElement;
-    private $pointer: HTMLElement;
+    private $hue: HTMLElement | null;
+    private $pointer: HTMLElement | null;
 
     private hue = 0; // [0, 360]
 
@@ -83,7 +83,7 @@ class Hue extends HTMLElement {
 
     onKeyDown(evt: KeyboardEvent) {
 
-        this.$pointer.focus();
+        this.$pointer?.focus();
 
         switch (evt.key){
             case 'ArrowLeft': {
@@ -115,7 +115,7 @@ class Hue extends HTMLElement {
         window.addEventListener('mouseup', this.onMouseUp);
 
         window.setTimeout(() => {
-            this.$pointer.focus();
+            this.$pointer?.focus();
         }, 0);
     }
 
@@ -129,7 +129,9 @@ class Hue extends HTMLElement {
      */
     connectedCallback(){
 
-        this.cid = this.getAttribute('cid');
+        if(!this.shadowRoot) return;
+
+        this.cid = this.getAttribute('cid') || '';
 
         const color = parseColor(this.getAttribute('color'));
         this.hue = color.toHsv().h;
@@ -154,12 +156,12 @@ class Hue extends HTMLElement {
         this.$hue = this.shadowRoot.querySelector('.hue');
         this.$pointer = this.shadowRoot.querySelector('.pointer-box');
 
-        this.$hue.addEventListener('mousedown', this.onMouseDown);
-        this.$hue.addEventListener('mouseup', this.onMouseUp);
-        this.$hue.addEventListener('touchmove', this.onChange);
-        this.$hue.addEventListener('touchstart', this.onChange);
+        this.$hue?.addEventListener('mousedown', this.onMouseDown);
+        this.$hue?.addEventListener('mouseup', this.onMouseUp);
+        this.$hue?.addEventListener('touchmove', this.onChange);
+        this.$hue?.addEventListener('touchstart', this.onChange);
 
-        this.$pointer.addEventListener('keydown', this.onKeyDown);
+        this.$pointer?.addEventListener('keydown', this.onKeyDown);
         document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
     }
 
@@ -168,11 +170,11 @@ class Hue extends HTMLElement {
      */
     disconnectedCallback(){
 
-        this.$hue.removeEventListener('mousedown', this.onMouseDown);
-        this.$hue.removeEventListener('mouseup', this.onMouseUp);
-        this.$hue.removeEventListener('touchmove', this.onChange);
-        this.$hue.removeEventListener('touchstart', this.onChange);
-        this.$pointer.removeEventListener('keydown', this.onKeyDown);
+        this.$hue?.removeEventListener('mousedown', this.onMouseDown);
+        this.$hue?.removeEventListener('mouseup', this.onMouseUp);
+        this.$hue?.removeEventListener('touchmove', this.onChange);
+        this.$hue?.removeEventListener('touchstart', this.onChange);
+        this.$pointer?.removeEventListener('keydown', this.onKeyDown);
 
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
     }
@@ -180,7 +182,7 @@ class Hue extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName, oldVal, newVal){
+    attributeChangedCallback(attrName: string, oldVal: string, newVal: string){
 
         const color = parseColor(newVal);
         const hsv = color.toHsv();

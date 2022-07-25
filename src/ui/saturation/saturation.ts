@@ -19,9 +19,9 @@ class Saturation extends HTMLElement {
     // this id attribute is used for custom events
     private cid: string;
 
-    private $saturation: HTMLElement;
-    private $color: HTMLElement;
-    private $pointer: HTMLElement;
+    private $saturation: HTMLElement | null;
+    private $color: HTMLElement | null;
+    private $pointer: HTMLElement | null;
 
     private hue = 0; // [0, 360]
     private saturation = 0; // [0, 1]
@@ -127,7 +127,7 @@ class Saturation extends HTMLElement {
         window.addEventListener('mouseup', this.onMouseUp);
 
         window.setTimeout(() => {
-            this.$pointer.focus();
+            this.$pointer?.focus();
         }, 0);
     }
 
@@ -182,7 +182,9 @@ class Saturation extends HTMLElement {
      */
     connectedCallback(){
 
-        this.cid = this.getAttribute('cid');
+        if(!this.shadowRoot) return;
+
+        this.cid = this.getAttribute('cid') || '';
 
         const color = parseColor(this.getAttribute('color'));
         const hsv = color.toHsv();
@@ -213,11 +215,11 @@ class Saturation extends HTMLElement {
         this.$color = this.shadowRoot.querySelector('.box');
         this.$pointer = this.shadowRoot.querySelector('.pointer');
 
-        this.$pointer.addEventListener('keydown', this.onPointerKeyDown);
-        this.$saturation.addEventListener('mousedown', this.onMouseDown);
-        this.$saturation.addEventListener('mouseup', this.onMouseUp);
-        this.$saturation.addEventListener('touchmove', this.onChange);
-        this.$saturation.addEventListener('touchstart', this.onChange);
+        this.$pointer?.addEventListener('keydown', this.onPointerKeyDown);
+        this.$saturation?.addEventListener('mousedown', this.onMouseDown);
+        this.$saturation?.addEventListener('mouseup', this.onMouseUp);
+        this.$saturation?.addEventListener('touchmove', this.onChange);
+        this.$saturation?.addEventListener('touchstart', this.onChange);
 
         document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
         document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
@@ -227,11 +229,11 @@ class Saturation extends HTMLElement {
      * when the custom element disconnected from DOM
      */
     disconnectedCallback(){
-        this.$saturation.removeEventListener('mousedown', this.onMouseDown);
-        this.$saturation.removeEventListener('mouseup', this.onMouseUp);
-        this.$saturation.removeEventListener('touchmove', this.onChange);
-        this.$saturation.removeEventListener('touchstart', this.onChange);
-        this.$pointer.removeEventListener('keydown', this.onPointerKeyDown);
+        this.$saturation?.removeEventListener('mousedown', this.onMouseDown);
+        this.$saturation?.removeEventListener('mouseup', this.onMouseUp);
+        this.$saturation?.removeEventListener('touchmove', this.onChange);
+        this.$saturation?.removeEventListener('touchstart', this.onChange);
+        this.$pointer?.removeEventListener('keydown', this.onPointerKeyDown);
 
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
         document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
@@ -240,7 +242,7 @@ class Saturation extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName, oldVal, newVal){
+    attributeChangedCallback(attrName: string, oldVal: string, newVal: string){
 
         const color = parseColor(newVal);
         const hsv = color.toHsv();

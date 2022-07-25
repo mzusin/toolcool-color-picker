@@ -21,7 +21,6 @@ class Fields extends HTMLElement {
     private cid: string;
     private color: TinyColor = new TinyColor('#000');
 
-    private $fields: HTMLElement;
     private $hex: HTMLInputElement;
     private $r: HTMLInputElement;
     private $g: HTMLInputElement;
@@ -118,23 +117,23 @@ class Fields extends HTMLElement {
         this.a = rgba.a;
         this.hex = this.color.toHex();
 
-        if(this.$hex && this.shadowRoot.activeElement !== this.$hex){
+        if(this.$hex && this.shadowRoot?.activeElement !== this.$hex){
             this.$hex.value = this.hex.toUpperCase();
         }
 
-        if(this.$r && this.shadowRoot.activeElement !== this.$r){
+        if(this.$r && this.shadowRoot?.activeElement !== this.$r){
             this.$r.value = this.r.toString();
         }
 
-        if(this.$g && this.shadowRoot.activeElement !== this.$g){
+        if(this.$g && this.shadowRoot?.activeElement !== this.$g){
             this.$g.value = this.g.toString();
         }
 
-        if(this.$b && this.shadowRoot.activeElement !== this.$b){
+        if(this.$b && this.shadowRoot?.activeElement !== this.$b){
             this.$b.value = this.b.toString();
         }
 
-        if(this.$a && this.shadowRoot.activeElement !== this.$a){
+        if(this.$a && this.shadowRoot?.activeElement !== this.$a){
             this.$a.value = Math.round(this.a * 100).toString();
         }
     }
@@ -222,7 +221,7 @@ class Fields extends HTMLElement {
                 break;
             }
             case 'Escape': {
-                if(this.shadowRoot.activeElement){
+                if(this.shadowRoot?.activeElement){
                     const $el = this.shadowRoot.activeElement as HTMLElement;
                     $el.blur();
                 }
@@ -231,7 +230,7 @@ class Fields extends HTMLElement {
                 break;
             }
             case 'Enter': {
-                if(this.shadowRoot.activeElement){
+                if(this.shadowRoot?.activeElement){
                     const $el = this.shadowRoot.activeElement as HTMLElement;
                     $el.blur();
                 }
@@ -335,7 +334,9 @@ class Fields extends HTMLElement {
      */
     connectedCallback(){
 
-        this.cid = this.getAttribute('cid');
+        if(!this.shadowRoot) return;
+
+        this.cid = this.getAttribute('cid') || '';
         this.color = parseColor(this.getAttribute('color'));
 
         const rgba = this.color.toRgb();
@@ -368,7 +369,6 @@ class Fields extends HTMLElement {
            </div>
         `;
 
-        this.$fields = this.shadowRoot.querySelector('.fields');
         this.$hex = this.shadowRoot.getElementById(`hex-${ hexId }`) as HTMLInputElement;
         this.$r = this.shadowRoot.getElementById(`r-${ rId }`) as HTMLInputElement;
         this.$g = this.shadowRoot.getElementById(`g-${ gId }`) as HTMLInputElement;
@@ -427,7 +427,7 @@ class Fields extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName, oldVal, newVal){
+    attributeChangedCallback(attrName: string, oldVal: string, newVal: string){
         this.color = parseColor(newVal);
         this.render();
     }

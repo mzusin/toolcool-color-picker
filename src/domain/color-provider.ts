@@ -77,7 +77,7 @@ export const getLeftBySaturation = (saturation: number) => {
  * Hue: get left position in % by hue from hsv.
  * @param {number} hue - [0, 360]
  */
-export const getLeftByHue = (hue) => {
+export const getLeftByHue = (hue: number) => {
     if(hue < 0){
         hue = 0;
     }
@@ -128,7 +128,7 @@ export const fixPercent = (updatedValue: string|number) => {
     return value;
 };
 
-export const parseColor = (colorString: string) => {
+export const parseColor = (colorString: string | null) => {
     const color = new TinyColor(colorString || '#000');
     color.setAlpha(color.getAlpha());
     return color;

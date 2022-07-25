@@ -114,9 +114,9 @@ class ColorPicker extends HTMLElement {
     // this id attribute is used for custom events
     public readonly cid: string;
 
-    private $button: HTMLElement;
-    private $buttonColor: HTMLElement;
-    private $popupBox: HTMLElement;
+    private $button: HTMLElement | null;
+    private $buttonColor: HTMLElement | null;
+    private $popupBox: HTMLElement | null;
 
     private stateDefaults: IColorPickerState = {
         isPopupVisible: false,
@@ -206,7 +206,7 @@ class ColorPicker extends HTMLElement {
             this.$buttonColor.style.backgroundColor = bgColor;
         }
 
-        const $popup = this.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $popup = this.shadowRoot?.querySelector('toolcool-color-picker-popup');
         if($popup){
             $popup.setAttribute('color', bgColor);
         }
@@ -288,7 +288,7 @@ class ColorPicker extends HTMLElement {
         this.state.isPopupVisible = false;
     }
 
-    clickedOutside(evt: MouseEvent) {
+    clickedOutside() {
         this.state.isPopupVisible = false;
     }
 
@@ -322,6 +322,8 @@ class ColorPicker extends HTMLElement {
      */
     connectedCallback() {
 
+        if(!this.shadowRoot) return;
+
         this.state.initialColor = parseColor(this.getAttribute('color'));
         this.state.color = parseColor(this.getAttribute('color'));
         this.state.popupPosition = this.getAttribute('popup-position') || 'left';
@@ -344,9 +346,9 @@ class ColorPicker extends HTMLElement {
         this.$button = this.shadowRoot.querySelector('.button');
         this.$buttonColor = this.shadowRoot.querySelector('.button-color');
 
-        this.$button.addEventListener('click', this.toggle);
-        this.$button.addEventListener('keydown', this.onKeyDown);
-        this.$button.addEventListener('mousedown', this.stopPropagation);
+        this.$button?.addEventListener('click', this.toggle);
+        this.$button?.addEventListener('keydown', this.onKeyDown);
+        this.$button?.addEventListener('mousedown', this.stopPropagation);
 
         // init popup container
         this.$popupBox = this.shadowRoot.querySelector('[data-popup-box]');
@@ -367,9 +369,9 @@ class ColorPicker extends HTMLElement {
      * when the custom element disconnected from DOM
      */
     disconnectedCallback(){
-        this.$button.removeEventListener('click', this.toggle);
-        this.$button.removeEventListener('keydown', this.onKeyDown);
-        this.$button.removeEventListener('mousedown', this.stopPropagation);
+        this.$button?.removeEventListener('click', this.toggle);
+        this.$button?.removeEventListener('keydown', this.onKeyDown);
+        this.$button?.removeEventListener('mousedown', this.stopPropagation);
         document.removeEventListener('mousedown', this.clickedOutside);
 
         document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
@@ -381,7 +383,7 @@ class ColorPicker extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName){
+    attributeChangedCallback(attrName: string){
 
         if(attrName === 'color') {
             this.state.initialColor = parseColor(this.getAttribute('color'));
