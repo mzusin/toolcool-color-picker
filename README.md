@@ -274,7 +274,7 @@ const ColorPickerExample = () => {
     }, []);
 
     return (
-        &lt;toolcool-color-picker ref={ colorPickerRef }  color="#efefef" /&gt;
+        <toolcool-color-picker ref={ colorPickerRef }  color="#efefef" />;
     )
 };
 
