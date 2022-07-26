@@ -1,23 +1,31 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "node",
+
+    "outDir": "./types",
+    "allowJs": true,
+
     "isolatedModules": true,
-    "noEmit": true,
     "esModuleInterop": true,
     "useDefineForClassFields": true,
-    "moduleResolution": "node",
-    "module": "esnext",
-    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "suppressImplicitAnyIndexErrors": true,
+
+    "declaration": true,
+    "declarationMap": true,
+
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
-    "importHelpers": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "strictBindCallApply": true
   },
-  "exclude": [
-    "node_modules"
+  "include": [
+    "src"
   ]
 }

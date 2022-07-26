@@ -3,11 +3,13 @@
   "version": "1.0.11",
   "description": "Tool Cool Color Picker is a color picker library written in typescript and using web component technologies.",
   "main": "./dist/toolcool-color-picker.min.js",
+  "types": "./types/app/color-picker.d.ts",
   "scripts": {
     "build": "node run/build.js",
     "watch": "node run/watch.js",
     "test": "node ./run/test.js",
-    "eslint": "eslint ./src/**"
+    "eslint": "eslint ./src/**",
+    "typescript-declarations": "tsc --emitDeclarationOnly"
   },
   "type": "module",
   "keywords": [
