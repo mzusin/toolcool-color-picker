@@ -56,7 +56,7 @@ Color picker popup can be aligned to the right:
 <toolcool-color-picker color="rgb(255, 200, 10)" popup-position="right"></toolcool-color-picker>
 ```
 
-## CDN  [⬆](#table-of-contents)
+## CDN
 [![](https://data.jsdelivr.com/v1/package/npm/toolcool-color-picker/badge?style=rounded)](https://www.jsdelivr.com/package/npm/toolcool-color-picker)
 
 The ToolCool Color Picker is also available in the [jsDelivr CND](https://www.jsdelivr.com/package/npm/toolcool-color-picker): 
@@ -67,7 +67,7 @@ The ToolCool Color Picker is also available in the [jsDelivr CND](https://www.js
 <script src="https://cdn.jsdelivr.net/npm/toolcool-color-picker/dist/toolcool-color-picker.min.js"></script>
 ```
 
-## Node.js usage  [⬆](#table-of-contents)
+## Node.js usage
 
 [![Tool Cool Color Picker](https://nodei.co/npm/toolcool-color-picker.png)](https://npmjs.org/package/toolcool-color-picker)
 
@@ -87,7 +87,7 @@ import 'toolcool-color-picker';
 
 NPM package can fe found [here](https://www.npmjs.com/package/toolcool-color-picker).
 
-## APIs  [⬆](#table-of-contents)
+## APIs
 You can control the color picker by referencing the `toolcool-color-picker` HTML tag.
 
 ```html
@@ -106,7 +106,7 @@ You can control the color picker by referencing the `toolcool-color-picker` HTML
 </script>
 ```
 
-## APIs: Listen to the change event  [⬆](#table-of-contents)
+## APIs: Listen to the change event
 
 ```js
 // listen to the color change event
@@ -127,7 +127,7 @@ $colorPicker.addEventListener('change', (evt) => {
 });
 ```
 
-## APIs: Change Color  [⬆](#table-of-contents)
+## APIs: Change Color
 The color picker uses the awesome [TinyColor library](https://github.com/scttcper/tinycolor) for color manipulation. Each color format supported by the TinyColor library can be passed in a color property:
 
 ```js
@@ -158,7 +158,7 @@ $colorPicker.color = 'hsl(110, 90%, 61%)';
 $colorPicker.color = 'hsla(110, 90%, 61%, 1)';
 ```
 
-## APIs: Get current color in different formats  [⬆](#table-of-contents)
+## APIs: Get current color in different formats
 
 ```js
 const $colorPicker = document.getElementById('color-picker');
@@ -187,7 +187,7 @@ You can also access the color object of the [TinyColor library](https://github.c
 console.log($colorPicker.color); 
 ```
 
-## APIs: Popup  [⬆](#table-of-contents)
+## APIs: Popup
 
 Open or close color picker popup with the following API:
 
@@ -206,7 +206,7 @@ Open or close color picker popup with the following API:
 </script>
 ```
 
-## Styles  [⬆](#table-of-contents)
+## Styles
 It's possible to control color picker styles through CSS variables:
 
 ```css
@@ -237,7 +237,7 @@ It's also possible to use CSS variables as inline styles in the following way:
 ```
 
 
-## TypeScript Usage  [⬆](#table-of-contents)
+## TypeScript Usage
 
 ```typescript
 import 'toolcool-color-picker';
@@ -255,7 +255,7 @@ $colorPicker.addEventListener('change', (evt: Event) => {
 $colorPicker.hex = '#fefefe';
 ```
 
-## Usage with React and TypeScript  [⬆](#table-of-contents)
+## Usage with React and TypeScript
 
 ```typescript
 import 'toolcool-color-picker';
@@ -296,9 +296,9 @@ const ColorPickerExample = () => {
 export default ColorPickerExample;
 ```
 
-## Credits  [⬆](#table-of-contents)
+## Credits
 An awesome [TinyColor Library](https://github.com/scttcper/tinycolor)
 
-## License  [⬆](#table-of-contents)
+## License
 
 [MIT license](https://github.com/toolcool-org/toolcool-color-picker/blob/main/LICENSE)
