@@ -1,6 +1,6 @@
 {
   "name": "toolcool-color-picker",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Tool Cool Color Picker is a color picker library written in typescript and using web component technologies.",
   "main": "./dist/toolcool-color-picker.min.js",
   "types": "./types/app/color-picker.d.ts",
