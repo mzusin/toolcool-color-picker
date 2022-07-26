@@ -241,7 +241,7 @@ It's also possible to use CSS variables as inline styles in the following way:
 
 ```typescript
 import 'toolcool-color-picker';
-import ColorPicker from 'toolcool-color-picker/src/app/color-picker';
+import ColorPicker from 'toolcool-color-picker';
 
 // ...
 
