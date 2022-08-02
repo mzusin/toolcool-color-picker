@@ -351,12 +351,22 @@ class ColorPicker extends HTMLElement {
     this.state.initialColor = parseColor(this.getAttribute("color"));
     this.state.color = parseColor(this.getAttribute("color"));
     this.state.popupPosition = this.getAttribute("popup-position") || "left";
-    this.state.width = this.getAttribute("width") || "2.5rem";
-    this.state.height = this.getAttribute("height") || "1rem";
+    this.state.width = this.getAttribute("width") || "fit-content";
+    this.state.height = this.getAttribute("height") || "auto";
 
     this.shadowRoot.innerHTML = `
-            <style>${styles}</style>
-            <div class="color-picker">
+            <style>
+                ${styles} 
+                .color-picker{
+                    --tool-cool-width-picker: ${this.formatSize(
+                      this.state.width
+                    )};
+                    --tool-cool-height-picker: ${this.formatSize(
+                      this.state.height
+                    )};  
+                }
+            </style>
+            <div class="color-picker" >
                 <button
                     type="button"
                     tabIndex="0"
@@ -364,13 +374,7 @@ class ColorPicker extends HTMLElement {
                     title="Select Color">
                     <span class="button-color" style="background: ${rgbaToString(
                       this.state.color
-                    )};
-                    --tool-cool-width-picker-span: ${this.formatSize(
-                      this.state.width
-                    )};
-                    --tool-cool-height-picker-span: ${this.formatSize(
-                      this.state.height
-                    )};  
+                    )};                    
                     "></span>
                 </button>
                 <div data-popup-box></div>
