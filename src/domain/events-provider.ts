@@ -28,12 +28,7 @@ export const sendAlphaCustomEvent = (cid: string, a: number) => {
   );
 };
 
-export const sendHsvCustomEvent = (
-  cid: string,
-  h: number,
-  s: number,
-  v: number
-) => {
+export const sendHsvCustomEvent = (cid: string, h: number, s: number, v: number) => {
   if (!cid) return;
 
   document.dispatchEvent(

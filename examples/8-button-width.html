@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Color Picker Button Width | Tool Cool</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link id="favicon-48" rel="icon" type="image/png" sizes="48x48" href="img/favicon/favicon-48.png">
+    <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32.png">
+    <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16.png">
+
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin: auto;">
+
+        <!-- default -->
+        <toolcool-color-picker color="#e76ff1"></toolcool-color-picker>
+
+        <!-- small / small -->
+        <toolcool-color-picker
+          color="#B48CF4"
+          button-width="sm"
+          button-height="sm"
+          button-padding="2px"></toolcool-color-picker>
+
+        <!-- medium / medium -->
+        <toolcool-color-picker
+          color="#6FF1CA"
+          button-width="md"
+          button-height="md"
+          button-padding="2px"></toolcool-color-picker>
+
+        <!-- large -->
+        <toolcool-color-picker
+          color="#6FE9F1"
+          button-width="lg"
+          button-height="lg"
+          button-padding="3px"></toolcool-color-picker>
+
+        <!-- x-large / large-->
+        <toolcool-color-picker
+          color="#C0F16F"
+          button-width="xl"
+          button-height="lg"
+          button-padding="3px"></toolcool-color-picker>
+
+        <!-- 2xl / 2xl-->
+        <toolcool-color-picker
+          color="#F1E46F"
+          button-width="2xl"
+          button-height="2xl"></toolcool-color-picker>
+
+        <!-- 3xl / 2xl-->
+        <toolcool-color-picker
+          color="#A64BC6"
+          button-width="3xl"
+          button-height="2xl"></toolcool-color-picker>
+
+        <!-- 4xl / 2xl-->
+        <toolcool-color-picker
+          color="#539AB1"
+          button-width="4xl"
+          button-height="2xl"></toolcool-color-picker>
+
+        <!-- with and height can also be defined in any css units like px, rem, etc.-->
+        <toolcool-color-picker
+          color="#996FF1"
+          button-width="10rem"
+          button-height="3rem"></toolcool-color-picker>
+
+
+    </div>
+
+    <script src="js/toolcool-color-picker.min.js"></script>
+</body>
+</html>

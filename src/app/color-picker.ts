@@ -1,22 +1,24 @@
 // @ts-ignore: esbuild custom loader
 import styles from './styles.pcss';
 import ColorPickerPopup from '../ui/popup/popup';
-import {
-  CUSTOM_EVENT_COLOR_HSV_CHANGED,
-  CUSTOM_EVENT_COLOR_HUE_CHANGED,
-  CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
-  sendButtonClickedCustomEvent,
-  CUSTOM_EVENT_BUTTON_CLICKED,
-} from '../domain/events-provider';
+import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, CUSTOM_EVENT_COLOR_ALPHA_CHANGED, CUSTOM_EVENT_BUTTON_CLICKED, sendButtonClickedCustomEvent } from '../domain/events-provider';
 import { getUniqueId } from '../domain/common-provider';
-import {
-  hslaToString,
-  hsvaToString,
-  parseColor,
-  rgbaToString,
-} from '../domain/color-provider';
+import { hslaToString, hsvaToString, parseColor, rgbaToString } from '../domain/color-provider';
 import { TinyColor } from '@ctrl/tinycolor'; // https://github.com/scttcper/tinycolor
 import { ColorInput } from '@ctrl/tinycolor/dist';
+
+/**
+ * predefined button widths
+ */
+const buttonPredefinedSizes: { [key: string]: string } = {
+  sm: '0.875rem',
+  md: '1.2rem',
+  lg: '1.5rem',
+  xl: '2.25rem',
+  '2xl': '3rem',
+  '3xl': '3.75rem',
+  '4xl': '4.5rem',
+};
 
 /*
  Usage:
@@ -24,17 +26,23 @@ import { ColorInput } from '@ctrl/tinycolor/dist';
  <toolcool-color-picker color="#ff0000" popup-position="left"></toolcool-color-picker>
  */
 interface IColorPickerState {
+  // popup
   isPopupVisible: boolean;
   popupPosition: string;
+
+  // color
   initialColor: TinyColor;
   color: TinyColor;
-  width: string;
-  height: string;
+
+  // button
+  buttonWidth?: string | null;
+  buttonHeight?: string | null;
+  buttonPadding?: string | null;
 }
 
 class ColorPicker extends HTMLElement {
   static get observedAttributes() {
-    return ['color', 'popup-position', 'width', 'height'];
+    return ['color', 'popup-position', 'button-width', 'button-height'];
   }
 
   // ----------- APIs ------------------------
@@ -131,8 +139,9 @@ class ColorPicker extends HTMLElement {
     popupPosition: 'left',
     initialColor: new TinyColor('#000'),
     color: new TinyColor('#000'),
-    width: '2.5rem',
-    height: '1rem',
+    buttonWidth: null,
+    buttonHeight: null,
+    buttonPadding: null,
   };
   private state: IColorPickerState;
 
@@ -159,6 +168,7 @@ class ColorPicker extends HTMLElement {
     this.hueChanged = this.hueChanged.bind(this);
     this.alphaChanged = this.alphaChanged.bind(this);
     this.buttonClicked = this.buttonClicked.bind(this);
+    this.formatButtonSize = this.formatButtonSize.bind(this);
 
     this.initState();
   }
@@ -168,12 +178,7 @@ class ColorPicker extends HTMLElement {
     const scope = this;
     this.state = new Proxy(scope.stateDefaults, {
       // eslint-disable-next-line
-      set(
-        target: IColorPickerState,
-        key: string | symbol,
-        value: any,
-        receiver: any
-      ): boolean {
+      set(target: IColorPickerState, key: string | symbol, value: any, receiver: any): boolean {
         target[key] = value;
 
         if (key === 'isPopupVisible') {
@@ -192,6 +197,10 @@ class ColorPicker extends HTMLElement {
           scope.onColorChange();
         }
 
+        if (key === 'buttonWidth' || key === 'buttonHeight' || key === 'buttonPadding') {
+          scope.setButtonSize();
+        }
+
         return true;
       },
     });
@@ -200,9 +209,7 @@ class ColorPicker extends HTMLElement {
   onPopupVisibilityChange() {
     if (!this.$popupBox) return;
     this.$popupBox.innerHTML = this.state.isPopupVisible
-      ? `<toolcool-color-picker-popup color="${this.state.color.toRgbString()}" cid="${
-          this.cid
-        }" popup-position="${this.state.popupPosition}" />`
+      ? `<toolcool-color-picker-popup color="${this.state.color.toRgbString()}" cid="${this.cid}" popup-position="${this.state.popupPosition}" />`
       : '';
   }
 
@@ -222,11 +229,25 @@ class ColorPicker extends HTMLElement {
       this.$buttonColor.style.backgroundColor = bgColor;
     }
 
-    const $popup = this.shadowRoot?.querySelector(
-      'toolcool-color-picker-popup'
-    );
+    const $popup = this.shadowRoot?.querySelector('toolcool-color-picker-popup');
     if ($popup) {
       $popup.setAttribute('color', bgColor);
+    }
+  }
+
+  setButtonSize() {
+    if (!this.$button) return;
+
+    if (this.state.buttonWidth) {
+      this.$button.style.width = this.formatButtonSize(this.state.buttonWidth);
+    }
+
+    if (this.state.buttonHeight) {
+      this.$button.style.height = this.formatButtonSize(this.state.buttonHeight);
+    }
+
+    if (this.state.buttonPadding) {
+      this.$button.style.padding = this.state.buttonPadding;
     }
   }
 
@@ -331,17 +352,15 @@ class ColorPicker extends HTMLElement {
   stopPropagation(evt: MouseEvent) {
     evt.stopPropagation();
   }
-  formatSize(size: string): string {
-    const diccionary: Object = {
-      sm: '0.875rem',
-      lg: '1.5rem',
-      xl: '2.25rem',
-      '2xl': '3rem',
-      '3xl': '3.75rem',
-      '4xl': '4.5rem',
-    };
-    return diccionary[size] ?? size;
+
+  /**
+   * button can accept predefined width and height lik sm, lg, etc.
+   * and also it can accept any css sizes like 1rem, 50px, etc.
+   */
+  formatButtonSize(size: string) {
+    return buttonPredefinedSizes[size] ?? size;
   }
+
   /**
    * when the custom element connected to DOM
    */
@@ -351,20 +370,13 @@ class ColorPicker extends HTMLElement {
     this.state.initialColor = parseColor(this.getAttribute('color'));
     this.state.color = parseColor(this.getAttribute('color'));
     this.state.popupPosition = this.getAttribute('popup-position') || 'left';
-    this.state.width = this.getAttribute('width') || 'fit-content';
-    this.state.height = this.getAttribute('height') || 'auto';
+    this.state.buttonWidth = this.getAttribute('button-width');
+    this.state.buttonHeight = this.getAttribute('button-height');
+    this.state.buttonPadding = this.getAttribute('button-padding');
 
     this.shadowRoot.innerHTML = `
             <style>
                 ${styles} 
-                .color-picker{
-                    --tool-cool-width-picker: ${this.formatSize(
-                      this.state.width
-                    )};
-                    --tool-cool-height-picker: ${this.formatSize(
-                      this.state.height
-                    )};  
-                }
             </style>
             <div class="color-picker" >
                 <button
@@ -372,10 +384,7 @@ class ColorPicker extends HTMLElement {
                     tabIndex="0"
                     class="button"
                     title="Select Color">
-                    <span class="button-color" style="background: ${rgbaToString(
-                      this.state.color
-                    )};                    
-                    "></span>
+                    <span class="button-color" style="background: ${rgbaToString(this.state.color)};"></span>
                 </button>
                 <div data-popup-box></div>
             </div>
@@ -392,6 +401,9 @@ class ColorPicker extends HTMLElement {
     // init popup container
     this.$popupBox = this.shadowRoot.querySelector('[data-popup-box]');
 
+    // init button dimensions
+    this.setButtonSize();
+
     // close popup when clicked outside - we use mousedown instead of click to fix strange behaviour when
     // user drags some inner element like saturation point from the bounds of the window,
     // and the popup is suddenly closed
@@ -400,10 +412,7 @@ class ColorPicker extends HTMLElement {
     // custom event from other parts of the app
     document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
     document.addEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
-    document.addEventListener(
-      CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
-      this.alphaChanged
-    );
+    document.addEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.alphaChanged);
     document.addEventListener(CUSTOM_EVENT_BUTTON_CLICKED, this.buttonClicked);
   }
 
@@ -416,22 +425,10 @@ class ColorPicker extends HTMLElement {
     this.$button?.removeEventListener('mousedown', this.stopPropagation);
     document.removeEventListener('mousedown', this.clickedOutside);
 
-    document.removeEventListener(
-      CUSTOM_EVENT_COLOR_HSV_CHANGED,
-      this.hsvChanged
-    );
-    document.removeEventListener(
-      CUSTOM_EVENT_COLOR_HUE_CHANGED,
-      this.hueChanged
-    );
-    document.removeEventListener(
-      CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
-      this.alphaChanged
-    );
-    document.removeEventListener(
-      CUSTOM_EVENT_BUTTON_CLICKED,
-      this.buttonClicked
-    );
+    document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+    document.removeEventListener(CUSTOM_EVENT_COLOR_HUE_CHANGED, this.hueChanged);
+    document.removeEventListener(CUSTOM_EVENT_COLOR_ALPHA_CHANGED, this.alphaChanged);
+    document.removeEventListener(CUSTOM_EVENT_BUTTON_CLICKED, this.buttonClicked);
   }
 
   /**
@@ -447,6 +444,21 @@ class ColorPicker extends HTMLElement {
     if (attrName === 'popup-position') {
       this.state.popupPosition = this.getAttribute('popup-position') || 'left';
       this.onPopupPosChange();
+    }
+
+    if (attrName === 'button-width') {
+      this.state.buttonWidth = this.getAttribute('button-width');
+      this.setButtonSize();
+    }
+
+    if (attrName === 'button-height') {
+      this.state.buttonHeight = this.getAttribute('button-height');
+      this.setButtonSize();
+    }
+
+    if (attrName === 'button-padding') {
+      this.state.buttonPadding = this.getAttribute('button-padding');
+      this.setButtonSize();
     }
   }
 }
