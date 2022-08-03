@@ -1,22 +1,22 @@
 // @ts-ignore: esbuild custom loader
-import styles from "./styles.pcss";
-import ColorPickerPopup from "../ui/popup/popup";
+import styles from './styles.pcss';
+import ColorPickerPopup from '../ui/popup/popup';
 import {
   CUSTOM_EVENT_COLOR_HSV_CHANGED,
   CUSTOM_EVENT_COLOR_HUE_CHANGED,
   CUSTOM_EVENT_COLOR_ALPHA_CHANGED,
   sendButtonClickedCustomEvent,
   CUSTOM_EVENT_BUTTON_CLICKED,
-} from "../domain/events-provider";
-import { getUniqueId } from "../domain/common-provider";
+} from '../domain/events-provider';
+import { getUniqueId } from '../domain/common-provider';
 import {
   hslaToString,
   hsvaToString,
   parseColor,
   rgbaToString,
-} from "../domain/color-provider";
-import { TinyColor } from "@ctrl/tinycolor"; // https://github.com/scttcper/tinycolor
-import { ColorInput } from "@ctrl/tinycolor/dist";
+} from '../domain/color-provider';
+import { TinyColor } from '@ctrl/tinycolor'; // https://github.com/scttcper/tinycolor
+import { ColorInput } from '@ctrl/tinycolor/dist';
 
 /*
  Usage:
@@ -34,7 +34,7 @@ interface IColorPickerState {
 
 class ColorPicker extends HTMLElement {
   static get observedAttributes() {
-    return ["color", "popup-position", "width", "height"];
+    return ['color', 'popup-position', 'width', 'height'];
   }
 
   // ----------- APIs ------------------------
@@ -128,11 +128,11 @@ class ColorPicker extends HTMLElement {
 
   private stateDefaults: IColorPickerState = {
     isPopupVisible: false,
-    popupPosition: "left",
-    initialColor: new TinyColor("#000"),
-    color: new TinyColor("#000"),
-    width: "2.5rem",
-    height: "1rem",
+    popupPosition: 'left',
+    initialColor: new TinyColor('#000'),
+    color: new TinyColor('#000'),
+    width: '2.5rem',
+    height: '1rem',
   };
   private state: IColorPickerState;
 
@@ -142,12 +142,12 @@ class ColorPicker extends HTMLElement {
     this.cid = getUniqueId();
 
     // register web components
-    if (!customElements.get("toolcool-color-picker-popup")) {
-      customElements.define("toolcool-color-picker-popup", ColorPickerPopup);
+    if (!customElements.get('toolcool-color-picker-popup')) {
+      customElements.define('toolcool-color-picker-popup', ColorPickerPopup);
     }
 
     this.attachShadow({
-      mode: "open", // 'closed', 'open',
+      mode: 'open', // 'closed', 'open',
     });
 
     this.toggle = this.toggle.bind(this);
@@ -176,19 +176,19 @@ class ColorPicker extends HTMLElement {
       ): boolean {
         target[key] = value;
 
-        if (key === "isPopupVisible") {
+        if (key === 'isPopupVisible') {
           scope.onPopupVisibilityChange();
         }
 
-        if (key === "popupPosition") {
+        if (key === 'popupPosition') {
           scope.onPopupPosChange();
         }
 
-        if (key === "initialColor") {
+        if (key === 'initialColor') {
           scope.onInitialColorChange();
         }
 
-        if (key === "color") {
+        if (key === 'color') {
           scope.onColorChange();
         }
 
@@ -203,16 +203,16 @@ class ColorPicker extends HTMLElement {
       ? `<toolcool-color-picker-popup color="${this.state.color.toRgbString()}" cid="${
           this.cid
         }" popup-position="${this.state.popupPosition}" />`
-      : "";
+      : '';
   }
 
   onPopupPosChange() {
     if (!this.$popupBox) return;
 
-    const $popup = this.$popupBox.querySelector("toolcool-color-picker-popup");
+    const $popup = this.$popupBox.querySelector('toolcool-color-picker-popup');
     if (!$popup) return;
 
-    $popup.setAttribute("popup-position", this.state.popupPosition);
+    $popup.setAttribute('popup-position', this.state.popupPosition);
   }
 
   onInitialColorChange() {
@@ -223,10 +223,10 @@ class ColorPicker extends HTMLElement {
     }
 
     const $popup = this.shadowRoot?.querySelector(
-      "toolcool-color-picker-popup"
+      'toolcool-color-picker-popup'
     );
     if ($popup) {
-      $popup.setAttribute("color", bgColor);
+      $popup.setAttribute('color', bgColor);
     }
   }
 
@@ -236,7 +236,7 @@ class ColorPicker extends HTMLElement {
     }
 
     this.dispatchEvent(
-      new CustomEvent("change", {
+      new CustomEvent('change', {
         detail: {
           hex: this.hex,
           hex8: this.hex8,
@@ -322,7 +322,7 @@ class ColorPicker extends HTMLElement {
   }
 
   onKeyDown(evt: KeyboardEvent) {
-    if (evt.key === "Escape") {
+    if (evt.key === 'Escape') {
       // close the popup
       this.state.isPopupVisible = false;
     }
@@ -333,12 +333,12 @@ class ColorPicker extends HTMLElement {
   }
   formatSize(size: string): string {
     const diccionary: Object = {
-      sm: "0.875rem",
-      lg: "1.5rem",
-      xl: "2.25rem",
-      "2xl": "3rem",
-      "3xl": "3.75rem",
-      "4xl": "4.5rem",
+      sm: '0.875rem',
+      lg: '1.5rem',
+      xl: '2.25rem',
+      '2xl': '3rem',
+      '3xl': '3.75rem',
+      '4xl': '4.5rem',
     };
     return diccionary[size] ?? size;
   }
@@ -348,11 +348,11 @@ class ColorPicker extends HTMLElement {
   connectedCallback() {
     if (!this.shadowRoot) return;
 
-    this.state.initialColor = parseColor(this.getAttribute("color"));
-    this.state.color = parseColor(this.getAttribute("color"));
-    this.state.popupPosition = this.getAttribute("popup-position") || "left";
-    this.state.width = this.getAttribute("width") || "fit-content";
-    this.state.height = this.getAttribute("height") || "auto";
+    this.state.initialColor = parseColor(this.getAttribute('color'));
+    this.state.color = parseColor(this.getAttribute('color'));
+    this.state.popupPosition = this.getAttribute('popup-position') || 'left';
+    this.state.width = this.getAttribute('width') || 'fit-content';
+    this.state.height = this.getAttribute('height') || 'auto';
 
     this.shadowRoot.innerHTML = `
             <style>
@@ -382,20 +382,20 @@ class ColorPicker extends HTMLElement {
         `;
 
     // init button and its events
-    this.$button = this.shadowRoot.querySelector(".button");
-    this.$buttonColor = this.shadowRoot.querySelector(".button-color");
+    this.$button = this.shadowRoot.querySelector('.button');
+    this.$buttonColor = this.shadowRoot.querySelector('.button-color');
 
-    this.$button?.addEventListener("click", this.toggle);
-    this.$button?.addEventListener("keydown", this.onKeyDown);
-    this.$button?.addEventListener("mousedown", this.stopPropagation);
+    this.$button?.addEventListener('click', this.toggle);
+    this.$button?.addEventListener('keydown', this.onKeyDown);
+    this.$button?.addEventListener('mousedown', this.stopPropagation);
 
     // init popup container
-    this.$popupBox = this.shadowRoot.querySelector("[data-popup-box]");
+    this.$popupBox = this.shadowRoot.querySelector('[data-popup-box]');
 
     // close popup when clicked outside - we use mousedown instead of click to fix strange behaviour when
     // user drags some inner element like saturation point from the bounds of the window,
     // and the popup is suddenly closed
-    document.addEventListener("mousedown", this.clickedOutside);
+    document.addEventListener('mousedown', this.clickedOutside);
 
     // custom event from other parts of the app
     document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
@@ -411,10 +411,10 @@ class ColorPicker extends HTMLElement {
    * when the custom element disconnected from DOM
    */
   disconnectedCallback() {
-    this.$button?.removeEventListener("click", this.toggle);
-    this.$button?.removeEventListener("keydown", this.onKeyDown);
-    this.$button?.removeEventListener("mousedown", this.stopPropagation);
-    document.removeEventListener("mousedown", this.clickedOutside);
+    this.$button?.removeEventListener('click', this.toggle);
+    this.$button?.removeEventListener('keydown', this.onKeyDown);
+    this.$button?.removeEventListener('mousedown', this.stopPropagation);
+    document.removeEventListener('mousedown', this.clickedOutside);
 
     document.removeEventListener(
       CUSTOM_EVENT_COLOR_HSV_CHANGED,
@@ -438,14 +438,14 @@ class ColorPicker extends HTMLElement {
    * when attributes change
    */
   attributeChangedCallback(attrName: string) {
-    if (attrName === "color") {
-      this.state.initialColor = parseColor(this.getAttribute("color"));
-      this.state.color = parseColor(this.getAttribute("color"));
+    if (attrName === 'color') {
+      this.state.initialColor = parseColor(this.getAttribute('color'));
+      this.state.color = parseColor(this.getAttribute('color'));
       this.onInitialColorChange();
     }
 
-    if (attrName === "popup-position") {
-      this.state.popupPosition = this.getAttribute("popup-position") || "left";
+    if (attrName === 'popup-position') {
+      this.state.popupPosition = this.getAttribute('popup-position') || 'left';
       this.onPopupPosChange();
     }
   }

@@ -9,7 +9,8 @@
     "watch": "node run/watch.js",
     "test": "node ./run/test.js",
     "eslint": "eslint ./src/**",
-    "typescript-declarations": "tsc --emitDeclarationOnly"
+    "typescript-declarations": "tsc --emitDeclarationOnly",
+    "prettier": "prettier --write src/**/*.ts"
   },
   "type": "module",
   "keywords": [
@@ -28,8 +29,10 @@
     "autoprefixer": "^10.4.7",
     "esbuild": "^0.14.49",
     "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
     "open": "^8.4.0",
     "postcss": "^8.4.14",
+    "prettier": "2.7.1",
     "uglify-js": "^3.16.2",
     "uglifycss": "^0.0.29"
   },
