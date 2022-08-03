@@ -21,6 +21,7 @@ Tool Cool Color Picker is a color picker library written in typescript and using
   - [Get current color in different formats](#apis-get-current-color-in-different-formats)
   - [Popup](#apis-popup)
 - [Styles](#styles)
+- [Button width, height, and padding](#button-width-height-and-padding)
 - [TypeScript Usage](#typescript-usage)
 - [Usage with React and TypeScript](#usage-with-react-and-typescript)
 - [Credits](#credits)
@@ -236,6 +237,42 @@ It's also possible to use CSS variables as inline styles in the following way:
         style="--tool-cool-color-picker-btn-bg: #fff"></toolcool-color-picker>
 ```
 
+## Button width, height, and padding
+
+> Thanks to [MGarcia93](https://github.com/MGarcia93) for contributing to this section.
+
+Button size can be changed using **button-width**, **button-height**, and **button-padding** attributes.
+
+```html
+<toolcool-color-picker
+        color="#B48CF4"
+        button-width="2rem"
+        button-height="1rem"
+        button-padding="2px"></toolcool-color-picker>
+```
+
+It's also possible to use the following predefined values:
+
+| Attribute Value | The result size |
+|-----------------|-----------------|
+| sm              | 0.875rem        |
+| md              | 1.2rem          |
+| lg              | 1.5rem          |
+| xl              | 2.25rem         |
+| 2xl             | 3rem            |
+| 3xl             | 3.75rem         |
+| 4xl             | 4.5rem          |
+
+
+For example:
+
+```html
+<toolcool-color-picker
+        color="#C0F16F"
+        button-width="xl"
+        button-height="lg"
+        button-padding="3px"></toolcool-color-picker>
+```
 
 ## TypeScript Usage
 
