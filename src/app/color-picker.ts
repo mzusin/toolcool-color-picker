@@ -42,7 +42,7 @@ interface IColorPickerState {
 
 class ColorPicker extends HTMLElement {
   static get observedAttributes() {
-    return ['color', 'popup-position', 'button-width', 'button-height'];
+    return ['color', 'popup-position', 'button-width', 'button-height', 'button-padding'];
   }
 
   // ----------- APIs ------------------------
