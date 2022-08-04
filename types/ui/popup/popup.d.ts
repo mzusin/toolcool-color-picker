@@ -17,7 +17,7 @@ declare class ColorPickerPopup extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName: string, oldVal: string, newVal: string): void;
+    attributeChangedCallback(attrName: string, _oldVal: string, newVal: string): void;
 }
 export default ColorPickerPopup;
 //# sourceMappingURL=popup.d.ts.map

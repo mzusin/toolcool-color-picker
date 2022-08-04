@@ -9,135 +9,131 @@ import { getHueByLeft, getLeftByHue, parseColor } from '../../domain/color-provi
  <toolcool-color-picker-hue color="#000" cid="..."></toolcool-color-picker-hue>
  */
 class Hue extends HTMLElement {
+  // this id attribute is used for custom events
+  private cid: string;
 
-    // this id attribute is used for custom events
-    private cid: string;
+  private $hue: HTMLElement | null;
+  private $pointer: HTMLElement | null;
 
-    private $hue: HTMLElement | null;
-    private $pointer: HTMLElement | null;
+  private hue = 0; // [0, 360]
 
-    private hue = 0; // [0, 360]
+  static get observedAttributes() {
+    return ['color'];
+  }
 
-    static get observedAttributes() {
-        return ['color'];
+  constructor() {
+    super();
+
+    this.attachShadow({
+      mode: 'open', // 'closed', 'open',
+    });
+
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+
+    this.hsvChanged = this.hsvChanged.bind(this);
+  }
+
+  render() {
+    if (this.$pointer) {
+      this.$pointer.style.left = `${getLeftByHue(this.hue)}%`;
     }
 
-    constructor() {
-        super();
+    // update outer color to change the button, and
+    // send the updated color to the user
+    sendHueCustomEvent(this.cid, this.hue);
+  }
 
-        this.attachShadow({
-            mode: 'open', // 'closed', 'open',
-        });
+  hsvChanged(evt: CustomEvent) {
+    if (!evt || !evt.detail || !evt.detail.cid) return;
 
-        this.onMouseDown = this.onMouseDown.bind(this);
-        this.onMouseUp = this.onMouseUp.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
+    // handle only current instance
+    if (evt.detail.cid !== this.cid) return;
 
-        this.hsvChanged = this.hsvChanged.bind(this);
+    if (this.hue !== evt.detail.h) {
+      this.hue = evt.detail.h;
+      this.render();
+    }
+  }
+
+  // we need to handle both MouseEvent and TouchEvent --->
+  // eslint-disable-next-line
+  onChange(evt: any) {
+    if (!this.$hue) return;
+
+    if (evt.preventDefault) {
+      evt.preventDefault();
     }
 
-    render() {
-        if(this.$pointer){
-            this.$pointer.style.left = `${ getLeftByHue(this.hue) }%`;
-        }
+    const { width: boxWidth, left: boxLeft } = this.$hue.getBoundingClientRect();
+    if (boxWidth === 0) return;
 
-        // update outer color to change the button, and
-        // send the updated color to the user
-        sendHueCustomEvent(this.cid, this.hue);
-    }
+    const mouseX = typeof evt.clientX === 'number' ? evt.clientX : evt.touches[0].clientX;
 
-    hsvChanged(evt: CustomEvent) {
+    const left = Math.min(Math.max(0, mouseX - boxLeft), boxWidth);
+    const percent = Math.min(Math.max(0, Math.round((left * 100) / boxWidth)), 100);
 
-        if(!evt || !evt.detail || !evt.detail.cid) return;
+    this.hue = getHueByLeft(percent);
+    this.render();
+  }
 
-        // handle only current instance
-        if(evt.detail.cid !== this.cid) return;
+  onKeyDown(evt: KeyboardEvent) {
+    this.$pointer?.focus();
 
-        if(this.hue !== evt.detail.h){
-            this.hue = evt.detail.h;
-            this.render();
-        }
-    }
-
-    // we need to handle both MouseEvent and TouchEvent --->
-    // eslint-disable-next-line
-    onChange(evt: any) {
-        if(!this.$hue) return;
-
-        if(evt.preventDefault){
-            evt.preventDefault();
-        }
-
-        const { width: boxWidth, left: boxLeft } = this.$hue.getBoundingClientRect();
-        if(boxWidth === 0) return;
-
-        const mouseX = typeof evt.clientX === 'number' ? evt.clientX : evt.touches[0].clientX;
-
-        const left = Math.min(Math.max(0, mouseX - boxLeft), boxWidth);
-        const percent = Math.min(Math.max(0, Math.round((left * 100) / boxWidth)), 100);
-
+    switch (evt.key) {
+      case 'ArrowLeft': {
+        let percent = getLeftByHue(this.hue);
+        percent = Math.max(0, percent - 1);
         this.hue = getHueByLeft(percent);
         this.render();
+        break;
+      }
+
+      case 'ArrowRight': {
+        let percent = getLeftByHue(this.hue);
+        percent = Math.min(100, percent + 1);
+        this.hue = getHueByLeft(percent);
+        this.render();
+        break;
+      }
+    }
+  }
+
+  onMouseDown(evt: MouseEvent) {
+    if (evt.preventDefault) {
+      evt.preventDefault();
     }
 
-    onKeyDown(evt: KeyboardEvent) {
+    this.onChange(evt);
 
-        this.$pointer?.focus();
+    window.addEventListener('mousemove', this.onChange);
+    window.addEventListener('mouseup', this.onMouseUp);
 
-        switch (evt.key){
-            case 'ArrowLeft': {
-                let percent = getLeftByHue(this.hue);
-                percent = Math.max(0, percent - 1);
-                this.hue = getHueByLeft(percent);
-                this.render();
-                break;
-            }
+    window.setTimeout(() => {
+      this.$pointer?.focus();
+    }, 0);
+  }
 
-            case 'ArrowRight': {
-                let percent = getLeftByHue(this.hue);
-                percent = Math.min(100, percent + 1);
-                this.hue = getHueByLeft(percent);
-                this.render();
-                break;
-            }
-        }
-    }
+  onMouseUp() {
+    window.removeEventListener('mousemove', this.onChange);
+    window.removeEventListener('mouseup', this.onChange);
+  }
 
-    onMouseDown(evt: MouseEvent) {
-        if(evt.preventDefault){
-            evt.preventDefault();
-        }
+  /**
+   * when the custom element connected to DOM
+   */
+  connectedCallback() {
+    if (!this.shadowRoot) return;
 
-        this.onChange(evt);
+    this.cid = this.getAttribute('cid') || '';
 
-        window.addEventListener('mousemove', this.onChange);
-        window.addEventListener('mouseup', this.onMouseUp);
+    const color = parseColor(this.getAttribute('color'));
+    this.hue = color.toHsv().h;
 
-        window.setTimeout(() => {
-            this.$pointer?.focus();
-        }, 0);
-    }
-
-    onMouseUp() {
-        window.removeEventListener('mousemove', this.onChange);
-        window.removeEventListener('mouseup', this.onChange);
-    }
-
-    /**
-     * when the custom element connected to DOM
-     */
-    connectedCallback(){
-
-        if(!this.shadowRoot) return;
-
-        this.cid = this.getAttribute('cid') || '';
-
-        const color = parseColor(this.getAttribute('color'));
-        this.hue = color.toHsv().h;
-
-        this.shadowRoot.innerHTML = `
-           <style>${ styles }</style>
+    this.shadowRoot.innerHTML = `
+           <style>${styles}</style>
            <div class="hue">
                 <div class="box">
                     <div class="hue-v box">
@@ -145,7 +141,7 @@ class Hue extends HTMLElement {
                     </div>
                     
                     <div class="pointer box">
-                        <div class="pointer-box" tabindex="0" style="left: ${ getLeftByHue(this.hue) }%">
+                        <div class="pointer-box" tabindex="0" style="left: ${getLeftByHue(this.hue)}%">
                             <div class="handler"></div>
                         </div>
                     </div>
@@ -153,43 +149,41 @@ class Hue extends HTMLElement {
            </div>
         `;
 
-        this.$hue = this.shadowRoot.querySelector('.hue');
-        this.$pointer = this.shadowRoot.querySelector('.pointer-box');
+    this.$hue = this.shadowRoot.querySelector('.hue');
+    this.$pointer = this.shadowRoot.querySelector('.pointer-box');
 
-        this.$hue?.addEventListener('mousedown', this.onMouseDown);
-        this.$hue?.addEventListener('mouseup', this.onMouseUp);
-        this.$hue?.addEventListener('touchmove', this.onChange);
-        this.$hue?.addEventListener('touchstart', this.onChange);
+    this.$hue?.addEventListener('mousedown', this.onMouseDown);
+    this.$hue?.addEventListener('mouseup', this.onMouseUp);
+    this.$hue?.addEventListener('touchmove', this.onChange);
+    this.$hue?.addEventListener('touchstart', this.onChange);
 
-        this.$pointer?.addEventListener('keydown', this.onKeyDown);
-        document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
-    }
+    this.$pointer?.addEventListener('keydown', this.onKeyDown);
+    document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+  }
 
-    /**
-     * when the custom element disconnected from DOM
-     */
-    disconnectedCallback(){
+  /**
+   * when the custom element disconnected from DOM
+   */
+  disconnectedCallback() {
+    this.$hue?.removeEventListener('mousedown', this.onMouseDown);
+    this.$hue?.removeEventListener('mouseup', this.onMouseUp);
+    this.$hue?.removeEventListener('touchmove', this.onChange);
+    this.$hue?.removeEventListener('touchstart', this.onChange);
+    this.$pointer?.removeEventListener('keydown', this.onKeyDown);
 
-        this.$hue?.removeEventListener('mousedown', this.onMouseDown);
-        this.$hue?.removeEventListener('mouseup', this.onMouseUp);
-        this.$hue?.removeEventListener('touchmove', this.onChange);
-        this.$hue?.removeEventListener('touchstart', this.onChange);
-        this.$pointer?.removeEventListener('keydown', this.onKeyDown);
+    document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
+  }
 
-        document.removeEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
-    }
+  /**
+   * when attributes change
+   */
+  attributeChangedCallback(_attrName: string, _oldVal: string, newVal: string) {
+    const color = parseColor(newVal);
+    const hsv = color.toHsv();
 
-    /**
-     * when attributes change
-     */
-    attributeChangedCallback(attrName: string, oldVal: string, newVal: string){
-
-        const color = parseColor(newVal);
-        const hsv = color.toHsv();
-
-        this.hue = hsv.h;
-        this.render();
-    }
+    this.hue = hsv.h;
+    this.render();
+  }
 }
 
 export default Hue;

@@ -26,7 +26,7 @@ declare class Saturation extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName: string, oldVal: string, newVal: string): void;
+    attributeChangedCallback(_attrName: string, _oldVal: string, newVal: string): void;
 }
 export default Saturation;
 //# sourceMappingURL=saturation.d.ts.map

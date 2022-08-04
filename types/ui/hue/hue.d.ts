@@ -22,7 +22,7 @@ declare class Hue extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName: string, oldVal: string, newVal: string): void;
+    attributeChangedCallback(_attrName: string, _oldVal: string, newVal: string): void;
 }
 export default Hue;
 //# sourceMappingURL=hue.d.ts.map

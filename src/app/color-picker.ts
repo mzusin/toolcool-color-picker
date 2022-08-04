@@ -178,7 +178,7 @@ class ColorPicker extends HTMLElement {
     const scope = this;
     this.state = new Proxy(scope.stateDefaults, {
       // eslint-disable-next-line
-      set(target: IColorPickerState, key: string | symbol, value: any, receiver: any): boolean {
+      set(target: IColorPickerState, key: string | symbol, value: any, _receiver: any): boolean {
         target[key] = value;
 
         if (key === 'isPopupVisible') {

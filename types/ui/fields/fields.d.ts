@@ -38,7 +38,7 @@ declare class Fields extends HTMLElement {
     /**
      * when attributes change
      */
-    attributeChangedCallback(attrName: string, oldVal: string, newVal: string): void;
+    attributeChangedCallback(_attrName: string, _oldVal: string, newVal: string): void;
 }
 export default Fields;
 //# sourceMappingURL=fields.d.ts.map
