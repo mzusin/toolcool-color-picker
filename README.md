@@ -4,6 +4,7 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/toolcool-org/toolcool-color-picker)
 [![npm](https://img.shields.io/npm/dw/toolcool-color-picker)](https://www.npmjs.com/package/toolcool-color-picker)
 [![NPM](https://img.shields.io/badge/npm-color_picker-brightgreen)](https://www.npmjs.com/package/toolcool-color-picker)
+[![](https://data.jsdelivr.com/v1/package/npm/toolcool-color-picker/badge?style=rounded)](https://www.jsdelivr.com/package/npm/toolcool-color-picker)
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)
 
 
@@ -58,7 +59,6 @@ Color picker popup can be aligned to the right:
 ```
 
 ## CDN
-[![](https://data.jsdelivr.com/v1/package/npm/toolcool-color-picker/badge?style=rounded)](https://www.jsdelivr.com/package/npm/toolcool-color-picker)
 
 The ToolCool Color Picker is also available in the [jsDelivr CND](https://www.jsdelivr.com/package/npm/toolcool-color-picker): 
 
