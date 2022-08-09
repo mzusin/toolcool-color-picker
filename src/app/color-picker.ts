@@ -125,7 +125,7 @@ class ColorPicker extends HTMLElement {
     this.state.isPopupVisible = isOpened;
   }
 
-  // -----------------------------------------
+  // ------------------------- INIT ----------------
 
   // this id attribute is used for custom events
   public readonly cid: string;
@@ -172,6 +172,8 @@ class ColorPicker extends HTMLElement {
 
     this.initState();
   }
+
+  // --------------------------------------------------
 
   initState() {
     // eslint-disable-next-line
@@ -361,6 +363,8 @@ class ColorPicker extends HTMLElement {
     return buttonPredefinedSizes[size] ?? size;
   }
 
+  // ------------------------- WEB COMPONENT LIFECYCLE ----------------------------
+
   /**
    * when the custom element connected to DOM
    */
@@ -435,30 +439,37 @@ class ColorPicker extends HTMLElement {
    * when attributes change
    */
   attributeChangedCallback(attrName: string) {
-    if (attrName === 'color') {
-      this.state.initialColor = parseColor(this.getAttribute('color'));
-      this.state.color = parseColor(this.getAttribute('color'));
-      this.onInitialColorChange();
-    }
+    switch (attrName) {
+      case 'color': {
+        this.state.initialColor = parseColor(this.getAttribute('color'));
+        this.state.color = parseColor(this.getAttribute('color'));
+        this.onInitialColorChange();
+        break;
+      }
 
-    if (attrName === 'popup-position') {
-      this.state.popupPosition = this.getAttribute('popup-position') || 'left';
-      this.onPopupPosChange();
-    }
+      case 'popup-position': {
+        this.state.popupPosition = this.getAttribute('popup-position') || 'left';
+        this.onPopupPosChange();
+        break;
+      }
 
-    if (attrName === 'button-width') {
-      this.state.buttonWidth = this.getAttribute('button-width');
-      this.setButtonSize();
-    }
+      case 'button-width': {
+        this.state.buttonWidth = this.getAttribute('button-width');
+        this.setButtonSize();
+        break;
+      }
 
-    if (attrName === 'button-height') {
-      this.state.buttonHeight = this.getAttribute('button-height');
-      this.setButtonSize();
-    }
+      case 'button-height': {
+        this.state.buttonHeight = this.getAttribute('button-height');
+        this.setButtonSize();
+        break;
+      }
 
-    if (attrName === 'button-padding') {
-      this.state.buttonPadding = this.getAttribute('button-padding');
-      this.setButtonSize();
+      case 'button-padding': {
+        this.state.buttonPadding = this.getAttribute('button-padding');
+        this.setButtonSize();
+        break;
+      }
     }
   }
 }
