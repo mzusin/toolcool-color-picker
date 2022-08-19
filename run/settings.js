@@ -25,6 +25,11 @@ export default {
   },
   plugins: [pcssPlugin, esbuildCopyPlugin],
   banner: {
-    js: `// Tool Cool Color Picker v${version}, MIT License - https://github.com/toolcool-org/toolcool-color-picker`,
+    js: `/* 
+Tool Cool Color Picker
+Version: ${version}
+Documentation: ttps://github.com/toolcool-org/toolcool-color-picker
+License: MIT License                                   
+*/`,
   },
 };

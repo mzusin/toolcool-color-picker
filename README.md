@@ -13,7 +13,7 @@ Tool Cool Color Picker is a color picker library written in typescript and using
 ![Tool Cool Color Picker](https://github.com/toolcool-org/toolcool-color-picker/blob/main/examples/img/preview/preview-1.png?raw=true)
 
 ## Table of contents
-- [Basic usage in a browser](#basic-usage-in-a-browser)
+- [Basic usage](#basic-usage)
 - [CDN](#cdn)
 - [Node.js usage](#nodejs-usage)
 - [APIs](#APIs)
@@ -28,7 +28,7 @@ Tool Cool Color Picker is a color picker library written in typescript and using
 - [Credits](#credits)
 - [License](#license)
 
-## Basic usage in a browser
+## Basic Usage
 
 Download the latest [toolcool-color-picker.min.js](https://github.com/toolcool-org/toolcool-color-picker/blob/main/dist/toolcool-color-picker.min.js) script:
 
@@ -65,7 +65,7 @@ The ToolCool Color Picker is also available in the [jsDelivr CND](https://www.js
 ```html
 <toolcool-color-picker color="#e76ff1"></toolcool-color-picker>
 
-<script src="https://cdn.jsdelivr.net/npm/toolcool-color-picker/dist/toolcool-color-picker.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toolcool-color-picker/dist/toolcool-color-picker.min.js"></script>
 ```
 
 ## Node.js usage
@@ -94,7 +94,7 @@ You can control the color picker by referencing the `toolcool-color-picker` HTML
 ```html
 <toolcool-color-picker color="#e76ff1" id="color-picker-1"></toolcool-color-picker>
 
-<script type='text/javascript' src='toolcool-color-picker.min.js'></script>
+<script type="text/javascript" src="toolcool-color-picker.min.js"></script>
 <script>
     // get the reference
     const $colorPicker = document.getElementById('color-picker-1');
@@ -282,7 +282,7 @@ import ColorPicker from 'toolcool-color-picker';
 
 // ...
 
-const $colorPicker = document.getElementById('get-color-picker') as ColorPicker;
+const $colorPicker = document.getElementById('color-picker-1') as ColorPicker;
 
 $colorPicker.addEventListener('change', (evt: Event) => {
     const customEvent = evt as CustomEvent;
