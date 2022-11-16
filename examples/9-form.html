@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Color Picker Form Example | Tool Cool</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link id="favicon-48" rel="icon" type="image/png" sizes="48x48" href="img/favicon/favicon-48.png">
+    <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32.png">
+    <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16.png">
+</head>
+<body>
+
+    <form id="my-form">
+        <toolcool-color-picker color="#e76ff1" id="color-picker"></toolcool-color-picker>
+        <input type="hidden" id="color-picker-hidden" name="color-picker" />
+
+        <button style="margin-top: 1rem">Submit</button>
+    </form>
+
+    <script src="js/toolcool-color-picker.min.js"></script>
+    <script>
+        // get references to the elements
+        const $colorPicker = document.getElementById('color-picker');
+        const $hidden = document.getElementById('color-picker-hidden');
+
+        // update the hidden field on page load
+        $hidden.value = $colorPicker.hex;
+
+        // listen to the color changes
+        $colorPicker.addEventListener('change', (evt) => {
+            $hidden.value = evt.detail.hex;
+        });
+
+        // test the submitted form values -----------
+        const $form = document.getElementById('my-form');
+        $form.addEventListener('submit', (evt) => {
+           evt.preventDefault();
+           const formData = new FormData($form);
+           console.log(formData.get('color-picker'));
+        });
+    </script>
+</body>
+</html>
