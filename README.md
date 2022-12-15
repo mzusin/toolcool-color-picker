@@ -5,7 +5,6 @@
 [![npm](https://img.shields.io/npm/dw/toolcool-color-picker)](https://www.npmjs.com/package/toolcool-color-picker)
 [![NPM](https://img.shields.io/badge/npm-color_picker-brightgreen)](https://www.npmjs.com/package/toolcool-color-picker)
 [![](https://data.jsdelivr.com/v1/package/npm/toolcool-color-picker/badge?style=rounded)](https://www.jsdelivr.com/package/npm/toolcool-color-picker)
-[![Featured on Openbase](https://badges.openbase.com/js/featured/toolcool-color-picker.svg?token=YI3O7TL9LxytqzLjVis0bXvLsAlz3u949GGrm9kCCNk=)](https://openbase.com/js/toolcool-color-picker?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Ftoolcool-org%2Ftoolcool-color-picker)
 
 
