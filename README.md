@@ -7,7 +7,7 @@
 [![](https://data.jsdelivr.com/v1/package/npm/toolcool-color-picker/badge?style=rounded)](https://www.jsdelivr.com/package/npm/toolcool-color-picker)
 
 
-Tool Cool Color Picker is a color picker library written in typescript and using web component technologies. [Check out the demo here.](https://mzusin.github.io/toolcool-color-picker/)
+Tool Cool Color Picker is a color picker library written in typescript and using web component technologies. [Check out the demo here.](https://toolcool-color-picker.mzsoft.org/)
 
 ![Tool Cool Color Picker](https://github.com/mzusin/toolcool-color-picker/blob/main/examples/img/preview/preview-1.png?raw=true)
 
