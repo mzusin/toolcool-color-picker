@@ -28,7 +28,8 @@ export default {
     js: `/* 
 Tool Cool Color Picker
 Version: ${version}
-Documentation: ttps://github.com/toolcool-org/toolcool-color-picker
+Documentation: https://github.com/mzusin/toolcool-color-picker
+Author: Miriam Zusin
 License: MIT License                                   
 */`,
   },

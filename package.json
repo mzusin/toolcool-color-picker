@@ -1,6 +1,6 @@
 {
   "name": "toolcool-color-picker",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Tool Cool Color Picker is a color picker library written in typescript and using web component technologies.",
   "main": "./dist/toolcool-color-picker.min.js",
   "types": "./types/app/color-picker.d.ts",
@@ -20,7 +20,7 @@
     "color-pickers",
     "color-picking"
   ],
-  "author": "Tool Cool <toolcool.org@gmail.com>",
+  "author": "Miriam Zusin <miriam.zusin@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/tinycolor2": "^1.4.3",
@@ -38,7 +38,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/toolcool-org/toolcool-color-picker"
+    "url": "https://github.com/mzusin/toolcool-color-picker"
   },
   "browserslist": [
     ">0.2%",
