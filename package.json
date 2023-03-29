@@ -7,6 +7,8 @@
   "scripts": {
     "build": "node run/build.js",
     "watch": "node run/watch.js",
+    "docs:build": "node run/docs-build.js",
+    "docs:watch": "node run/docs-watch.js",
     "test": "node ./run/test.js",
     "eslint": "eslint ./src/**",
     "typescript-declarations": "tsc --emitDeclarationOnly",
@@ -30,6 +32,7 @@
     "esbuild": "^0.14.49",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
+    "highlight.js": "^11.7.0",
     "open": "^8.4.0",
     "postcss": "^8.4.14",
     "prettier": "2.7.1",

@@ -9,3 +9,4 @@ import ColorPicker from './app/color-picker';
 if (!customElements.get('toolcool-color-picker')) {
   customElements.define('toolcool-color-picker', ColorPicker);
 }
+
