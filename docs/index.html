@@ -1,0 +1,720 @@
+<html lang="en">
+    <head>
+        <title>Tool Cool Color Picker</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+        <meta name="description" content="Tool Cool Color Picker is a color picker library written in typescript and using web component technologies." />
+        <meta name="keywords" content="color-picker, color-palette, color-picker-library, color-pickers, color-picking" />
+
+        <meta property="og:title" content="Tool Cool Color Picker" />
+        <meta property="og:site_name" content="Tool Cool Color Picker" />
+        <meta property="og:url" content="https://toolcool.org/toolcool-color-picker/" />
+        <meta property="og:description" content="Tool Cool Color Picker is a color picker library written in typescript and using web component technologies." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://toolcool.org/img/project-thumbs/tool-cool-color-picker.png" />
+
+        <!-- favicons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+        <link id="favicon-48" rel="icon" type="image/png" sizes="48x48" href="img/favicon/favicon-48.png" />
+        <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32.png" />
+        <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16.png" />
+        <link rel="manifest" href="manifest.json" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+
+        <!-- google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&amp;display=swap" rel="stylesheet">
+
+        <script>
+            // fire Google Analytics only after user consent
+            (() => {
+                try{
+                    const ls = window.localStorage.getItem('cookie_consent');
+                    if(!ls) return;
+
+                    let data = JSON.parse(decodeURIComponent(ls));
+                    if(!data.accept) return;
+
+                    const $script = document.createElement('script');
+                    $script.type = 'text/javascript';
+                    $script.setAttribute('async', 'true');
+                    $script.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=G-Z5T4DW77R');
+                    document.documentElement.firstChild.appendChild($script);
+
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'G-Z5T4DW77RE');
+                }
+                catch(ex){}
+            })();
+        </script>
+
+        <link href="../css/styles.css?v=1" rel="stylesheet" />
+        <link href="static/index.min.css?v=5" rel="stylesheet" />
+    </head>
+<body>
+
+<a href="/random-favicon-generator/" class="bg-gray-800 text-gray-100 px-4 py-2 text-center flex flex-wrap justify-center items-center text-sm"><div class="my-2">Check out the new Random Favicon Generator tool</div><div class="my-2 mx-4 bg-red-500 text-white rounded px-6 py-0.5">Check it now</div></a>
+
+<header class="bg-gray-100 px-4 py-4">
+    <nav>
+        <div>
+            <a class="ml-2 underline flex items-center" href="https://toolcool.org">
+                <img
+                        src="img/icons/logo.svg"
+                        title="Tool Cool"
+                        alt="Tool Cool"
+                        width="25"
+                        height="25"
+                        class="mr-4"
+                />
+                <span>toolcool.org</span>
+            </a>
+        </div>
+    </nav>
+</header>
+
+<a class="absolute right-0 top-0" href="https://github.com/toolcool-org/toolcool-color-picker">
+    <img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png?resize=149%2C149" alt="Fork me on GitHub" />
+</a>
+
+<main class="flex-1">
+
+    <!-- title section -->
+    <section class="py-4 md:py-28 px-4 text-center lg:text-left">
+        <div class="box-1100 mx-auto flex items-center flex-col lg:flex-row">
+            <div class="px-4 lg:mr-10">
+                <h1 class="text-4xl md:text-5xl mb-6 mt-4 md:mt-0">Tool Cool Color Picker</h1>
+                <h2 class="text-lg md:text-xl md:w-550">Tool Cool Color Picker is an open source color picker library written in typescript and using web component technologies.</h2>
+            </div>
+
+            <div class="p-6 mx-auto my-10 lg:mt-4 mb:mt-0 grid grid-cols-4 gap-4 border shadow-xl rounded-lg">
+                <toolcool-color-picker color="#e76ff1"></toolcool-color-picker>
+                <toolcool-color-picker color="rgba(255, 0, 0, 0.5)"></toolcool-color-picker>
+                <toolcool-color-picker color="rgb(255, 200, 10)"></toolcool-color-picker>
+                <toolcool-color-picker color="#68BED1" popup-position="right"></toolcool-color-picker>
+
+                <toolcool-color-picker color="#B267B8"></toolcool-color-picker>
+                <toolcool-color-picker color="rgba(168, 20, 0, 0.5)"></toolcool-color-picker>
+                <toolcool-color-picker color="#6AD3BA"></toolcool-color-picker>
+                <toolcool-color-picker color="#7068D1" popup-position="right"></toolcool-color-picker>
+            </div>
+        </div>
+    </section>
+
+    <!-- keywords section -->
+    <section class="grid grid-cols-2 gap-4 md:flex justify-center items-center justify-items-center text-white px-4 py-4" style="background-color: #5daed2;">
+        <div class="mx-4 whitespace-nowrap">TypeScript</div>
+        <div class="mx-4 whitespace-nowrap">Web Components</div>
+        <div class="mx-4 whitespace-nowrap">Open Source</div>
+        <div class="mx-4 whitespace-nowrap underline"><a href="https://github.com/toolcool-org/toolcool-color-picker/blob/main/LICENSE" title="" target="_blank">MIT license</a></div>
+        <div class="mx-4 whitespace-nowrap underline"><a href="https://www.npmjs.com/package/toolcool-color-picker" title="" target="_blank">NPM</a></div>
+        <div class="mx-4 whitespace-nowrap underline"><a href="https://github.com/toolcool-org/toolcool-color-picker" title="" target="_blank">GitHub</a></div>
+    </section>
+
+    <!-- basic usage in browser -->
+    <section id="basic-use-in-browser" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #fff;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>Basic usage in a browser</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#basic-use-in-browser">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <p class="mb-2">Download <a class="text-cyan-700 underline" href="https://github.com/toolcool-org/toolcool-color-picker/blob/main/dist/toolcool-color-picker.min.js" title="" target="_blank">toolcool-color-picker.min.js</a></p>
+            <p>Add the following html to the page:</p>
+
+            <div class="flex xl:items-center my-6 flex-col xl:flex-row">
+                        <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow ">&lt;toolcool-color-picker color="#345FCD">&lt;/toolcool-color-picker>
+&lt;script type="text/javascript" src="toolcool-color-picker.min.js">&lt;/script></code>
+                        </pre>
+
+                <div class="py-6 px-24 mx-auto sm:mr-auto sm:ml-0 xl:mx-auto border shadow-xl rounded-lg">
+                    <toolcool-color-picker color="#345FCD"></toolcool-color-picker>
+                </div>
+            </div>
+
+            <p>Or with other color formats:</p>
+
+            <div class="flex xl:items-center my-6 flex-col xl:flex-row">
+                        <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow">&lt;toolcool-color-picker color="rgb(96, 245, 66)">&lt;/toolcool-color-picker>
+&lt;toolcool-color-picker color="rgba(96, 245, 66, 1)">&lt;/toolcool-color-picker>
+&lt;toolcool-color-picker color="hsv(110, 73%, 96%)">&lt;/toolcool-color-picker>
+&lt;toolcool-color-picker color="hsva(110, 73%, 96%, 1)">&lt;/toolcool-color-picker>
+&lt;toolcool-color-picker color="hsl(110, 90%, 61%)">&lt;/toolcool-color-picker>
+&lt;toolcool-color-picker color="hsla(110, 90%, 61%, 1)">&lt;/toolcool-color-picker>
+
+&lt;script type="text/javascript" src="toolcool-color-picker.min.js">&lt;/script></code>
+                        </pre>
+
+                <div class="py-6 px-24 mx-auto sm:mr-auto sm:ml-0 xl:mx-auto border shadow-xl rounded-lg grid grid-cols-3 gap-4">
+                    <toolcool-color-picker color="rgb(96, 245, 66)"></toolcool-color-picker>
+                    <toolcool-color-picker color="rgba(96, 245, 66, 1)"></toolcool-color-picker>
+                    <toolcool-color-picker color="hsv(110, 73%, 96%)"></toolcool-color-picker>
+                    <toolcool-color-picker color="hsva(110, 73%, 96%, 1)"></toolcool-color-picker>
+                    <toolcool-color-picker color="hsl(110, 90%, 61%)"></toolcool-color-picker>
+                    <toolcool-color-picker color="hsla(110, 90%, 61%, 1)"></toolcool-color-picker>
+                </div>
+            </div>
+
+            <p>Color picker popup can be aligned to the right:</p>
+
+            <div class="flex xl:items-center my-6 flex-col xl:flex-row">
+                        <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow">&lt;toolcool-color-picker color="#1A8585" popup-position="right">
+&lt;/toolcool-color-picker></code>
+                        </pre>
+
+                <div class="py-6 px-24 mx-auto sm:mr-auto sm:ml-0 xl:mx-auto border shadow-xl rounded-lg">
+                    <toolcool-color-picker color="#1A8585" popup-position="right">
+                    </toolcool-color-picker>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CDN -->
+    <section id="cdn" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #EDF4FC;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>CDN</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#cdn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <p class="mb-2">ToolCool Color Picker is also available in the <a class="text-cyan-700 underline" href="https://www.jsdelivr.com/package/npm/toolcool-color-picker" title="" target="_blank">jsDelivr CND</a>:</p>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow ">&lt;toolcool-color-picker color="#e76ff1">&lt;/toolcool-color-picker>
+
+&lt;script src="https://cdn.jsdelivr.net/npm/toolcool-color-picker/dist/toolcool-color-picker.min.js">&lt;/script></code>
+                    </pre>
+
+        </div>
+    </section>
+
+    <!-- node.js usage section -->
+    <section id="node-js-usage" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #FFF;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>Node.js usage</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#node-js-usage">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <p class="mb-4">Color picker may also be included as a <a class="text-cyan-700 underline" href="https://www.npmjs.com/package/toolcool-color-picker" title="" target="_blank">node module</a> like this:</p>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                        <code class="language-js rounded shadow">npm i toolcool-color-picker</code>
+                    </pre>
+
+            <p class="mb-4 mt-4">And then you can include it in your application like this:</p>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                        <code class="language-js rounded shadow">import 'toolcool-color-picker';</code>
+                    </pre>
+
+            <p class="mt-4">NPM package can fe found <a class="text-cyan-700 underline" href="https://www.npmjs.com/package/toolcool-color-picker" title="" target="_blank">here</a>.</p>
+        </div>
+    </section>
+
+    <!-- apis -->
+    <section id="apis" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #EDF4FC;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>APIs</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#apis">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <p>You can control the color picker by referencing the <b>toolcool-color-picker</b> HTML tag.</p>
+
+            <div class="flex xl:items-center my-6 flex-col xl:flex-row">
+                        <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow">&lt;toolcool-color-picker color="#e76ff1" id="color-picker-1">
+&lt;/toolcool-color-picker>
+
+&lt;script type='text/javascript' src='toolcool-color-picker.min.js'>&lt;/script>
+&lt;script>
+    // get the reference
+    const $colorPicker = document.getElementById('color-picker-1');
+
+    // change color
+    $colorPicker.color = '#FBF330';
+
+    // get color
+    console.log($colorPicker.rgba);
+&lt;/script></code>
+                        </pre>
+
+                <div class="py-6 mx-auto sm:mr-auto sm:ml-0 xl:mx-auto border shadow-xl rounded-lg bg-white" style="width: 300px; max-width: 100%">
+                    <div class="px-10 py-10 flex items-center">
+                        <toolcool-color-picker color="#FBF330" id="get-color-picker" class="mr-5"></toolcool-color-picker>
+                        <div id="get-color-placeholder" class="text-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- apis: listen to the change event -->
+    <section id="listen-to-change-event" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #FFF;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>APIs: Listen to the change event</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#listen-to-change-event">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <div class="flex xl:items-center my-6 flex-col xl:flex-row">
+                        <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-js rounded shadow">// listen to the color change event
+const $colorPicker = document.getElementById('color-picker');
+
+// @param {evt} CustomEvent
+$colorPicker.addEventListener('change', (evt) => {
+
+    console.log(evt.detail.hex);
+    console.log(evt.detail.hex8);
+    console.log(evt.detail.rgb);
+    console.log(evt.detail.rgba);
+    console.log(evt.detail.hsl);
+    console.log(evt.detail.hsla);
+    console.log(evt.detail.hsv);
+    console.log(evt.detail.hsva);
+    console.log(evt.detail.color);
+});</code>
+                        </pre>
+
+                <div class="py-6 mx-auto sm:mr-auto sm:ml-0 xl:mx-auto border shadow-xl rounded-lg bg-white" style="width: 300px; max-width: 100%">
+                    <div class="px-10 py-10 flex flex-col items-center">
+
+                        <div id="change-event-placeholder-hex" class="text-sm mb-2"></div>
+                        <div id="change-event-placeholder-hex8" class="text-sm mb-2"></div>
+                        <div id="change-event-placeholder-rgb" class="text-sm mb-2"></div>
+                        <div id="change-event-placeholder-rgba" class="text-sm mb-2"></div>
+                        <div id="change-event-placeholder-hsl" class="text-sm mb-2"></div>
+                        <div id="change-event-placeholder-hsla" class="text-sm mb-2"></div>
+                        <div id="change-event-placeholder-hsv" class="text-sm mb-2"></div>
+                        <div id="change-event-placeholder-hsva" class="text-sm mb-2"></div>
+
+                        <toolcool-color-picker color="#FB6130" id="change-event-color-picker" class="mt-6"></toolcool-color-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- apis: change color api-->
+    <section id="change-color-api" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #EDF4FC;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-6">
+                <span>APIs: Change Color API</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#change-color-api">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <p class="mb-2">The color picker uses the awesome <a class="text-cyan-700 underline" href="https://github.com/scttcper/tinycolor" title="" target="_blank">TinyColor library</a> for color manipulation.</p>
+            <p class="mb-6">Each color format supported by the TinyColor library can be passed in a color property:</p>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                        <code class="language-js rounded shadow">const $colorPicker = document.getElementById('color-picker');
+
+// HEX format
+$colorPicker.color = '#60f542';
+
+// OR HEX with opacity
+$colorPicker.color = '#60f542ff';
+
+// OR rgb
+$colorPicker.color = 'rgb(96, 245, 66)';
+
+// OR rgb with opacity
+$colorPicker.color = 'rgba(96, 245, 66, 1)';
+
+// OR hsv
+$colorPicker.color = 'hsv(110, 73%, 96%)';
+
+// OR hsv with opacity
+$colorPicker.color = 'hsva(110, 73%, 96%, 1)';
+
+// OR hsl
+$colorPicker.color = 'hsl(110, 90%, 61%)';
+
+// OR hsl with opacity
+$colorPicker.color = 'hsla(110, 90%, 61%, 1)';</code>
+                    </pre>
+        </div>
+    </section>
+
+    <!-- apis: get current color api-->
+    <section id="get-current-color-api" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #FFF;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>APIs: Get current color in different formats</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#get-current-color-api">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                    <code class="language-js rounded shadow">const $colorPicker = document.getElementById('color-picker');
+$colorPicker.color = '#367E95';
+
+console.log($colorPicker.hex); // #367E95
+
+console.log($colorPicker.hex8); // #367E95FF
+
+console.log($colorPicker.rgb); // rgb(54, 126, 149)
+
+console.log($colorPicker.rgba); // rgba(54, 126, 149, 1)
+
+console.log($colorPicker.hsl); // hsl(195, 47%, 40%)
+
+console.log($colorPicker.hsla); // hsla(195, 47%, 40%, 1)
+
+console.log($colorPicker.hsv); // hsv(195, 64%, 58%)
+
+console.log($colorPicker.hsva); // hsva(195, 64%, 58%, 1)
+</code></pre>
+
+            <p class="mt-10 mb-4">You can also access the color object of the <a class="text-cyan-700 underline" href="https://github.com/scttcper/tinycolor" title="" target="_blank">TinyColor library</a>. It should <b>only be used to get color values</b> and should not be modified directly.</p>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                        <code class="language-js rounded shadow">console.log($colorPicker.color);</code>
+                    </pre>
+        </div>
+    </section>
+
+    <!-- apis: popup api-->
+    <section id="popup-api" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #EDF4FC;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>APIs: Popup</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#popup-api">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <p class="mb-4">Open or close color picker popup with the following API:</p>
+
+            <div class="flex xl:items-center my-6 flex-col xl:flex-row">
+                        <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow">&lt;toolcool-color-picker color="#e76ff1" id="color-picker">
+&lt;/toolcool-color-picker>
+
+&lt;script src="js/toolcool-color-picker.min.js">&lt;/script>
+
+&lt;script>
+    const $colorPicker = document.getElementById('color-picker');
+
+    // open color picker popup
+    $colorPicker.opened = true;
+
+    // close color picker popup
+    $colorPicker.opened = false;
+&lt;/script></code></pre>
+
+                <div class="py-6 mx-auto sm:mr-auto sm:ml-0 xl:mx-auto border shadow-xl rounded-lg bg-white" style="width: 300px; max-width: 100%">
+                    <div class="px-10 py-10 flex flex-col items-center">
+                        <button type="button" id="toggle-popup-button" class="mb-6 bg-cyan-700 px-6 py-3 rounded cursor-pointer text-white rounded-full">Toggle Popup</button>
+                        <toolcool-color-picker color="#FB9130" id="toggle-popup-color-picker" class="mb-6"></toolcool-color-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- styles-->
+    <section id="styles" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #FFF;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>Styles</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#styles">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <p class="mb-4">It's possible to control color picker styles through CSS variables:</p>
+
+            <div class="flex xl:items-center my-6 flex-col xl:flex-row">
+                        <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-css rounded shadow">:root{
+    /* button */
+    --tool-cool-color-picker-btn-bg: #b9b9b9;
+    --tool-cool-color-picker-btn-border-color: #000;
+    --tool-cool-color-picker-btn-border-color-inner: #363636;
+    --tool-cool-color-picker-btn-border-radius: 1rem;
+    --tool-cool-color-picker-btn-border-radius-inner: 1rem;
+
+    /* popup */
+    --tool-cool-color-picker-popup-bg: #b9b9b9;
+    --tool-cool-color-picker-popup-border-color: #000;
+
+    /* fields */
+    --tool-cool-color-picker-field-border-color: #363636;
+    --tool-cool-color-picker-field-label-color: #1a3c6e;
+}</code></pre>
+
+                <div class="py-6 mx-auto sm:mr-auto sm:ml-0 xl:mx-auto border shadow-xl rounded-lg bg-black" style="width: 300px; max-width: 100%">
+                    <div class="px-10 py-10 flex flex-col items-center">
+                        <toolcool-color-picker
+                                color="#FB9130"
+                                class="color-picker-black"
+                                style="
+                                        --tool-cool-color-picker-btn-bg: #b9b9b9;
+                                        --tool-cool-color-picker-btn-border-color: #000;
+                                        --tool-cool-color-picker-btn-border-color-inner: #363636;
+                                        --tool-cool-color-picker-btn-border-radius: 1rem;
+                                        --tool-cool-color-picker-btn-border-radius-inner: 1rem;
+                                        --tool-cool-color-picker-popup-bg: #b9b9b9;
+                                        --tool-cool-color-picker-popup-border-color: #000;
+                                        --tool-cool-color-picker-field-border-color: #363636;
+                                        --tool-cool-color-picker-field-label-color: #1a3c6e;">
+                        </toolcool-color-picker>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mb-4">It's also possible to use CSS variables as inline styles in the following way:</p>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow">&lt;toolcool-color-picker color="rgb(255, 200, 10)"
+style="--tool-cool-color-picker-btn-bg: #fff">&lt;/toolcool-color-picker></code></pre>
+        </div>
+    </section>
+
+    <!-- button size -->
+    <section id="button-size" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #fbfced;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-4">
+                <span>Button Size</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#button-size">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <p class="mb-4">Button size can be changed using <b>button-width</b>, <b>button-height</b>, and <b>button-padding</b> attributes.</p>
+
+            <div class="flex xl:items-center my-6 flex-col xl:flex-row">
+                        <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow">&lt;toolcool-color-picker
+    color="#B48CF4"
+    button-width="5rem"
+    button-height="3rem"
+    button-padding="5px">&lt;/toolcool-color-picker></code></pre>
+
+                <div class="py-6 mx-auto sm:mr-auto sm:ml-0 xl:mx-auto border shadow-xl rounded-lg bg-black" style="width: 300px; max-width: 100%">
+                    <div class="px-10 py-10 flex flex-col items-center">
+                        <toolcool-color-picker
+                                color="#B48CF4"
+                                button-width="5rem"
+                                button-height="3rem"
+                                button-padding="5px"></toolcool-color-picker>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mb-6">It's also possible to use the following predefined values:</p>
+
+            <table class="border-collapse table-auto w-full mb-10 rounded-xl overflow-hidden shadow max-w-full" style="width: 400px">
+                <thead class="bg-white dark:bg-slate-800">
+                <tr>
+                    <th class="border-b p-4 text-left text-slate-600">Attribute Value</th>
+                    <th class="border-b p-4 text-left text-slate-600">The result size</th>
+                </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-slate-800">
+                <tr>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">sm</td>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">0.875rem</td>
+                </tr>
+                <tr>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">md</td>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">1.2rem</td>
+                </tr>
+                <tr>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">lg</td>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">1.5rem</td>
+                </tr>
+                <tr>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">xl</td>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">2.25rem</td>
+                </tr>
+                <tr>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">2xl</td>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">3rem</td>
+                </tr>
+                <tr>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">3xl</td>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">3.75rem</td>
+                </tr>
+                <tr>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">4xl</td>
+                    <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">4.5rem</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p class="mb-6">For example:</p>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                            <code class="language-html rounded shadow">&lt;toolcool-color-picker
+    color="#C0F16F"
+    button-width="xl"
+    button-height="lg"
+    button-padding="3px">&lt;/toolcool-color-picker></code></pre>
+        </div>
+    </section>
+
+    <!-- typescript usage -->
+    <section id="typescript-usage" class="px-4 md:px-20 py-6 md:py-20" style="background-color: #EDF4FC;">
+        <div class="flex flex-col mx-auto box-1400">
+            <h3 class="text-3xl mb-6">
+                <span>TypeScript Usage</span>
+                <a class="mx-2 hidden md:inline-block" aria-hidden="true" href="#typescript-usage">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#888" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"/>
+                        <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"/>
+                    </svg>
+                </a>
+            </h3>
+
+            <pre class="flex flex-col flex-1 max-w-full mb-6 xl:mb-0">
+                        <code class="language-js rounded shadow">import 'toolcool-color-picker';
+import ColorPicker from 'toolcool-color-picker';
+
+// ...
+
+const $colorPicker = document.getElementById('get-color-picker') as ColorPicker;
+
+$colorPicker.addEventListener('change', (evt: Event) => {
+    const customEvent = evt as CustomEvent;
+    console.log(customEvent.detail.rgba);
+});
+
+$colorPicker.hex = '#fefefe';</code>
+                    </pre>
+        </div>
+    </section>
+
+</main>
+
+<div class="h-10 w-full border-t-8 border-t-gray-700"></div>
+
+<div data-tcw="other-projects">
+    <div class="px-4">
+        <div class="mb-10 container mx-auto">
+            <div class="text-xl md:text-2xl mb-6">You May Also Like</div>
+            <div class="flex flex-wrap">
+                <a class="mr-4 mb-4 border rounded-xl bg-gray-50 px-6 py-3" href="/random-favicon-generator/" title="Random Favicon Generator">Random Favicon Generator</a>
+                <a class="mr-4 mb-4 border rounded-xl bg-gray-50 px-6 py-3" href="/svg-stripes-maker-react/" title="SVG Stripes Maker">SVG Stripes Maker</a>
+                <a class="mr-4 mb-4 border rounded-xl bg-gray-50 px-6 py-3" href="/online-image-resizer/" title="Online Image Resizer">Online Image Resizer</a>
+                <a class="mr-4 mb-4 border rounded-xl bg-gray-50 px-6 py-3" href="/art-text-made-of-svg-icons-maker/" title="Art Text Made of SVG Icons">Art Text Made of SVG Icons</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-gray-100 px-4 py-4 py-6">
+    <div class="flex flex-wrap items-center justify-center text-center px-4 py-3">
+
+            <span class="flex items-center justify-center mx-4 my-2">
+                <a class="ml-2 underline" href="https://toolcool.org">toolcool.org</a>
+            </span>
+
+        <span class="flex items-center justify-center mx-4 my-2">
+               &copy; All rights reserved.
+            </span>
+
+        <a href="mailto:toolcool.org@gmail.com?subject=Random Favicon Generator" title="" class="mx-4 my-2 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
+                <path fill="#111" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/>
+            </svg> <span class="ml-2 underline">Contact Us</span>
+        </a>
+
+        <a href="https://twitter.com/_ToolCool" target="_blank" title="" class="mx-4 my-2 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" width="24" height="24" viewBox="0 0 24 24">
+                <path stroke="none" d="M0 0h24v24H0z"/>
+                <path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84 0 0 0 .497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/>
+            </svg>
+            <span class="ml-2 underline">Twitter</span>
+        </a>
+
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center text-center px-4 py-3">
+        <a href="mailto:toolcool.org@gmail.com?subject=Random Favicon Generator Bug" title="" class="mx-4 my-2 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+                <path stroke="none" d="M0 0h24v24H0z"/>
+                <path d="M9 9V8a3 3 0 0 1 6 0v1M8 9h8a6 6 0 0 1 1 3v3a5 5 0 0 1-10 0v-3a6 6 0 0 1 1-3m-5 4h4m10 0h4m-9 7v-6m-8 5 3.35-2M20 19l-3.35-2M4 7l3.75 2.4M20 7l-3.75 2.4"/>
+            </svg> <span class="ml-2 underline">Found a bug? Let us know</span>
+        </a>
+
+        <a href="privacy/privacy-policy.html" title="" class="mx-4 my-2 underline">Privacy Policy</a>
+    </div>
+</footer>
+
+<!-- color picker lib -->
+<script src="static/index.min.js?v=4"></script>
+
+<!-- gdpr user consent -->
+<div id="gdpr-root"></div>
+<script defer="defer" src="/gdpr/js/main.23bdeb40.js"></script>
+
+</body>
+</html>
