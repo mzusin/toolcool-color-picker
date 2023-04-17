@@ -161,7 +161,7 @@ class Fields extends HTMLElement {
           this.render();
         }
         if (type === 'a') {
-          this.a = Math.min(100, this.a + 0.01);
+          this.a = Math.max(0, Math.min(this.a + 0.01, 1));
           this.$a.value = Math.round(this.a * 100).toString();
 
           const rgba = this.color.toRgb();
