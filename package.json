@@ -27,6 +27,7 @@
   "author": "Miriam Zusin <miriam.zusin@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@ctrl/tinycolor": "^3.6.0",
     "@types/tinycolor2": "^1.4.3",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
@@ -53,8 +54,5 @@
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ],
-  "dependencies": {
-    "@ctrl/tinycolor": "^3.4.1"
-  }
+  ]
 }

@@ -26,11 +26,10 @@ export default {
   plugins: [pcssPlugin, esbuildCopyPlugin],
   banner: {
     js: `/* 
-Tool Cool Color Picker
-Version: ${version}
-Documentation: https://github.com/mzusin/toolcool-color-picker
-Author: Miriam Zusin
-License: MIT License                                   
+Tool Cool Color Picker v${ version }
+https://github.com/mzusin/toolcool-color-picker
+MIT License     
+Copyright (c) 2022-present, Miriam Zusin                               
 */`,
   },
 };
