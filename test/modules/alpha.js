@@ -10,6 +10,38 @@ QUnit.module('Alpha', () => {
         assert.notEqual($alpha, null);
     });
 
+    QUnit.test('when popup is opened with show-alpha ---> alpha element should be visible', (assert) => {
+        const $colorPicker = document.querySelector('#show-alpha');
+        $colorPicker.opened = true;
+
+        const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
+        assert.equal($alpha.checkVisibility({checkVisibilityCSS: true}), true);
+    });
+
+    QUnit.test('when popup is opened with show-alpha="false" ---> alpha element should be hidden', (assert) => {
+        const $colorPicker = document.querySelector('#no-alpha');
+        $colorPicker.opened = true;
+
+        const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
+        assert.equal($alpha.checkVisibility({checkVisibilityCSS: true}), false);
+    });
+
+    QUnit.test('when popup is opened and show-alpha attribute changes ---> alpha element should be shown or hidden', (assert) => {
+        const $colorPicker = document.querySelector('#no-alpha');
+        $colorPicker.opened = true;
+
+        const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $alpha = $popup.shadowRoot.querySelector('toolcool-color-picker-alpha');
+
+        $colorPicker.setAttribute('show-alpha', 'true');
+        assert.equal($alpha.checkVisibility({checkVisibilityCSS: true}), true);
+
+        $colorPicker.setAttribute('show-alpha', 'false');
+        assert.equal($alpha.checkVisibility({checkVisibilityCSS: true}), false);
+    });
+
     QUnit.test('for red with 100% opacity color pointer left position should be 100%', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.opened = true;

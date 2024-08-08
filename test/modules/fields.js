@@ -60,6 +60,36 @@ QUnit.module('Fields', () => {
         assert.notEqual($alpha, null);
     });
 
+    QUnit.test('when popup is opened with show-alpha="false" ---> alpha field element should be hidden', (assert) => {
+        const $colorPicker = document.querySelector('#no-alpha');
+        $colorPicker.opened = true;
+
+        const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+        const $alpha = $fields.shadowRoot.querySelector('[data-type="a"]');
+        const $alphaLabel = $fields.shadowRoot.querySelector('label[id^="a-label"]');
+        assert.equal($alpha.checkVisibility({checkVisibilityCSS: true}), false);
+        assert.equal($alphaLabel.checkVisibility({checkVisibilityCSS: true}), false);
+    });
+
+    QUnit.test('when popup is opened and show-alpha attribute changes ---> alpha field element should be shown or hidden', (assert) => {
+        const $colorPicker = document.querySelector('#no-alpha');
+        $colorPicker.opened = true;
+
+        const $popup =  $colorPicker.shadowRoot.querySelector('toolcool-color-picker-popup');
+        const $fields = $popup.shadowRoot.querySelector('toolcool-color-picker-fields');
+        const $alpha = $fields.shadowRoot.querySelector('[data-type="a"]');
+        const $alphaLabel = $fields.shadowRoot.querySelector('label[id^="a-label"]');
+
+        $colorPicker.setAttribute('show-alpha', 'true');
+        assert.equal($alpha.checkVisibility({checkVisibilityCSS: true}), true);
+        assert.equal($alphaLabel.checkVisibility({checkVisibilityCSS: true}), true);
+
+        $colorPicker.setAttribute('show-alpha', 'false');
+        assert.equal($alpha.checkVisibility({checkVisibilityCSS: true}), false);
+        assert.equal($alphaLabel.checkVisibility({checkVisibilityCSS: true}), false);
+    });
+
     QUnit.test('initial color red ---> hex element should contain the correct value', (assert) => {
         const $colorPicker = document.querySelector('#red');
         $colorPicker.opened = true;

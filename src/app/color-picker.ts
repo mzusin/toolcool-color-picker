@@ -1,6 +1,7 @@
 // @ts-ignore: esbuild custom loader
 import styles from './styles.pcss';
 import ColorPickerPopup from '../ui/popup/popup';
+import { castShowAlphaAttribute } from '../domain/attribute-provider';
 import { CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, CUSTOM_EVENT_COLOR_ALPHA_CHANGED, CUSTOM_EVENT_BUTTON_CLICKED, sendButtonClickedCustomEvent } from '../domain/events-provider';
 import { getUniqueId } from '../domain/common-provider';
 import { hslaToString, hsvaToString, parseColor, rgbaToString } from '../domain/color-provider';
@@ -29,6 +30,7 @@ interface IColorPickerState {
   // popup
   isPopupVisible: boolean;
   popupPosition: string;
+  isAlphaControlVisible: boolean;
 
   // color
   initialColor: TinyColor;
@@ -42,7 +44,7 @@ interface IColorPickerState {
 
 class ColorPicker extends HTMLElement {
   static get observedAttributes() {
-    return ['color', 'popup-position', 'button-width', 'button-height', 'button-padding'];
+    return ['color', 'popup-position', 'show-alpha', 'button-width', 'button-height', 'button-padding'];
   }
 
   // ----------- APIs ------------------------
@@ -137,6 +139,7 @@ class ColorPicker extends HTMLElement {
   private stateDefaults: IColorPickerState = {
     isPopupVisible: false,
     popupPosition: 'left',
+    isAlphaControlVisible: true,
     initialColor: new TinyColor('#000'),
     color: new TinyColor('#000'),
     buttonWidth: null,
@@ -180,7 +183,7 @@ class ColorPicker extends HTMLElement {
     const scope = this;
     this.state = new Proxy(scope.stateDefaults, {
       // eslint-disable-next-line
-      set(target: IColorPickerState, key: string | symbol, value: any, _receiver: any): boolean {
+      set(target: IColorPickerState, key: keyof IColorPickerState, value: any, _receiver: any): boolean {
         target[key] = value;
 
         if (key === 'isPopupVisible') {
@@ -189,6 +192,10 @@ class ColorPicker extends HTMLElement {
 
         if (key === 'popupPosition') {
           scope.onPopupPosChange();
+        }
+
+        if (key === 'isAlphaControlVisible') {
+          scope.onAlphaControlVisibilityChange();
         }
 
         if (key === 'initialColor') {
@@ -211,7 +218,12 @@ class ColorPicker extends HTMLElement {
   onPopupVisibilityChange() {
     if (!this.$popupBox) return;
     this.$popupBox.innerHTML = this.state.isPopupVisible
-      ? `<toolcool-color-picker-popup color="${this.state.color.toRgbString()}" cid="${this.cid}" popup-position="${this.state.popupPosition}" />`
+      ? `<toolcool-color-picker-popup
+            color="${this.state.color.toRgbString()}"
+            cid="${this.cid}"
+            popup-position="${this.state.popupPosition}"
+            show-alpha="${this.state.isAlphaControlVisible ? 'true' : 'false'}"
+         />`
       : '';
   }
 
@@ -222,6 +234,15 @@ class ColorPicker extends HTMLElement {
     if (!$popup) return;
 
     $popup.setAttribute('popup-position', this.state.popupPosition);
+  }
+
+  onAlphaControlVisibilityChange() {
+    if (!this.$popupBox) return;
+
+    const $popup = this.$popupBox.querySelector('toolcool-color-picker-popup');
+    if (!$popup) return;
+
+    $popup.setAttribute('show-alpha', String(this.state.isAlphaControlVisible));
   }
 
   onInitialColorChange() {
@@ -374,13 +395,14 @@ class ColorPicker extends HTMLElement {
     this.state.initialColor = parseColor(this.getAttribute('color'));
     this.state.color = parseColor(this.getAttribute('color'));
     this.state.popupPosition = this.getAttribute('popup-position') || 'left';
+    this.state.isAlphaControlVisible = castShowAlphaAttribute(this.getAttribute('show-alpha'));
     this.state.buttonWidth = this.getAttribute('button-width');
     this.state.buttonHeight = this.getAttribute('button-height');
     this.state.buttonPadding = this.getAttribute('button-padding');
 
     this.shadowRoot.innerHTML = `
             <style>
-                ${styles} 
+                ${styles}
             </style>
             <div class="color-picker" >
                 <button
@@ -450,6 +472,12 @@ class ColorPicker extends HTMLElement {
       case 'popup-position': {
         this.state.popupPosition = this.getAttribute('popup-position') || 'left';
         this.onPopupPosChange();
+        break;
+      }
+
+      case 'show-alpha': {
+        this.state.isAlphaControlVisible = castShowAlphaAttribute(this.getAttribute('show-alpha'));
+        this.onAlphaControlVisibilityChange();
         break;
       }
 

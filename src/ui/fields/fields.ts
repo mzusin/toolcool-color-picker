@@ -2,6 +2,7 @@
 import styles from './fields.pcss';
 import { CUSTOM_EVENT_COLOR_ALPHA_CHANGED, CUSTOM_EVENT_COLOR_HSV_CHANGED, CUSTOM_EVENT_COLOR_HUE_CHANGED, sendAlphaCustomEvent, sendHsvCustomEvent } from '../../domain/events-provider';
 import { TinyColor } from '@ctrl/tinycolor';
+import { castShowAlphaAttribute } from '../../domain/attribute-provider';
 import { fixPercent, fixRGB, parseColor } from '../../domain/color-provider';
 import { getUniqueId } from '../../domain/common-provider';
 
@@ -14,12 +15,14 @@ class Fields extends HTMLElement {
   // this id attribute is used for custom events
   private cid: string;
   private color: TinyColor = new TinyColor('#000');
+  private alphaControlVisible = true;
 
   private $hex: HTMLInputElement;
   private $r: HTMLInputElement;
   private $g: HTMLInputElement;
   private $b: HTMLInputElement;
   private $a: HTMLInputElement;
+  private $aLabel: HTMLLabelElement;
 
   private hex = '';
   private r = 0;
@@ -28,7 +31,7 @@ class Fields extends HTMLElement {
   private a = 1;
 
   static get observedAttributes() {
-    return ['color'];
+    return ['color', 'show-alpha'];
   }
 
   constructor() {
@@ -320,6 +323,16 @@ class Fields extends HTMLElement {
     }
   }
 
+  onAlphaControlVisibilityChange() {
+    if (this.$a) {
+      this.$a.style.visibility = this.alphaControlVisible ? 'visible' : 'hidden';
+    }
+
+    if (this.$aLabel) {
+      this.$aLabel.style.visibility = this.alphaControlVisible ? 'visible' : 'hidden';
+    }
+  }
+
   /**
    * when the custom element connected to DOM
    */
@@ -328,6 +341,7 @@ class Fields extends HTMLElement {
 
     this.cid = this.getAttribute('cid') || '';
     this.color = parseColor(this.getAttribute('color'));
+    this.alphaControlVisible = castShowAlphaAttribute(this.getAttribute('show-alpha'));
 
     const rgba = this.color.toRgb();
     this.r = rgba.r;
@@ -350,12 +364,12 @@ class Fields extends HTMLElement {
                <input id="g-${gId}" type="text" value="${this.g}" data-type="g" />
                <input id="b-${bId}" type="text" value="${this.b}" data-type="b" />
                <input id="a-${aId}" type="text" value="${Math.round(this.a * 100)}" data-type="a" />
-               
+
                <label for="hex-${hexId}">Hex</label>
                <label for="r-${rId}">R</label>
                <label for="g-${gId}">G</label>
                <label for="b-${bId}">B</label>
-               <label for="a-${aId}">A</label>
+               <label id="a-label-${aId}" for="a-${aId}">A</label>
            </div>
         `;
 
@@ -364,6 +378,9 @@ class Fields extends HTMLElement {
     this.$g = this.shadowRoot.getElementById(`g-${gId}`) as HTMLInputElement;
     this.$b = this.shadowRoot.getElementById(`b-${bId}`) as HTMLInputElement;
     this.$a = this.shadowRoot.getElementById(`a-${aId}`) as HTMLInputElement;
+    this.$aLabel = this.shadowRoot.getElementById(`a-label-${aId}`) as HTMLLabelElement;
+
+    this.onAlphaControlVisibilityChange();
 
     // custom event from other parts of the app
     document.addEventListener(CUSTOM_EVENT_COLOR_HSV_CHANGED, this.hsvChanged);
@@ -417,9 +434,16 @@ class Fields extends HTMLElement {
   /**
    * when attributes change
    */
-  attributeChangedCallback(_attrName: string, _oldVal: string, newVal: string) {
-    this.color = parseColor(newVal);
-    this.render();
+  attributeChangedCallback(attrName: string, _oldVal: string, newVal: string) {
+    if (attrName === 'color') {
+      this.color = parseColor(newVal);
+      this.render();
+    }
+
+    if (attrName === 'show-alpha') {
+      this.alphaControlVisible = castShowAlphaAttribute(newVal);
+      this.onAlphaControlVisibilityChange();
+    }
   }
 }
 

@@ -23,6 +23,7 @@ Tool Cool Color Picker is a color picker library written in typescript and using
   - [Popup](#apis-popup)
 - [Styles](#styles)
 - [Button width, height, and padding](#button-width-height-and-padding)
+- [Hide alpha controls](#hide-alpha-controls)
 - [TypeScript Usage](#typescript-usage)
 - [Usage with React and TypeScript](#usage-with-react-and-typescript)
 - [Credits](#credits)
@@ -272,6 +273,18 @@ For example:
         button-width="xl"
         button-height="lg"
         button-padding="3px"></toolcool-color-picker>
+```
+
+## Hide Alpha Controls
+
+> Thanks to [simshaun](https://github.com/simshaun) for contributing to this section.
+
+The alpha controls can be hidden using the **show-alpha** attribute.
+
+```html
+<toolcool-color-picker
+        color="#B48CF4"
+        show-alpha="false"></toolcool-color-picker>
 ```
 
 ## TypeScript Usage

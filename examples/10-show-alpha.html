@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Color Picker Alpha Control | Tool Cool</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link id="favicon-48" rel="icon" type="image/png" sizes="48x48" href="img/favicon/favicon-48.png">
+    <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32.png">
+    <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16.png">
+</head>
+<body>
+    <div>
+        <p>Alpha controls hidden:</p>
+        <toolcool-color-picker color="#e76ff1" show-alpha="false"></toolcool-color-picker>
+
+        <p>Alpha controls visible by default:</p>
+        <toolcool-color-picker color="rgba(255, 0, 0, 0.5)"></toolcool-color-picker>
+
+        <p>Alpha controls visible by attribute:</p>
+        <toolcool-color-picker color="rgba(0, 0, 255, 0.5)" show-alpha></toolcool-color-picker>
+    </div>
+
+    <script src="js/toolcool-color-picker.min.js"></script>
+</body>
+</html>
